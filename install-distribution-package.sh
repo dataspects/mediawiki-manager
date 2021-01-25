@@ -2,8 +2,8 @@
 
 # Configure ########################
 
-SYSTEM_ROOT_FOLDER=/home/dserver # No trailing / !
-SYSTEM_ROOT_FOLDER_OWNER=dserver
+SYSTEM_ROOT_FOLDER=/home/lex/mediawiki-canasta # No trailing / !
+SYSTEM_ROOT_FOLDER_OWNER=lex
 
 ####################################
 
