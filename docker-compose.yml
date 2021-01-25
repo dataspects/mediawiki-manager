@@ -1,0 +1,18 @@
+version: "3.7"
+services:
+  mediawiki:
+    container_name: mediawiki_canasta
+    image: dataspects/php-apache:7.4.7_200707
+    ports:
+      - 80:80
+    volumes:
+      - ./mediawiki_root:/var/www/html/
+    network_mode: host
+  mysql:
+    container_name: mysql_canasta
+    image: mariadb:10.5.5
+    volumes:
+      - ./mysql_data:/var/lib/mysql
+    environment:
+      - MYSQL_ROOT_PASSWORD=mysqlpassword
+    network_mode: host
