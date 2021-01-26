@@ -4,7 +4,7 @@ services:
     env_file:
       - CanastaInstanceSettings.env
     container_name: mediawiki_canasta
-    image: dataspects/php-apache:7.4.7_200707
+    image: dataspects/php-apache:7.4.7_210126
     ports:
       - ${CANASTA_DOMAIN_PORT}:80
     volumes:
