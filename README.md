@@ -9,6 +9,10 @@
     * `user@server:~$ wget -c https://www.dropbox.com/s/zncf0q288um5gic/mediawiki-root-w-folder-1.35.1-3.2.2.tar.gz?dl=0 -O mediawiki-root-w-folder-1.35.1-3.2.2.tar.gz`
     * ...
 5. Configure `~/mediawiki-canasta/CanastaInstanceSettings.env`
+    * CANASTA_INSTANCE_ROOT to the mediawiki-canasta directory (e.g. `/home/ubuntu/mediawiki-canasta`)
+    * CANASTA_INSTANCE_ROOT_OWNER to the correct user (e.g. `ubuntu`)
+    * MARIADB_ROOT_PASSWORD a new root password if required
+    * WG_DB_PASSWORD to a new db password if required
 6. `user@server:~/mediawiki-canasta$ ./install-canasta-version.sh`
 
 ## Operate
