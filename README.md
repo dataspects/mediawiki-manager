@@ -23,6 +23,6 @@
 
 ## Switch (Upgrade)
 
-1. Edit `~/mediawiki-canasta/CanastaInstanceSettings.env`:
-    * CURRENT_CANASTA_ARCHIVE=`mediawiki-root-w-folder-1.35.1-3.2.2.tar.gz`
+1. Edit `~/mediawiki-canasta/switch-canasta-version.sh`:
+    * NEW_CANASTA_ARCHIVE=`mediawiki-root-w-folder-1.35.1-3.2.2.tar.gz`
 2. `user@server:~/mediawiki-canasta$ ./switch-canasta-version.sh`

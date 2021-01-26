@@ -1,5 +1,9 @@
 #!/bin/bash
 
+NEW_CANASTA_ARCHIVE=mediawiki-root-w-folder-1.35.1-3.2.2.tar.gz
+
+####################################
+
 source ./CanastaInstanceSettings.env
 
 ####################################
@@ -7,7 +11,7 @@ source ./CanastaInstanceSettings.env
 MEDIAWIKI_ROOT_FOLDER=$CANASTA_INSTANCE_ROOT/mediawiki_root
 APACHE_CONTAINER_NAME=mediawiki_canasta
 
-requiredFiles=( "$CURRENT_CANASTA_ARCHIVE" )
+requiredFiles=( "$NEW_CANASTA_ARCHIVE" )
 for file in "${requiredFiles[@]}"
 do
   if [ ! -e "$file" ]; then
@@ -21,7 +25,7 @@ mkdir --parents existing_version
 sudo mv $MEDIAWIKI_ROOT_FOLDER/w/* existing_version
 
 echo "Extract..."
-tar -xzf $CURRENT_CANASTA_ARCHIVE -C $MEDIAWIKI_ROOT_FOLDER/w
+tar -xzf $NEW_CANASTA_ARCHIVE -C $MEDIAWIKI_ROOT_FOLDER/w
 sleep 5
 
 echo "Copy..."
@@ -34,4 +38,4 @@ echo "Update..."
 sudo -S docker exec $APACHE_CONTAINER_NAME /bin/bash -c \
   'cd w; php maintenance/update.php'
 
-echo "Done switching to $CURRENT_CANASTA_ARCHIVE"
+echo "Done switching to $NEW_CANASTA_ARCHIVE"
