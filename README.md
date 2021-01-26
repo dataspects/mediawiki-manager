@@ -15,6 +15,10 @@
     * WG_DB_PASSWORD to a new db password if required
 6. `user@server:~/mediawiki-canasta$ ./install-canasta-version.sh`
 
+## View
+1. The wiki is now accessible on localhost
+2. Install lynx to view the wiki from the command line
+
 ## Operate
 
 **START the MediaWiki Canasta instance**
