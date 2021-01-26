@@ -1,14 +1,10 @@
 #!/bin/bash
 
-# Configure ########################
-
-SYSTEM_ROOT_FOLDER=/home/lex/mediawiki-canasta # No trailing / !
-SYSTEM_ROOT_FOLDER_OWNER=lex
+source ./CanastaSettings.sh
 
 ####################################
 
-MEDIAWIKI_CANASTA_ARCHIVE=mediawiki-root-w-folder-1.35.0-3.2.1.tar.gz
-MEDIAWIKI_ROOT_FOLDER=$SYSTEM_ROOT_FOLDER/mediawiki_root
+MEDIAWIKI_ROOT_FOLDER=$CANASTA_INSTANCE_ROOT/mediawiki_root
 
 APACHE_CONTAINER_NAME=mediawiki_canasta
 MYSQL_HOST=127.0.0.1
@@ -17,7 +13,7 @@ MYSQL_USER=mediawiki
 MYSQL_USER_PASSWORD=mediawikipass
 MYSQL_ROOT_PASSWORD=mysqlpassword
 
-requiredFiles=( "docker-compose.yml" "$MEDIAWIKI_CANASTA_ARCHIVE" )
+requiredFiles=( "docker-compose.yml" "$CURRENT_CANASTA_ARCHIVE" )
 for file in "${requiredFiles[@]}"
 do
   if [ ! -e "$file" ]; then
@@ -29,11 +25,11 @@ done
 echo "Run docker-compose..."
 sudo -S docker-compose down \
   && sudo -S docker-compose up -d \
-  && sudo -S chown -R $SYSTEM_ROOT_FOLDER_OWNER:www-data mediawiki_root
+  && sudo -S chown -R $CANASTA_INSTANCE_ROOT_OWNER:www-data mediawiki_root
 sleep 5
 echo "Extract..."
 mkdir --parents $MEDIAWIKI_ROOT_FOLDER/w
-tar -xzf $SYSTEM_ROOT_FOLDER/$MEDIAWIKI_CANASTA_ARCHIVE -C $MEDIAWIKI_ROOT_FOLDER/w
+tar -xzf $CANASTA_INSTANCE_ROOT/$CURRENT_CANASTA_ARCHIVE -C $MEDIAWIKI_ROOT_FOLDER/w
 sleep 5
 echo "Ensure permissions..."
 sudo chown -R www-data $MEDIAWIKI_ROOT_FOLDER/w/images
