@@ -1,10 +1,9 @@
 #!/bin/bash
 
-CURRENT_CANASTA_ARCHIVE=mediawiki-root-w-folder-1.35.1-3.2.2.tar.gz
+source ./CanastaInstanceSettings.sh
 
 ####################################
 
-CANASTA_INSTANCE_ROOT=/home/dserver # No trailing / !
 MEDIAWIKI_ROOT_FOLDER=$CANASTA_INSTANCE_ROOT/mediawiki_root
 APACHE_CONTAINER_NAME=mediawiki_canasta
 

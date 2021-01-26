@@ -1,6 +1,6 @@
 #!/bin/bash
 
-source ./CanastaSettings.sh
+source ./CanastaInstanceSettings.sh
 
 ####################################
 
