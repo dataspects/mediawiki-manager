@@ -37,6 +37,18 @@
     * NEW_CANASTA_ARCHIVE=`mediawiki-root-w-folder-1.35.1-3.2.2.tar.gz`
 2. `user@server:~/mediawiki-canasta$ ./switch-canasta-version.sh`
 
-## Backup/Restore
+## Snapshooting (Backup/Restore)
 
-Under construction
+MediaWiki Canasta uses https://restic.net.
+
+**TAKE snapshot**
+
+`user@server:~/mediawiki-canasta$ ./take-restic-snapshot.sh`
+
+**VIEW snapshots**
+
+`user@server:~/mediawiki-canasta$ ./view-restic-snapshots.sh`
+
+**RESTORE snapshots**
+
+`user@server:~/mediawiki-canasta$ ./restore-restic-snapshot.sh`
