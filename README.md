@@ -57,4 +57,4 @@ Currently this snapshoots `$MEDIAWIKI_ROOT_FOLDER` into `~/mediawiki-canasta/$RE
 
 `user@server:~/mediawiki-canasta$ ./restore-restic-snapshot.sh`
 
-Currently this restores the latest snapshot into `~/mediawiki-canasta/$RESTIC_RESTORE_REPOSITORY`.
+Currently this restores the latest snapshot into `~/mediawiki-canasta/$RESTIC_RESTORE_FOLDER`.
