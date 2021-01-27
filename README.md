@@ -41,7 +41,11 @@
 
 MediaWiki Canasta uses https://restic.net.
 
+The installer creates a restic repository at `~/mediawiki-canasta/$RESTIC_REPOSITORY` protected by `$RESTIC_PASSWORD`.
+
 **TAKE snapshot**
+
+Currently this snapshoots `$MEDIAWIKI_ROOT_FOLDER` into `~/mediawiki-canasta/$RESTIC_REPOSITORY`.
 
 `user@server:~/mediawiki-canasta$ ./take-restic-snapshot.sh`
 
@@ -49,6 +53,8 @@ MediaWiki Canasta uses https://restic.net.
 
 `user@server:~/mediawiki-canasta$ ./view-restic-snapshots.sh`
 
-**RESTORE snapshots**
+**RESTORE snapshot**
 
 `user@server:~/mediawiki-canasta$ ./restore-restic-snapshot.sh`
+
+Currently this restores the latest snapshot into `~/mediawiki-canasta/$RESTIC_RESTORE_REPOSITORY`.
