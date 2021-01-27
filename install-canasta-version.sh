@@ -67,15 +67,13 @@ echo "Create restic backup repository"
 sudo docker pull restic/restic
 sudo docker run \
   --env-file ./CanastaInstanceSettings.env \
-  --volume /home/dserver/mediawiki-canasta:/data \
-  --volume /home/dserver/mediawiki-canasta/restic-backup-repository:/restic-backup-repository \
+  --volume $CANASTA_INSTANCE_ROOT/$RESTIC_REPOSITORY:/$RESTIC_REPOSITORY \
   restic/restic \
   --verbose init
 
 sudo docker run \
   --env-file ./CanastaInstanceSettings.env \
-  --volume /home/dserver/mediawiki-canasta:/data \
-  --volume /home/dserver/mediawiki-canasta/restic-backup-repository:/restic-backup-repository \
+  --volume $CANASTA_INSTANCE_ROOT/$RESTIC_REPOSITORY:/$RESTIC_REPOSITORY \
   restic/restic \
   --verbose snapshots
 
