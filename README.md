@@ -5,8 +5,8 @@
 2. `user@server:~$ cd mediawiki-canasta`
 3. `user@server:~/mediawiki-canasta$`
 4. Download MediaWiki Canasta archives into `~/mediawiki-canasta`:
-    * `user@server:~$ wget -c https://www.dropbox.com/s/p5r2qsar1q0u4i3/mediawiki-root-w-folder-1.35.0-3.2.1.tar.gz?dl=0 -O mediawiki-root-w-folder-1.35.0-3.2.1.tar.gz`
-    * `user@server:~$ wget -c https://www.dropbox.com/s/zncf0q288um5gic/mediawiki-root-w-folder-1.35.1-3.2.2.tar.gz?dl=0 -O mediawiki-root-w-folder-1.35.1-3.2.2.tar.gz`
+    * `user@server:~/mediawiki-canasta$ wget -c https://www.dropbox.com/s/p5r2qsar1q0u4i3/mediawiki-root-w-folder-1.35.0-3.2.1.tar.gz?dl=0 -O mediawiki-root-w-folder-1.35.0-3.2.1.tar.gz`
+    * `user@server:~/mediawiki-canasta$ wget -c https://www.dropbox.com/s/zncf0q288um5gic/mediawiki-root-w-folder-1.35.1-3.2.2.tar.gz?dl=0 -O mediawiki-root-w-folder-1.35.1-3.2.2.tar.gz`
     * ...
 5. Configure `~/mediawiki-canasta/CanastaInstanceSettings.env`
     * CANASTA_INSTANCE_ROOT to the mediawiki-canasta directory (e.g. `/home/ubuntu/mediawiki-canasta`)
