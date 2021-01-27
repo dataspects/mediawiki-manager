@@ -63,4 +63,8 @@ echo "Update..."
 sudo -S docker exec $APACHE_CONTAINER_NAME /bin/bash -c \
   'cd w; php maintenance/update.php'
 
+echo "Create restic backup repository"
+sudo docker pull restic/restic
+sudo docker run --env-file ./CanastaInstanceSettings.env restic/restic  --verbose init -r ./$RESTIC_REPOSITORY
+
 echo "http://localhost:80"
