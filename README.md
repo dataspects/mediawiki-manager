@@ -1,4 +1,6 @@
 # mediawiki-canasta
+
+The following procedures are currently tested on Ubuntu 20.04 including docker-compose.
 ## Install
 
 1. `user@server:~$ git clone https://github.com/dataspects/mediawiki-canasta.git`
