@@ -21,6 +21,8 @@
 
 ## Operate
 
+*Note: MediaWiki Canasta runs on an Apache/PHP setup based on this [Dockerfile](https://github.com/dataspects/dataspectsSystemBuilder/blob/master/docker-images/php-apache/Dockerfile).*
+
 **START the MediaWiki Canasta instance**
 
 `user@server:~/mediawiki-canasta$ sudo docker-compose --env-file ./CanastaInstanceSettings.env up -d`
