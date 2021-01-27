@@ -20,5 +20,9 @@ printf "MediaWiki Canasta snapshot: mysqldump mediawiki completed.\n"
 ######
 # STEP 2: Run restic backup
 printf "MediaWiki Canasta snapshot: Trying to run restic backup...\n"
-sudo docker run --env-file ./CanastaInstanceSettings.env restic/restic:0.11.0 -r restic-backup-repository --verbose backup $MEDIAWIKI_ROOT_FOLDER/w/
+sudo docker run \
+    --env-file ./CanastaInstanceSettings.env \
+    restic/restic \
+    -r restic-backup-repository \
+    --verbose backup $MEDIAWIKI_ROOT_FOLDER/w/
 printf "MediaWiki Canasta snapshot: Completed running restic backup.\n"

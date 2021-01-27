@@ -65,6 +65,18 @@ sudo -S docker exec $APACHE_CONTAINER_NAME /bin/bash -c \
 
 echo "Create restic backup repository"
 sudo docker pull restic/restic
-sudo docker run --env-file ./CanastaInstanceSettings.env restic/restic  --verbose init -r ./$RESTIC_REPOSITORY
+sudo docker run \
+  --env-file ./CanastaInstanceSettings.env \
+  --volume /home/dserver/mediawiki-canasta:/data \
+  --volume /home/dserver/mediawiki-canasta/restic-backup-repository:/restic-backup-repository \
+  restic/restic \
+  --verbose init
+
+sudo docker run \
+  --env-file ./CanastaInstanceSettings.env \
+  --volume /home/dserver/mediawiki-canasta:/data \
+  --volume /home/dserver/mediawiki-canasta/restic-backup-repository:/restic-backup-repository \
+  restic/restic \
+  --verbose snapshots
 
 echo "http://localhost:80"
