@@ -1,4 +1,4 @@
-# mediawiki-canasta
+# mediawiki-manager
 
 The following procedures are currently tested on Ubuntu 20.04 including docker-compose.
 ## Install
