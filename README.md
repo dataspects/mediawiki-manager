@@ -39,6 +39,12 @@ The following procedures are currently tested on Ubuntu 20.04 including docker-c
     * NEW_CANASTA_ARCHIVE=`mediawiki-root-w-folder-1.35.1-3.2.2.tar.gz`
 2. `user@server:~/mediawiki-manager$ ./switch-canasta-version.sh`
 
+### Check what has changed
+
+`user@server:~/mediawiki-manager$ ./check-extensions-diff.sh`
+
+![Check MW config diffs](images/check-mw-config-diffs.png)
+
 ## Snapshooting (Backup/Restore)
 
 MediaWiki Canasta uses https://restic.net.
