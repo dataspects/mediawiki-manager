@@ -66,3 +66,22 @@ Currently this snapshoots `$MEDIAWIKI_ROOT_FOLDER` into `~/mediawiki-manager/$RE
 `user@server:~/mediawiki-manager$ ./restore-restic-snapshot.sh`
 
 Currently this restores the latest snapshot into `~/mediawiki-manager/$RESTIC_RESTORE_FOLDER`.
+
+
+## Upcoming use cases
+
+* Add sets of "certified" extensions
+* Disable existing extensions
+* "Safely" add arbitrary extension (reversible)
+* Pretty URLs
+* TLS
+
+## Background thoughts
+
+* MVP: no caching
+* MVP: no CirrusSearch
+
+## Design principles considered
+
+* Keep 2 sections in LocalSettings.php separated by "# End of automatically generated settings."
+* Keep all components within mediawiki_root/
