@@ -78,8 +78,10 @@ Currently this restores the latest snapshot into `~/mediawiki-manager/$RESTIC_RE
 
 ## Background thoughts
 
-* MVP: no caching
-* MVP: no CirrusSearch
+**MVP**
+* VisualEditor
+* no caching
+* no CirrusSearch
 
 ## Design principles considered
 
