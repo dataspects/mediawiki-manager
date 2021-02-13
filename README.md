@@ -68,18 +68,18 @@ Currently this snapshoots `$MEDIAWIKI_ROOT_FOLDER` into `~/mediawiki-manager/$RE
 Currently this restores the latest snapshot into `~/mediawiki-manager/$RESTIC_RESTORE_FOLDER`.
 
 
-## Upcoming use cases
+## MVP Features
+
+ *<span style="color:green">&#10004;</span> = implemented at local development level*
 
 * Add sets of "certified" extensions
 * Disable existing extensions
 * "Safely" add arbitrary extension (reversible)
-* Pretty URLs
-* TLS
-
-## Background thoughts
-
-**MVP**
 * VisualEditor
+* Pretty URLs <span style="color:green">&#10004;</span>
+* TLS <span style="color:green">&#10004;</span>
+
+**Skipped features**
 * no caching
 * no CirrusSearch
 
