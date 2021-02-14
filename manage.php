@@ -41,8 +41,10 @@ sort($composerjsonReq);
 
 ///////////////////////////////////////////////////////////////////////////////
 
-echo "<html><head><title>Simple MWStake MediaWiki Manager</title></head><body>";
-echo "<h1>Simple MWStake MediaWiki Manager</h1>";
+$siteTitle = "MWStake Simple MediaWiki Manager v0.1";
+
+echo "<html><head><title>$siteTitle</title></head><body>";
+echo "<h1>$siteTitle</h1>";
 echo "<form action='manage.php' method='post'><table cellspacing='50'>";
 echo "<tr>";
 echo "<td colspan='3'>
@@ -51,12 +53,12 @@ echo "<td colspan='3'>
         <h2>Enable/disable existing extensions</h2>
         <code style='white-space: pre;'>
         mediawiki-manager$ <b><a href='https://github.com/dataspects/mediawiki-manager/blob/main/enable-extension.sh'>./enable-extension.sh</a></b>
-        Enter extension name to enable: <b>jeroen/mediawiki-github</b>
+        Enter extension name to enable: <b>mediawiki/mermaid</b>
         &lt;ENTER&gt;
         </code>
         <code style='white-space: pre;'>
         mediawiki-manager$ <b><a href='https://github.com/dataspects/mediawiki-manager/blob/main/disable-extension.sh'>./disable-extension.sh</a></b>
-        Enter extension name to disable: <b>jeroen/mediawiki-github</b>
+        Enter extension name to disable: <b>mediawiki/mermaid</b>
         &lt;ENTER&gt;
         </code>
         <h2>Install new extensions</h2>
