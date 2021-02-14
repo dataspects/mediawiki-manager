@@ -59,6 +59,12 @@ echo "<td colspan='3'>
         Enter extension name to disable: <b>jeroen/mediawiki-github</b>
         &lt;ENTER&gt;
         </code>
+        <h2>Install new extensions</h2>
+        <code style='white-space: pre;'>
+        mediawiki-manager$ <b><a href='https://github.com/dataspects/mediawiki-manager/blob/main/install-extension.sh'>./install-extension.sh</a></b>
+        Enter extension name to install: <b>NearbyPages</b>
+        &lt;ENTER&gt;
+        </code>
       </td>";      
 echo "</tr>";     
 echo "<tr>
