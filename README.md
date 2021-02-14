@@ -33,6 +33,10 @@ The following procedures are currently tested on Ubuntu 20.04 including docker-c
 
 `user@server:~/mediawiki-manager$ sudo docker-compose --env-file ./CanastaInstanceSettings.env down`
 
+## Manage
+
+To enable/disable existing extensions, visit **https://$CANASTA_DOMAIN_NAME/w/manage.php**
+
 ## Switch (Upgrade)
 
 1. Edit `~/mediawiki-manager/switch-canasta-version.sh`:

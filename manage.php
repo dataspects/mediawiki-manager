@@ -41,6 +41,7 @@ sort($composerjsonReq);
 
 ///////////////////////////////////////////////////////////////////////////////
 
+echo "<html><head><title>Simple MWStake MediaWiki Manager</title></head><body>";
 echo "<h1>Simple MWStake MediaWiki Manager</h1>";
 echo "<form action='manage.php' method='post'><table cellspacing='50' width='100%'>";
 echo "<tr>";
@@ -50,12 +51,12 @@ echo "<td colspan='3'>
         <h2>Enable/disable existing extensions</h2>
         <code style='white-space: pre;'>
         mediawiki-manager$ <b><a href='https://github.com/dataspects/mediawiki-manager/blob/main/enable-extension.sh'>./enable-extension.sh</a></b>
-        Enter extension name to install: <b>jeroen/mediawiki-github</b>
+        Enter extension name to enable: <b>jeroen/mediawiki-github</b>
         &lt;ENTER&gt;
         </code>
         <code style='white-space: pre;'>
         mediawiki-manager$ <b><a href='https://github.com/dataspects/mediawiki-manager/blob/main/disable-extension.sh'>./disable-extension.sh</a></b>
-        Enter extension name to remove: <b>jeroen/mediawiki-github</b>
+        Enter extension name to disable: <b>jeroen/mediawiki-github</b>
         &lt;ENTER&gt;
         </code>
       </td>";      
@@ -71,3 +72,4 @@ echo "<td style='vertical-align:top;'>".implode('<br/>', $wfLEs)."</td>";
 echo "<td style='vertical-align:top;'>".implode('<br/>', $composerjsonReq)."</td>";
 echo "</tr>";
 echo "</table></form>";
+echo "</body></html>";

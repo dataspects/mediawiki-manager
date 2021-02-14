@@ -74,4 +74,5 @@ sudo docker run \
   restic/restic \
   --verbose snapshots
 
-echo "http://localhost:80"
+echo "Copy manage.php"
+cp manage.php $MEDIAWIKI_ROOT_FOLDER/w/
