@@ -43,7 +43,7 @@ sort($composerjsonReq);
 
 echo "<html><head><title>Simple MWStake MediaWiki Manager</title></head><body>";
 echo "<h1>Simple MWStake MediaWiki Manager</h1>";
-echo "<form action='manage.php' method='post'><table cellspacing='50' width='100%'>";
+echo "<form action='manage.php' method='post'><table cellspacing='50'>";
 echo "<tr>";
 echo "<td colspan='3'>
         <a href='https://packagist.org/explore/?type=mediawiki-extension'>Browse <b>packagist.org/explore/?type=mediawiki-extension</b></a>
