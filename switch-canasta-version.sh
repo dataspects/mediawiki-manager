@@ -8,9 +8,6 @@ source ./CanastaInstanceSettings.env
 
 ####################################
 
-MEDIAWIKI_ROOT_FOLDER=$CANASTA_INSTANCE_ROOT/mediawiki_root
-APACHE_CONTAINER_NAME=mediawiki_canasta
-
 requiredFiles=( "$NEW_CANASTA_ARCHIVE" )
 for file in "${requiredFiles[@]}"
 do

@@ -2,9 +2,6 @@
 
 source ./CanastaInstanceSettings.env
 
-MEDIAWIKI_ROOT_FOLDER=$CANASTA_INSTANCE_ROOT/mediawiki_root
-
-APACHE_CONTAINER_NAME=mediawiki_canasta
 MYSQL_HOST=127.0.0.1
 DATABASE_NAME=mediawiki
 MYSQL_USER=mediawiki
