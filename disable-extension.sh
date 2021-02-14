@@ -4,7 +4,7 @@ source ./CanastaInstanceSettings.env
 
 ####################################
 
-echo -n "Enter extension name to remove: "
+echo -n "Enter extension name to disable: "
 read EXTENSION_NAME
 
 # Check if the EXTENSION_NAME is of format abc/xyz

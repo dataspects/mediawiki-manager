@@ -35,7 +35,7 @@ The following procedures are currently tested on Ubuntu 20.04 including docker-c
 
 ## Manage
 
-To enable/disable existing extensions, visit **https://$CANASTA_DOMAIN_NAME/w/manage.php**
+To install new and enable/disable existing extensions, visit **https://$CANASTA_DOMAIN_NAME/w/manage.php**
 
 ## Switch (Upgrade)
 
