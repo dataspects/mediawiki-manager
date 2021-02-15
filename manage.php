@@ -47,7 +47,7 @@ echo "<html><head><title>$siteTitle</title></head><body>";
 echo "<h1>$siteTitle</h1>";
 echo "<form action='manage.php' method='post'><table cellspacing='50'>";
 echo "<tr>";
-echo "<td colspan='3'>
+echo "<td colspan='2'>
         <a href='https://packagist.org/explore/?type=mediawiki-extension'>Browse <b>packagist.org/explore/?type=mediawiki-extension</b></a>
         
         <h2>Enable/disable existing extensions</h2>
@@ -67,6 +67,12 @@ echo "<td colspan='3'>
         Enter extension name to install: <b>NearbyPages</b>
         &lt;ENTER&gt;
         </code>
+      </td>
+      <td style='vertical-align:top;'>
+        <h2>App Store</h2>
+        <p>&rarr; PageExchange (API?)</p>
+        <h2>Extension Store</h2>
+        <p>Extensions catalogue certified/secured e.g. by MWStake's Extensions Vetting Group</p>
       </td>";      
 echo "</tr>";     
 echo "<tr>
