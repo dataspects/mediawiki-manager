@@ -1,0 +1,4 @@
+Welcome!
+
+* [[Get started...]]
+* [https://{{SERVER}}{{SCRIPTPATH}}/manage.php Manage extensions]

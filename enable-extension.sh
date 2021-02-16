@@ -7,8 +7,6 @@ source ./CanastaInstanceSettings.env
 echo -n "Enter extension name to enable: "
 read EXTENSION_NAME
 
-echo $EXTENSION_NAME
-
 if [[ $EXTENSION_NAME =~ \/ ]]; then
   sudo -S docker exec $APACHE_CONTAINER_NAME bash -c \
     "cd w && php composer.phar require $EXTENSION_NAME"
