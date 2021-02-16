@@ -38,7 +38,15 @@ The following procedures are currently tested on Ubuntu 20.04 including:
 
 ## Manage
 
+### Extensions
+
 To install new and enable/disable existing extensions, visit **https://$CANASTA_DOMAIN_NAME/w/manage.php**
+
+### Content
+
+* `./inject-local-WikiPageContents`: inject content in `WikiPageContents/`
+* `./inject-ontology-WikiPageContents.sh`: inject content from onotlogy repositories, e.g. https://github.com/dataspects/dataspectsSystemCoreOntology
+
 
 ## Switch (Upgrade)
 

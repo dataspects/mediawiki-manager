@@ -6,7 +6,7 @@ source ./CanastaInstanceSettings.env
 
 if ! command -v jq &> /dev/null
 then
-	echo "Installing jq..."
+    echo "Installing jq..."
     sudo apt install jq
 fi
 

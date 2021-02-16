@@ -78,4 +78,4 @@ echo "Copy manage.php"
 cp manage.php $MEDIAWIKI_ROOT_FOLDER/w/
 
 echo "Inject contents..."
-source ./inject-WikiPageContents.sh
+source ./inject-local-WikiPageContents.sh

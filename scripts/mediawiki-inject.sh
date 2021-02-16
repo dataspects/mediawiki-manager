@@ -1,15 +1,6 @@
 #!/bin/bash
 
-source ./CanastaInstanceSettings.env
-
-####################################
-
-source ./scripts/mediawiki-login-for-edit.sh
-
-for filename in WikiPageContents/*.wikitext; do
-    PAGENAME=$(sed -r 's/.*\/(.*).wikitext/\1/g' <<< $filename)
-    WIKITEXT=`cat "$filename"`
-    CR=$(curl -S \
+CR=$(curl -S \
 	$OPTION_INSECURE \
 	--location \
     --silent \
@@ -24,5 +15,5 @@ for filename in WikiPageContents/*.wikitext; do
 	--data-urlencode "text=$WIKITEXT" \
 	--data-urlencode "token=${EDITTOKEN}" \
 	--request "POST" "${WIKIAPI}?action=edit&format=json")
-    echo "Injected content '$WIKITEXT' into $PAGENAME."
-done
+echo "Injected content into $PAGENAME."
+sleep 0.5
