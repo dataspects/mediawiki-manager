@@ -27,3 +27,5 @@ for filename in $ONTOLOGY_NAME/objects/*; do
     fi    
 done
 
+sudo -S docker exec $APACHE_CONTAINER_NAME bash -c \
+    "cd w && php maintenance/runJobs.php && php extensions/SemanticMediaWiki/maintenance/rebuildData.php"
