@@ -44,8 +44,8 @@ To install new and enable/disable existing extensions, visit **https://$CANASTA_
 
 ### Content
 
-* `./inject-local-WikiPageContents`: inject content in `WikiPageContents/`
-* `./inject-ontology-WikiPageContents.sh`: inject content from onotlogy repositories, e.g. https://github.com/dataspects/dataspectsSystemCoreOntology
+* `./inject-local-WikiPageContents`: inject content from `WikiPageContents/`
+* `./inject-ontology-WikiPageContents.sh`: inject content from ontology repositories, e.g. https://github.com/dataspects/dataspectsSystemCoreOntology
 
 
 ## Switch (Upgrade)
