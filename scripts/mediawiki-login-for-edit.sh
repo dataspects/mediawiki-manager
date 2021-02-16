@@ -4,6 +4,14 @@ source ./CanastaInstanceSettings.env
 
 ####################################
 
+if ! command -v jq &> /dev/null
+then
+	echo "Installing jq..."
+    sudo apt install jq
+fi
+
+####################################
+
 WIKI=https://$CANASTA_DOMAIN_NAME/w
 WIKIAPI=https://$CANASTA_DOMAIN_NAME/w/api.php
 cookie_jar="wikicj"

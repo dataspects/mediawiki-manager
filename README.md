@@ -1,6 +1,9 @@
 # mediawiki-manager
 
-The following procedures are currently tested on Ubuntu 20.04 including docker-compose.
+The following procedures are currently tested on Ubuntu 20.04 including:
+* docker-compose
+* https://stedolan.github.io/jq/
+
 ## Install
 
 1. `user@server:~$ git clone https://github.com/dataspects/mediawiki-manager.git`
