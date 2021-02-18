@@ -12,12 +12,10 @@ fi
 
 ####################################
 
+source ./scripts/utils.sh
+
 WIKI=https://$CANASTA_DOMAIN_NAME/w
 WIKIAPI=https://$CANASTA_DOMAIN_NAME/w/api.php
-cookie_jar="wikicj"
-folder="/tmp"
-
-OPTION_INSECURE=--insecure
 
 CR=$(curl -S \
     $OPTION_INSECURE \
