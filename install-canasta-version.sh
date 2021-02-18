@@ -28,16 +28,22 @@ echo "Ensure permissions..."
 sudo chown -R www-data $MEDIAWIKI_ROOT_FOLDER/w/images
 sleep 1
 
+echo "Copy AfterSettings.php"
+cp conf/AfterSettings.php mediawiki_root/w/
+
+echo "Include AfterSettings.php in LocalSettings.php"
+echo "require_once 'AfterSettings.php'; ">> $MEDIAWIKI_ROOT_FOLDER/w/LocalSettings.php
+
 echo "Set domain name..."
-sed -i "s/^\$wgServer.*;/\$wgServer = 'https:\/\/$CANASTA_DOMAIN_NAME';/g" mediawiki_root/w/LocalSettings.php
+echo "\$wgServer = 'https://$CANASTA_DOMAIN_NAME';">> mediawiki_root/w/AfterSettings.php
 sleep 1
 
 echo "Set database password..."
-sed -i "s/^\$wgDBpassword.*;/\$wgDBpassword = '$WG_DB_PASSWORD';/g" mediawiki_root/w/LocalSettings.php
+echo "\$wgDBpassword = '$WG_DB_PASSWORD';">> mediawiki_root/w/AfterSettings.php
 sleep 1
 
 echo "Set database server..."
-sed -i "s/^\$wgDBserver.*;/\$wgDBserver = '$MYSQL_HOST';/g" mediawiki_root/w/LocalSettings.php
+echo "\$wgDBserver = '$MYSQL_HOST';">> mediawiki_root/w/AfterSettings.php
 sleep 1
 
 # FIXME: Wait for MariaDB to be ready...
