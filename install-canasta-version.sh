@@ -29,7 +29,7 @@ sudo chown -R www-data $MEDIAWIKI_ROOT_FOLDER/w/images
 sleep 1
 
 echo "Set domain name..."
-sed -i "s/^\$wgServer.*;/\$wgServer = '$CANASTA_DOMAIN_NAME';/g" mediawiki_root/w/LocalSettings.php
+sed -i "s/^\$wgServer.*;/\$wgServer = 'https://$CANASTA_DOMAIN_NAME';/g" mediawiki_root/w/LocalSettings.php
 sleep 1
 
 echo "Set database password..."
@@ -79,3 +79,4 @@ cp manage.php $MEDIAWIKI_ROOT_FOLDER/w/
 
 echo "Inject contents..."
 source ./inject-local-WikiPageContents.sh
+source ./inject-manage-page-from-mediawiki.org.sh

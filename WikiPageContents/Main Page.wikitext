@@ -1,4 +1,5 @@
 Welcome!
 
 * [[Get started...]]
+* [[Manage this MediaWiki instance]]
 * [https://{{SERVER}}{{SCRIPTPATH}}/manage.php Manage extensions]
