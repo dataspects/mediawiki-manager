@@ -80,8 +80,13 @@ sudo docker run \
   restic/restic \
   --verbose snapshots
 
-echo "Copy manage.php"
-cp manage.php $MEDIAWIKI_ROOT_FOLDER/w/
+echo "Install mwm API"
+mkdir $MEDIAWIKI_ROOT_FOLDER/api/
+cp -r mwmapi/* $MEDIAWIKI_ROOT_FOLDER/api/
+
+echo "Install mwm UI"
+mkdir $MEDIAWIKI_ROOT_FOLDER/ui/
+cp -r mwmui/* $MEDIAWIKI_ROOT_FOLDER/ui/
 
 echo "Inject contents..."
 source ./inject-local-WikiPageContents.sh
