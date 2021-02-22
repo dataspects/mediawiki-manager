@@ -1,6 +1,7 @@
 <?php
 
 require_once "./overview.php";
+require_once "./extension.php";
 
 header("Access-Control-Allow-Origin: *");
 header("Access-Control-Allow-Headers: access");
@@ -8,16 +9,39 @@ header("Access-Control-Allow-Methods: GET");
 header("Access-Control-Allow-Credentials: false");
 header('Content-Type: application/json');
   
-$mode = isset($_GET['mode']) ? $_GET['mode'] : die();
+$action = isset($_GET['action']) ? $_GET['action'] : die();
 
-$overview = new Overview();
+switch($action) {
+    case "overview":
+        $overview = new Overview();
+        $response = array(
+            "extensionsInDirectory" => $overview->extensionsInDirectory(),
+            "wfLoadExtensions" => $overview->wfLoadExtensions(),
+            "composerjsonReq" => $overview->composerjsonReq()
+        );
+        http_response_code(200);
+        break;
+    case "enableDisableExtension":
+        $mode = isset($_GET['mode']) ? $_GET['mode'] : die();
+        $extensionName = isset($_GET['extensionName']) ? $_GET['extensionName'] : die();
+        $extension = new Extension($extensionName);
+        switch($mode) {
+            case "enable":
+                $response = array(
+                    "status" => $extension->enable()
+                );
+                break;
+            case "disable":
+                $response = array(
+                    "status" => $extension->disable()
+                );
+                break;
+        }
+        http_response_code(200);
+        break;
+    default:
+        $response = array();
+        http_response_code(404);
+}
 
-http_response_code(200);
-echo json_encode(
-    array(
-        "extensionsInDirectory" => $overview->extensionsInDirectory(),
-        "wfLoadExtensions" => $overview->wfLoadExtensions(),
-        "composerjsonReq" => $overview->composerjsonReq(),
-        "mode"=> $mode
-    )
-);
+echo json_encode($response);

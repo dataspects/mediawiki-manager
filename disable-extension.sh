@@ -16,7 +16,7 @@ if [[ $EXTENSION_NAME =~ \/ ]]; then
   EXTNAME_CC=$(sed -r 's/(^|-)(\w)/\U\2/g' <<<$EXTNAME)
 else
   # If no, then it seems to be manually managed
-  EXTNAME_CC=$EXTENSION_NAME  
+  EXTNAME_CC=$EXTENSION_NAME
 fi
 
 # If applicable, uncomment wfLoadExtension
