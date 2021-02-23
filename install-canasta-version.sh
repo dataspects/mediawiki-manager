@@ -25,7 +25,8 @@ tar -xzf $CANASTA_INSTANCE_ROOT/$CURRENT_CANASTA_ARCHIVE -C $MEDIAWIKI_ROOT_FOLD
 sleep 1
 
 echo "Ensure permissions..."
-sudo chown -R www-data $MEDIAWIKI_ROOT_FOLDER/w/images
+sudo chown -R $CANASTA_INSTANCE_ROOT_OWNER:www-data $MEDIAWIKI_ROOT_FOLDER
+sudo chmod -R 770 $MEDIAWIKI_ROOT_FOLDER
 sleep 1
 
 echo "Copy AfterSettings.php"
