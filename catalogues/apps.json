@@ -1,0 +1,10 @@
+{
+  "dataspects/dataspectsSystemCoreOntology": {},
+  "dataspects/TrustedWebOfColleaguesOntology": {},
+  "dataspects/dataspectsSystemCookbookOntology": {},
+  "dataspects/dataspectsSupportOntology": {},
+  "dataspects/dataspectsConferenceManagementOntology": {},
+  "dataspects/IssueManagementOntology": {},
+  "dataspects/TaskManagementOntology": {},
+  "dataspects/MeetingMinutesOntology": {}
+}

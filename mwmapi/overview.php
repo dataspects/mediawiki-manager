@@ -40,6 +40,15 @@ class Overview {
 
     public function extensionCatalogue() {
         $extensionsjson = file_get_contents(getcwd().'/extensions.json');
-        return json_decode($extensionsjson, true);
+        $jd = json_decode($extensionsjson, true);
+        ksort($jd);
+        return $jd;
+    }
+
+    public function appCatalogue() {
+        $appsjson = file_get_contents(getcwd().'/apps.json');
+        $jd = json_decode($appsjson, true);
+        ksort($jd);
+        return $jd;
     }
 }

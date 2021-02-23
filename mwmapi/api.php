@@ -45,6 +45,11 @@ switch($action) {
             "extensionCatalogue" => $overview->extensionCatalogue()
         );
         break;
+    case "appCatalogue":
+        $response = array(
+            "appCatalogue" => $overview->appCatalogue()
+        );
+        break;
     default:
         $response = array();
         http_response_code(404);
