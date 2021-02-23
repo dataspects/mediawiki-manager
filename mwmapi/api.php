@@ -25,7 +25,7 @@ switch($action) {
     case "enableDisableExtension":
         $mode = isset($_GET['mode']) ? $_GET['mode'] : die();
         $extensionName = isset($_GET['extensionName']) ? $_GET['extensionName'] : die();
-        $extension = new Extension($extensionName);
+        $extension = new Extension($extensionName, $overview);
         switch($mode) {
             case "enable":
                 $response = array(

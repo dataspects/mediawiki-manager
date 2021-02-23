@@ -1,29 +1,29 @@
-[
-    {
-        "name": "SemanticMediaWiki",
-        "docker_commands": [
-            "cd /var/www/html/w; php composer.phar require mediawiki/semantic-media-wiki '{{ semantic_mediawiki_version }}' --update-no-dev",
-            "cd /var/www/html/w && php maintenance/update.php --skip-external-dependencies"
-        ],
-        "localsettings_configs": [
+{
+    "mediawiki/semantic-media-wiki": {
+        "composer": "mediawiki/semantic-media-wiki '3.2.2' --update-no-dev",
+        "localsettings": [
             "enableSemantics( 'localhost' );",
             "$smwgLinksInValues = true;",
             "$smwgEnableUpdateJobs = false;"
         ]
     },
-    {
-        "name": "ParserFunctions",
-        "localsettings_configs": [
+    "ParserFunctions": {
+        "localsettings": [
             "wfLoadExtension( 'ParserFunctions' );",
             "$wgPFEnableStringFunctions = true;"
         ]
     },
-    {
-        "name": "PageForms",
+    "PageForms": {
         "repository": "https://gerrit.wikimedia.org/r/p/mediawiki/extensions/PageForms.git",
-        "localsettings_configs": [
+        "localsettings": [
             "wfLoadExtension( 'PageForms' );",
             "$wgPageFormsLinkAllRedLinksToForms = true;"
         ]
+    },
+    "LabeledSectionTransclusion": {
+        "repository": "https://gerrit.wikimedia.org/r/mediawiki/extensions/LabeledSectionTransclusion.git",
+        "localsettings": [
+            "wfLoadExtension( 'LabeledSectionTransclusion' );"
+        ]
     }
-]
+}

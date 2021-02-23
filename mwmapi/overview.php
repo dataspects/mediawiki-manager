@@ -20,9 +20,9 @@ class Overview {
     public function wfLoadExtensions() {
         $wfLEs = array();
         foreach($this->localSettingsArray as $lsline) {
-            preg_match('/#?wfLoadExtension.*;/', $lsline, $matches, PREG_OFFSET_CAPTURE);
-            if($matches[0]) {
-                $wfLEs[] = $matches[0][0];
+            preg_match('/#?wfLoadExtension.*;/', $lsline, $matches);
+            if(count($matches) > 0) {
+                $wfLEs[] = $matches[0];
             };
         }
         sort($wfLEs);

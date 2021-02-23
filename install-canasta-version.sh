@@ -84,6 +84,10 @@ echo "Install mwm API"
 mkdir $MEDIAWIKI_ROOT_FOLDER/api/
 cp -r mwmapi/* $MEDIAWIKI_ROOT_FOLDER/api/
 
+echo "Install mwm catalogues"
+mkdir $MEDIAWIKI_ROOT_FOLDER/api/
+cp -r catalogues/* $MEDIAWIKI_ROOT_FOLDER/api/
+
 echo "Install mwm UI"
 mkdir $MEDIAWIKI_ROOT_FOLDER/ui/
 cp -r mwmui/* $MEDIAWIKI_ROOT_FOLDER/ui/
