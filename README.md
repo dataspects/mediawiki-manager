@@ -102,3 +102,19 @@ Currently this restores the latest snapshot into `~/mediawiki-manager/$RESTIC_RE
 
 * Keep 2 sections in LocalSettings.php separated by "# End of automatically generated settings."
 * Keep all components within mediawiki_root/
+
+## MWM Factory
+
+### Develop MWM UI
+
+1. `user@workstation:~/mwmui$ gatsby develop -H 0.0.0.0`
+2. `user@workstation:~/mediawiki-manager$ cp mwmapi/* mediawiki_root/api/` for all changes in `mwmapi/`
+
+### Locally test production MWM UI
+
+* `user@workstation:~/mwmui$ gatsby build --prefix-paths && cp -r public/* ../mediawiki-manager/mediawiki_root/ui`
+
+### Deploy production MWM UI
+
+1. `user@workstation:~/mwmui$ gatsby build --prefix-paths && cp -r public/* ../mediawiki-manager/mwmui`
+2. `user@workstation:~/mediawiki-manager$ # git commit ...`
