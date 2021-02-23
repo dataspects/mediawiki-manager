@@ -32,7 +32,7 @@ class Extension {
             }
         }
         exec("cd /var/www/html/w && php maintenance/update.php --quick", $output, $retval);
-        return $retval;
+        return "Extension ".$this->name." enabled...";
     }
 
     public function disable() {
@@ -49,7 +49,7 @@ class Extension {
             }
         }
         exec("cd /var/www/html/w && php maintenance/update.php --quick", $output, $retval);
-        return $retval;
+        return "Extension ".$this->name." disabled...";
     }
 
     private function extensionProfile($overview) {

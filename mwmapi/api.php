@@ -42,12 +42,14 @@ switch($action) {
         break;
     case "extensionCatalogue":
         $response = array(
-            "extensionCatalogue" => $overview->extensionCatalogue()
+            "extensionCatalogue" => $overview->extensionCatalogue(),
+            "status" => "extensionCatalogue loaded..."
         );
         break;
     case "appCatalogue":
         $response = array(
-            "appCatalogue" => $overview->appCatalogue()
+            "appCatalogue" => $overview->appCatalogue(),
+            "status" => "appCatalogue loaded..."
         );
         break;
     default:
