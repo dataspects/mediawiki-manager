@@ -37,4 +37,9 @@ class Overview {
         sort($composerjsonReq);
         return $composerjsonReq;
     }
+
+    public function extensionCatalogue() {
+        $extensionsjson = file_get_contents(getcwd().'/extensions.json');
+        return json_decode($extensionsjson, true);
+    }
 }

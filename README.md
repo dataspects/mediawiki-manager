@@ -105,6 +105,8 @@ Currently this restores the latest snapshot into `~/mediawiki-manager/$RESTIC_RE
 
 ## MWM Factory
 
+* See https://github.com/dataspects/mwmui.
+* Docker images are built by https://github.com/dataspects/dataspectsSystemBuilder.
 ### Develop MWM UI
 
 1. `user@workstation:~/mwmui$ gatsby develop -H 0.0.0.0`

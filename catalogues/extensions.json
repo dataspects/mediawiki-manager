@@ -1,0 +1,29 @@
+[
+    {
+        "name": "SemanticMediaWiki",
+        "docker_commands": [
+            "cd /var/www/html/w; php composer.phar require mediawiki/semantic-media-wiki '{{ semantic_mediawiki_version }}' --update-no-dev",
+            "cd /var/www/html/w && php maintenance/update.php --skip-external-dependencies"
+        ],
+        "localsettings_configs": [
+            "enableSemantics( 'localhost' );",
+            "$smwgLinksInValues = true;",
+            "$smwgEnableUpdateJobs = false;"
+        ]
+    },
+    {
+        "name": "ParserFunctions",
+        "localsettings_configs": [
+            "wfLoadExtension( 'ParserFunctions' );",
+            "$wgPFEnableStringFunctions = true;"
+        ]
+    },
+    {
+        "name": "PageForms",
+        "repository": "https://gerrit.wikimedia.org/r/p/mediawiki/extensions/PageForms.git",
+        "localsettings_configs": [
+            "wfLoadExtension( 'PageForms' );",
+            "$wgPageFormsLinkAllRedLinksToForms = true;"
+        ]
+    }
+]

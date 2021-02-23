@@ -11,9 +11,10 @@ header('Content-Type: application/json');
   
 $action = isset($_GET['action']) ? $_GET['action'] : die();
 
+$overview = new Overview();
+
 switch($action) {
-    case "overview":
-        $overview = new Overview();
+    case "overview":        
         $response = array(
             "extensionsInDirectory" => $overview->extensionsInDirectory(),
             "wfLoadExtensions" => $overview->wfLoadExtensions(),
@@ -38,6 +39,11 @@ switch($action) {
                 break;
         }
         http_response_code(200);
+        break;
+    case "extensionCatalogue":
+        $response = array(
+            "extensionCatalogue" => $overview->extensionCatalogue()
+        );
         break;
     default:
         $response = array();
