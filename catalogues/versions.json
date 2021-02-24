@@ -1,0 +1,8 @@
+{
+  "1.35.0-3.2.1": {
+    "url": "wget -c https://www.dropbox.com/s/p5r2qsar1q0u4i3/mediawiki-root-w-folder-1.35.0-3.2.1.tar.gz"
+  },
+  "1.35.1-3.2.2": {
+    "url": "wget -c https://www.dropbox.com/s/zncf0q288um5gic/mediawiki-root-w-folder-1.35.1-3.2.2.tar.gz"
+  }
+}

@@ -3,6 +3,7 @@
 require_once "./overview.php";
 require_once "./extension.php";
 require_once "./snapshots.php";
+require_once "./upgrades.php";
 
 header("Access-Control-Allow-Origin: *");
 header("Access-Control-Allow-Headers: access");
@@ -14,6 +15,7 @@ $action = isset($_GET['action']) ? $_GET['action'] : die();
 
 $overview = new Overview();
 $snapshots = new Snapshots();
+$upgrades = new Upgrades();
 
 switch($action) {
     case "overview":        
@@ -52,6 +54,12 @@ switch($action) {
         $response = array(
             "appCatalogue" => $overview->appCatalogue(),
             "status" => "appCatalogue loaded..."
+        );
+        break;
+    case "upgradesCatalogue":
+        $response = array(
+            "upgradesCatalogue" => $upgrades->upgradesCatalogue(),
+            "status" => "upgradesCatalogue loaded..."
         );
         break;
     case "snapshotCatalogue":
