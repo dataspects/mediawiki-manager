@@ -2,6 +2,7 @@
 
 require_once "./overview.php";
 require_once "./extension.php";
+require_once "./snapshots.php";
 
 header("Access-Control-Allow-Origin: *");
 header("Access-Control-Allow-Headers: access");
@@ -12,6 +13,7 @@ header('Content-Type: application/json');
 $action = isset($_GET['action']) ? $_GET['action'] : die();
 
 $overview = new Overview();
+$snapshots = new Snapshots();
 
 switch($action) {
     case "overview":        
@@ -50,6 +52,17 @@ switch($action) {
         $response = array(
             "appCatalogue" => $overview->appCatalogue(),
             "status" => "appCatalogue loaded..."
+        );
+        break;
+    case "snapshotCatalogue":
+        $response = array(
+            "snapshotCatalogue" => $snapshots->snapshotCatalogue(),
+            "status" => "snapshotCatalogue loaded..."
+        );
+        break;
+    case "takeSnapshot":
+        $response = array(
+            "status" => $snapshots->takeSnapshot()
         );
         break;
     default:

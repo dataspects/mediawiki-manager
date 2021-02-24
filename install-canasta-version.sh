@@ -58,7 +58,7 @@ sudo -S docker exec $APACHE_CONTAINER_NAME bash -c \
 sleep 1
 
 echo "Import database..."
-sudo -S docker exec $APACHE_CONTAINER_NAME bash -c \
+sudo -S docker exec $APACHE_CONTAINER_NAME /bin/bash -c \
   "mysql -h $MYSQL_HOST -u $MYSQL_USER -p$WG_DB_PASSWORD \
   mediawiki < /var/www/html/w/db.sql"
 sleep 1
@@ -67,19 +67,20 @@ echo "Update..."
 sudo -S docker exec $APACHE_CONTAINER_NAME /bin/bash -c \
   'cd w; php maintenance/update.php'
 
-echo "Create restic backup repository"
-sudo docker pull restic/restic
-sudo docker run \
-  --env-file ./CanastaInstanceSettings.env \
-  --volume $CANASTA_INSTANCE_ROOT/$RESTIC_REPOSITORY:/$RESTIC_REPOSITORY \
-  restic/restic \
-  --verbose init
+echo "Initialize restic backup repository"
+sudo -S docker exec $APACHE_CONTAINER_NAME /bin/bash -c \
+  "restic --verbose init --repo /var/www/html/restic-repo"
 
-sudo docker run \
-  --env-file ./CanastaInstanceSettings.env \
-  --volume $CANASTA_INSTANCE_ROOT/$RESTIC_REPOSITORY:/$RESTIC_REPOSITORY \
-  restic/restic \
-  --verbose snapshots
+echo "Ensure permissions..."
+sudo chown -R $CANASTA_INSTANCE_ROOT_OWNER:www-data restic_data
+sudo chmod -R 770 restic_data
+sleep 1
+
+# sudo docker run \
+#   --env-file ./CanastaInstanceSettings.env \
+#   --volume $CANASTA_INSTANCE_ROOT/$RESTIC_REPOSITORY:/$RESTIC_REPOSITORY \
+#   restic/restic \
+#   --verbose snapshots
 
 echo "Install mwm API"
 mkdir $MEDIAWIKI_ROOT_FOLDER/api/
