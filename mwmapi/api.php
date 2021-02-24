@@ -73,6 +73,12 @@ switch($action) {
             "status" => $snapshots->takeSnapshot()
         );
         break;
+    case "info":
+        $response = array(
+            "info" => $overview->wikiInfo(),
+            "status" => "info loaded..."
+        );
+        break;
     default:
         $response = array();
         http_response_code(404);

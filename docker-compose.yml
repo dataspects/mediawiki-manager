@@ -12,6 +12,9 @@ services:
       - ./mediawiki_root:/var/www/html
       - ./restic_data:/var/www/html/restic-repo
       - ./conf:/etc/apache2/sites-available
+    # https://phabricator.wikimedia.org/source/mediawiki/browse/master/docker-compose.yml
+    # https://phoenixnap.com/kb/how-to-share-data-between-docker-containers
+    # + mysql
   mysql:
     container_name: mysql_canasta
     image: mariadb:10.5.5
