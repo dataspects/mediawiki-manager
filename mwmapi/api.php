@@ -5,6 +5,7 @@ require_once "./extension.php";
 require_once "./snapshots.php";
 require_once "./upgrades.php";
 require_once "./mediawiki.php";
+require_once "./system.php";
 
 header("Access-Control-Allow-Origin: *");
 header("Access-Control-Allow-Headers: access");
@@ -18,6 +19,7 @@ $overview = new Overview();
 $snapshots = new Snapshots();
 $upgrades = new Upgrades();
 $mediawiki = new MediaWiki();
+$system = new System();
 
 switch($action) {
     case "overview":        
@@ -85,6 +87,11 @@ switch($action) {
         $response = array(
             "generalSiteInfo" => $mediawiki->generalSiteInfo(),
             "status" => "info loaded..."
+        );
+        break;
+    case "upgradeNow":
+        $response = array(
+            "status" => $system->upgradeNow()
         );
         break;
     default:
