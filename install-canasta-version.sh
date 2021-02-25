@@ -68,8 +68,9 @@ sudo -S docker exec $APACHE_CONTAINER_NAME /bin/bash -c \
   'cd w; php maintenance/update.php'
 
 echo "Initialize restic backup repository"
+cp conf/restic_password $MEDIAWIKI_ROOT_FOLDER/
 sudo -S docker exec $APACHE_CONTAINER_NAME /bin/bash -c \
-  "restic --verbose init --repo /var/www/html/restic-repo"
+  "restic --password-file restic_password --verbose init --repo /var/www/html/restic-repo"
 
 echo "Ensure permissions..."
 sudo chown -R $CANASTA_INSTANCE_ROOT_OWNER:www-data restic_data
