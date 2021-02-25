@@ -65,7 +65,7 @@ sleep 1
 
 echo "Update..."
 sudo -S docker exec $APACHE_CONTAINER_NAME /bin/bash -c \
-  'cd w; php maintenance/update.php'
+  'cd w; php maintenance/update.php --quick'
 
 echo "Initialize restic backup repository"
 cp conf/restic_password $MEDIAWIKI_ROOT_FOLDER/
@@ -76,12 +76,6 @@ echo "Ensure permissions..."
 sudo chown -R $CANASTA_INSTANCE_ROOT_OWNER:www-data restic_data
 sudo chmod -R 770 restic_data
 sleep 1
-
-# sudo docker run \
-#   --env-file ./CanastaInstanceSettings.env \
-#   --volume $CANASTA_INSTANCE_ROOT/$RESTIC_REPOSITORY:/$RESTIC_REPOSITORY \
-#   restic/restic \
-#   --verbose snapshots
 
 echo "Install mwm API"
 mkdir $MEDIAWIKI_ROOT_FOLDER/api/
