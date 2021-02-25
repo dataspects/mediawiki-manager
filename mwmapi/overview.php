@@ -52,46 +52,4 @@ class Overview {
         return $jd;
     }
 
-    public function wikiInfo() {
-        return $this->wikiLogin();
-    }
-
-    private function wikiLogin() {
-        $loginToken = $this->loginToken();
-        $username = "Admin";
-        $password = "123adminpass456";
-        $ch = curl_init();
-        curl_setopt($ch, CURLOPT_URL, "https://localhost/w/api.php?action=clientlogin&format=json");
-        curl_setopt($ch,CURLOPT_POST,true);
-        curl_setopt($ch,CURLOPT_POSTFIELDS, array(
-            "username" => $username,
-            "password" => $password,
-            "logintoken" => $loginToken,
-            "loginreturnurl" => "https://localhost/w"
-        ));
-        curl_setopt($ch, CURLOPT_RETURNTRANSFER, 1);
-        curl_setopt($ch, CURLOPT_SSL_VERIFYHOST, false);
-        curl_setopt($ch, CURLOPT_SSL_VERIFYPEER, false);
-        curl_setopt($ch, CURLOPT_SSL_VERIFYSTATUS, false);
-        curl_setopt($ch, CURLOPT_COOKIEJAR, '/tmp/cookies.txt');
-        curl_setopt($ch, CURLOPT_COOKIEFILE, '/tmp/cookies.txt');
-        $output = json_decode(curl_exec($ch), true);
-        curl_close($ch);
-        return $output;
-    }
-
-    private function loginToken() {
-        $ch = curl_init();
-        curl_setopt($ch, CURLOPT_URL, "https://localhost/w/api.php?action=query&meta=tokens&type=login&format=json");
-        curl_setopt($ch, CURLOPT_RETURNTRANSFER, 1);
-        curl_setopt($ch, CURLOPT_SSL_VERIFYHOST, false);
-        curl_setopt($ch, CURLOPT_SSL_VERIFYPEER, false);
-        curl_setopt($ch, CURLOPT_SSL_VERIFYSTATUS, false);
-        curl_setopt($ch, CURLOPT_COOKIEJAR, '/tmp/cookies.txt');
-        curl_setopt($ch, CURLOPT_COOKIEFILE, '/tmp/cookies.txt');
-        $output = json_decode(curl_exec($ch), true);
-        curl_close($ch);
-        return $output["query"]["tokens"]["logintoken"];
-    }
-
 }

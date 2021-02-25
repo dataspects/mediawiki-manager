@@ -4,6 +4,7 @@ require_once "./overview.php";
 require_once "./extension.php";
 require_once "./snapshots.php";
 require_once "./upgrades.php";
+require_once "./mediawiki.php";
 
 header("Access-Control-Allow-Origin: *");
 header("Access-Control-Allow-Headers: access");
@@ -16,6 +17,7 @@ $action = isset($_GET['action']) ? $_GET['action'] : die();
 $overview = new Overview();
 $snapshots = new Snapshots();
 $upgrades = new Upgrades();
+$mediawiki = new MediaWiki();
 
 switch($action) {
     case "overview":        
@@ -73,9 +75,15 @@ switch($action) {
             "status" => $snapshots->takeSnapshot()
         );
         break;
-    case "info":
+    case "extensionsByMWAPI":
         $response = array(
-            "info" => $overview->wikiInfo(),
+            "extensionsByMWAPI" => $mediawiki->extensionsByMWAPI(),
+            "status" => "info loaded..."
+        );
+        break;
+    case "generalSiteInfo":
+        $response = array(
+            "generalSiteInfo" => $mediawiki->generalSiteInfo(),
             "status" => "info loaded..."
         );
         break;
