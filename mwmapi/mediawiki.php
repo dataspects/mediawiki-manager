@@ -30,8 +30,6 @@ class MediaWiki {
         return $output["query"];
     }
 
-
-
     private function wikiLogin() {
         $loginToken = $this->loginToken();
         $ch = $this->ch();
