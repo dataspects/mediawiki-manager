@@ -1,8 +1,15 @@
 {
-    "mediawiki/mermaid": {
+    "Mermaid": {
         "composer": "mediawiki/mermaid",
         "localsettings": [
             "wfLoadExtension( 'Mermaid' );"
+        ],
+        "functionality": "diagramming",
+        "documentation": [
+            "https://mermaid-js.github.io/mermaid/#/",
+            "https://github.com/SemanticMediaWiki/Mermaid/blob/master/docs/USAGE.md",
+            "https://www.semantic-mediawiki.org/wiki/Help:Using_Mermaid_together_with_Semantic_MediaWiki",
+            "https://github.com/SemanticMediaWiki/Mermaid/blob/master/README.md"
         ]
     },
     "ParserFunctions": {
