@@ -51,42 +51,43 @@ switch($action) {
     case "extensionCatalogue":
         $response = array(
             "extensionCatalogue" => $overview->extensionCatalogue(),
-            "status" => "extensionCatalogue loaded..."
+            "status" => "Extension catalogue loaded"
         );
         break;
     case "appCatalogue":
         $response = array(
             "appCatalogue" => $overview->appCatalogue(),
-            "status" => "appCatalogue loaded..."
+            "status" => "App catalogue loaded"
         );
         break;
     case "upgradesCatalogue":
         $response = array(
             "upgradesCatalogue" => $upgrades->upgradesCatalogue(),
-            "status" => "upgradesCatalogue loaded..."
+            "status" => "Upgrade catalogue loaded"
         );
         break;
     case "snapshotCatalogue":
         $response = array(
             "snapshotCatalogue" => $snapshots->snapshotCatalogue(),
-            "status" => "snapshotCatalogue loaded..."
+            "status" => "Snapshot catalogue loaded"
         );
         break;
     case "takeSnapshot":
+        $snapshots->takeSnapshot();
         $response = array(
-            "status" => $snapshots->takeSnapshot()
+            "status" => "Snapshot taken"
         );
         break;
     case "extensionsByMWAPI":
         $response = array(
             "extensionsByMWAPI" => $mediawiki->extensionsByMWAPI(),
-            "status" => "info loaded..."
+            "status" => "Extensions by MediaWiki API loaded"
         );
         break;
     case "generalSiteInfo":
         $response = array(
             "generalSiteInfo" => $mediawiki->generalSiteInfo(),
-            "status" => "info loaded..."
+            "status" => "MediaWiki info loaded"
         );
         break;
     case "upgradeNow":
