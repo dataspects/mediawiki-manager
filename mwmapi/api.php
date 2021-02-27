@@ -21,6 +21,8 @@ $upgrades = new Upgrades();
 $mediawiki = new MediaWiki();
 $system = new System();
 
+$generalSiteInfo = $mediawiki->generalSiteInfo();
+
 switch($action) {
     case "overview":        
         $response = array(
@@ -50,7 +52,7 @@ switch($action) {
         break;
     case "extensionCatalogue":
         $response = array(
-            "extensionCatalogue" => $overview->extensionCatalogue(),
+            "extensionCatalogue" => $overview->extensionCatalogue($generalSiteInfo),
             "status" => "Extension catalogue loaded"
         );
         break;
@@ -86,7 +88,7 @@ switch($action) {
         break;
     case "generalSiteInfo":
         $response = array(
-            "generalSiteInfo" => $mediawiki->generalSiteInfo(),
+            "generalSiteInfo" => $generalSiteInfo,
             "status" => "MediaWiki info loaded"
         );
         break;

@@ -1,6 +1,7 @@
 # mediawiki-manager
 
 ![DSMWM screenshot](images/mwmscreenshot.png)
+![DSMWM screenshot](images/mwstakeextensionstore.png)
 
 The following procedures are currently tested on Ubuntu 20.04 including:
 * docker-compose
