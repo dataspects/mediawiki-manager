@@ -15,7 +15,7 @@
           }
         }
       },
-      "category": "diagramming",
+      "categories": ["Diagramming"],
       "documentation": [
         "https://mermaid-js.github.io/mermaid/#/",
         "https://github.com/SemanticMediaWiki/Mermaid/blob/master/docs/USAGE.md",
@@ -31,20 +31,29 @@
                 "$wgPFEnableStringFunctions = true;"
             ]
         },
-      "category": "",
-      "documentation": []
+      "categories": ["Code-in-Wikitext"],
+      "documentation": [
+        "https://www.mediawiki.org/wiki/Help:Extension:ParserFunctions"
+      ]
     },
     {
       "name": "PageForms",
       "installation": {
         "repository": "https://gerrit.wikimedia.org/r/p/mediawiki/extensions/PageForms.git",
         "localsettings": [
-                "wfLoadExtension( 'PageForms' );",
-                "$wgPageFormsLinkAllRedLinksToForms = true;"
-            ]
-        },
-      "category": "",
-      "documentation": []
+          "wfLoadExtension( 'PageForms' );",
+          "$wgPageFormsLinkAllRedLinksToForms = true;"
+        ],
+        "requires": {
+          "mediawiki-core": {
+            "version": ">=1.30"
+          }
+        }
+      },
+      "categories": ["Edit-by-Forms"],
+      "documentation": [
+        "https://www.mediawiki.org/wiki/Extension:Page_Forms"
+      ]
     },
     {
       "name": "LabeledSectionTransclusion",
@@ -54,7 +63,9 @@
                 "wfLoadExtension( 'LabeledSectionTransclusion' );"
             ]
         },
-      "category": "",
-      "documentation": []
+      "categories": ["Reuse-Content", "DRY"],
+      "documentation": [
+        "https://www.mediawiki.org/wiki/Extension:Labeled_Section_Transclusion"
+      ]
     }
 ]
