@@ -1,7 +1,7 @@
 [
     {
       "name": "Mermaid",
-      "installation": {
+      "installation-aspects": {
         "composer": "mediawiki/mermaid",
         "localsettings": [
           "wfLoadExtension( 'Mermaid' );"
@@ -25,7 +25,7 @@
     },
     {
       "name": "ParserFunctions",
-      "installation": {
+      "installation-aspects": {
         "localsettings": [
                 "wfLoadExtension( 'ParserFunctions' );",
                 "$wgPFEnableStringFunctions = true;"
@@ -38,7 +38,7 @@
     },
     {
       "name": "PageForms",
-      "installation": {
+      "installation-aspects": {
         "repository": "https://gerrit.wikimedia.org/r/p/mediawiki/extensions/PageForms.git",
         "localsettings": [
           "wfLoadExtension( 'PageForms' );",
@@ -57,7 +57,7 @@
     },
     {
       "name": "LabeledSectionTransclusion",
-      "installation": {
+      "installation-aspects": {
         "repository": "https://gerrit.wikimedia.org/r/mediawiki/extensions/LabeledSectionTransclusion.git",
         "localsettings": [
                 "wfLoadExtension( 'LabeledSectionTransclusion' );"
