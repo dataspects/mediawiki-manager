@@ -1,34 +1,60 @@
-{
-    "Mermaid": {
+[
+    {
+      "name": "Mermaid",
+      "installation": {
         "composer": "mediawiki/mermaid",
         "localsettings": [
-            "wfLoadExtension( 'Mermaid' );"
+          "wfLoadExtension( 'Mermaid' );"
         ],
-        "functionality": "diagramming",
-        "documentation": [
-            "https://mermaid-js.github.io/mermaid/#/",
-            "https://github.com/SemanticMediaWiki/Mermaid/blob/master/docs/USAGE.md",
-            "https://www.semantic-mediawiki.org/wiki/Help:Using_Mermaid_together_with_Semantic_MediaWiki",
-            "https://github.com/SemanticMediaWiki/Mermaid/blob/master/README.md"
-        ]
+        "requires": {
+          "php": {
+            "version": ">=7.0"
+          },
+          "mediawiki-core": {
+            "version": ">=1.33"
+          }
+        }
+      },
+      "category": "diagramming",
+      "documentation": [
+        "https://mermaid-js.github.io/mermaid/#/",
+        "https://github.com/SemanticMediaWiki/Mermaid/blob/master/docs/USAGE.md",
+        "https://www.semantic-mediawiki.org/wiki/Help:Using_Mermaid_together_with_Semantic_MediaWiki",
+        "https://github.com/SemanticMediaWiki/Mermaid/blob/master/README.md"
+      ]
     },
-    "ParserFunctions": {
+    {
+      "name": "ParserFunctions",
+      "installation": {
         "localsettings": [
-            "wfLoadExtension( 'ParserFunctions' );",
-            "$wgPFEnableStringFunctions = true;"
-        ]
+                "wfLoadExtension( 'ParserFunctions' );",
+                "$wgPFEnableStringFunctions = true;"
+            ]
+        },
+      "category": "",
+      "documentation": []
     },
-    "PageForms": {
+    {
+      "name": "PageForms",
+      "installation": {
         "repository": "https://gerrit.wikimedia.org/r/p/mediawiki/extensions/PageForms.git",
         "localsettings": [
-            "wfLoadExtension( 'PageForms' );",
-            "$wgPageFormsLinkAllRedLinksToForms = true;"
-        ]
+                "wfLoadExtension( 'PageForms' );",
+                "$wgPageFormsLinkAllRedLinksToForms = true;"
+            ]
+        },
+      "category": "",
+      "documentation": []
     },
-    "LabeledSectionTransclusion": {
+    {
+      "name": "LabeledSectionTransclusion",
+      "installation": {
         "repository": "https://gerrit.wikimedia.org/r/mediawiki/extensions/LabeledSectionTransclusion.git",
         "localsettings": [
-            "wfLoadExtension( 'LabeledSectionTransclusion' );"
-        ]
+                "wfLoadExtension( 'LabeledSectionTransclusion' );"
+            ]
+        },
+      "category": "",
+      "documentation": []
     }
-}
+]
