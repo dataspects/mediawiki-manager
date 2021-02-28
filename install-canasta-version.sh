@@ -89,6 +89,10 @@ echo "Install mwm UI"
 mkdir $MEDIAWIKI_ROOT_FOLDER/ui/
 cp -r mwmui/* $MEDIAWIKI_ROOT_FOLDER/ui/
 
+echo "Initialized log">> $MEDIAWIKI_ROOT_FOLDER/dsmwm.log
+chgrp www-data $MEDIAWIKI_ROOT_FOLDER/dsmwm.log
+chmod 777 $MEDIAWIKI_ROOT_FOLDER/dsmwm.log
+
 echo "Inject contents..."
 source ./inject-local-WikiPageContents.sh
 source ./inject-manage-page-from-mediawiki.org.sh

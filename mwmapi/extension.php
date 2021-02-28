@@ -3,7 +3,8 @@
 class Extension {
 
     function __construct($name, $extensionCatalogue, $generalSiteInfo, $mediawiki, $logger) {
-        $this->configFile = "".$this->configFile."";
+        $this->mediawiki = $mediawiki;
+        $this->configFile = "LocalSettings.php";
         $this->name = $name;
         $this->generalSiteInfo = $generalSiteInfo;
         $this->extensionCatalogue = $extensionCatalogue;        
@@ -37,36 +38,37 @@ class Extension {
         if(array_key_exists("localsettings", $this->ep["installation-aspects"])) {
             foreach($this->ep["installation-aspects"]["localsettings"] as $ls) {
                 // Try to uncomment
-                exec("sed -i \"s/^#".$ls."/".$ls."/g\" /var/www/html/w/".$this->configFile."", $output, $retval);
+                exec("sed -i \"s/^#".$ls."/".$ls."/g\" /var/www/html/w/".$this->configFile, $output, $retval);
                 // Check if line is present
-                exec("grep -c \"".$ls."\" /var/www/html/w/".$this->configFile."", $output, $retval);
+                exec("grep -c \"".$ls."\" /var/www/html/w/".$this->configFile, $output, $retval);
                 if($output[0] == 0) {
                     // Add line if necessary
-                    exec("echo \"".$ls."\">> /var/www/html/w/".$this->configFile."", $output, $retval);
+                    exec("echo \"".$ls."\">> /var/www/html/w/".$this->configFile, $output, $retval);
                 }
                 $this->logger->write("Ensured existence of line \"$ls\" in ".$this->configFile);
             }
         }
-        $mediawiki->runMaintenanceUpdatePHP();
+        $this->mediawiki->runMaintenanceUpdatePHP();
         return $this->logger->write("Extension ".$this->name." enabled...");
     }
 
     
 
     public function disable() {
-        if(array_key_exists("composer", $this->ep)) {
+        $this->logger->write("Trying to disable ".$this->ep["name"]."...");
+        if(array_key_exists("composer", $this->ep["installation-aspects"])) {
             // By composer
-            exec("cd /var/www/html/w && COMPOSER_HOME=/var/www/html/w php composer.phar remove --no-update ".$this->ep["composer"], $output, $retval);
-        } elseif(array_key_exists("repository", $this->ep)) {
+            exec("cd /var/www/html/w && COMPOSER_HOME=/var/www/html/w php composer.phar remove --no-update ".$this->ep["installation-aspects"]["composer"], $output, $retval);
+        } elseif(array_key_exists("repository", $this->ep["installation-aspects"])) {
             // TBD: Remove extensions/repository?
         }
         // ".$this->configFile." directives?
-        if(array_key_exists("localsettings", $this->ep)) {
-            foreach($this->ep["localsettings"] as $ls) {
-                exec("sed -i \"s/^".$ls."/#".$ls."/g\" /var/www/html/w/".$this->configFile."", $output, $retval);
+        if(array_key_exists("localsettings", $this->ep["installation-aspects"])) {
+            foreach($this->ep["installation-aspects"]["localsettings"] as $ls) {
+                exec("sed -i \"s/^".$ls."/#".$ls."/g\" /var/www/html/w/".$this->configFile, $output, $retval);
             }
         }
-        $mediawiki->runMaintenanceUpdatePHP();
+        $this->mediawiki->runMaintenanceUpdatePHP();
         return $this->logger->write("Extension ".$this->name." disabled...");
     }
 
