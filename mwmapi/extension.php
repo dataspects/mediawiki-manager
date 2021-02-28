@@ -2,7 +2,7 @@
 
 class Extension {
 
-    function __construct($name, $extensionCatalogue, $generalSiteInfo, $logger) {
+    function __construct($name, $extensionCatalogue, $generalSiteInfo, $mediawiki, $logger) {
         $this->configFile = "".$this->configFile."";
         $this->name = $name;
         $this->generalSiteInfo = $generalSiteInfo;
@@ -47,14 +47,11 @@ class Extension {
                 $this->logger->write("Ensured existence of line \"$ls\" in ".$this->configFile);
             }
         }
-        $this->runMaintenanceUpdatePHP();
+        $mediawiki->runMaintenanceUpdatePHP();
         return $this->logger->write("Extension ".$this->name." enabled...");
     }
 
-    private function runMaintenanceUpdatePHP() {
-        exec("cd /var/www/html/w && php maintenance/update.php --quick", $output, $retval);
-        $this->logger->write("Ran maintenance/update.php");
-    }
+    
 
     public function disable() {
         if(array_key_exists("composer", $this->ep)) {
@@ -69,7 +66,7 @@ class Extension {
                 exec("sed -i \"s/^".$ls."/#".$ls."/g\" /var/www/html/w/".$this->configFile."", $output, $retval);
             }
         }
-        $this->runMaintenanceUpdatePHP();
+        $mediawiki->runMaintenanceUpdatePHP();
         return $this->logger->write("Extension ".$this->name." disabled...");
     }
 

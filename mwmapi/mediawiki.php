@@ -2,11 +2,18 @@
 
 class MediaWiki {
 
-    function __construct() {
+    function __construct($logger) {
+        $this->logger = $logger;
         $this->username = "Admin";
         $this->password = "123adminpass456";
         $this->apiURL = "https://localhost/w/api.php";
         $this->wikiLogin();
+    }
+
+    public function runMaintenanceUpdatePHP() {
+        $this->logger->write("Running maintenance/update.php...");
+        exec("cd /var/www/html/w && php maintenance/update.php --quick", $output, $retval);
+        $this->logger->write("Ran maintenance/update.php");
     }
 
     public function extensionsByMWAPI() {

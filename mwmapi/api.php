@@ -17,12 +17,13 @@ header('Content-Type: application/json');
   
 $action = isset($_GET['action']) ? $_GET['action'] : die();
 
+$logger = new Logger();
 $overview = new Overview();
 $snapshots = new Snapshots();
 $upgrades = new Upgrades();
-$mediawiki = new MediaWiki();
-$system = new System();
-$logger = new Logger();
+$mediawiki = new MediaWiki($logger);
+$system = new System($mediawiki, $logger);
+
 $extensionCatalogue = new ExtensionCatalogue($mediawiki);
 
 $generalSiteInfo = $mediawiki->generalSiteInfo();
@@ -39,7 +40,7 @@ switch($action) {
     case "enableDisableExtension":
         $mode = isset($_GET['mode']) ? $_GET['mode'] : die();
         $extensionName = isset($_GET['extensionName']) ? $_GET['extensionName'] : die();
-        $extension = new Extension($extensionName, $extensionCatalogue, $generalSiteInfo, $logger);
+        $extension = new Extension($extensionName, $extensionCatalogue, $generalSiteInfo, $mediawiki, $logger);
         switch($mode) {
             case "enable":
                 $response = array(
