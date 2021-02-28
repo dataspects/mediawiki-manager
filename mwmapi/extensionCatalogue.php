@@ -2,13 +2,15 @@
 
 class ExtensionCatalogue {
 
-    function __construct() {
+    function __construct($mediawiki) {
 
         $localSettingsString = file_get_contents(getcwd().'/../w/LocalSettings.php');
         $this->localSettingsArray = explode("\n", $localSettingsString);
 
         $composerjson = file_get_contents(getcwd().'/../w/composer.json');
         $this->composerjsonArray = json_decode($composerjson, true);
+
+        $this->extensionsByMWAPI = $mediawiki->extensionsByMWAPI();
 
     }
 
@@ -24,12 +26,7 @@ class ExtensionCatalogue {
         return $this->compileExtensionCatalogue($extensionCatalogue, $generalSiteInfo);
     }
 
-    public function appCatalogue() {
-        $appsjson = file_get_contents(getcwd().'/apps.json');
-        $jd = json_decode($appsjson, true);
-        ksort($jd);
-        return $jd;
-    }
+    
 
     private function compileExtensionCatalogue($extensionCatalogue, $generalSiteInfo) {
         $mediaWikiVersion = $this->mediaWikiVersion($generalSiteInfo);
@@ -39,9 +36,24 @@ class ExtensionCatalogue {
             $extension["requires"] = array();
             $extension["requires"] = array_merge($extension["requires"], $this->requiresMWUpdate($extension, $mediaWikiVersion));
             $extension["requires"] = array_merge($extension["requires"], $this->requiresPHPUpdate($extension, $phpVersion));
+            $extension["isInstalled"] = $this->extensionIsInstalled($extension);
             $ec[] = $extension;
         }
         return $ec;
+    }
+
+    private function extensionIsInstalled($extension) {
+        foreach($this->extensionsByMWAPI as $ebmwapi) {
+            if($ebmwapi["name"] == $extension["name"]) {
+                return array(
+                    "version" => $ebmwapi["version"],
+                    "url" => $ebmwapi["url"]
+                );
+            }
+        }
+        return array(
+        
+        );
     }
 
     private function mediaWikiVersion($generalSiteInfo) {

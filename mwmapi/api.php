@@ -23,6 +23,7 @@ $upgrades = new Upgrades();
 $mediawiki = new MediaWiki();
 $system = new System();
 $logger = new Logger();
+$extensionCatalogue = new ExtensionCatalogue($mediawiki);
 
 $generalSiteInfo = $mediawiki->generalSiteInfo();
 
@@ -38,7 +39,7 @@ switch($action) {
     case "enableDisableExtension":
         $mode = isset($_GET['mode']) ? $_GET['mode'] : die();
         $extensionName = isset($_GET['extensionName']) ? $_GET['extensionName'] : die();
-        $extension = new Extension($extensionName, $overview);
+        $extension = new Extension($extensionName, $extensionCatalogue, $generalSiteInfo, $logger);
         switch($mode) {
             case "enable":
                 $response = array(
@@ -53,8 +54,7 @@ switch($action) {
         }
         http_response_code(200);
         break;
-    case "extensionCatalogue":
-        $extensionCatalogue = new ExtensionCatalogue();
+    case "extensionCatalogue":        
         $response = array(
             "extensionCatalogue" => $extensionCatalogue->extensionCatalogue($generalSiteInfo),
             "status" => $logger->write("Extension catalogue loaded")

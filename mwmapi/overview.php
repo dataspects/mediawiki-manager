@@ -38,6 +38,13 @@ class Overview {
         return $composerjsonReq;
     }
 
+    public function appCatalogue() {
+        $appsjson = file_get_contents(getcwd().'/apps.json');
+        $jd = json_decode($appsjson, true);
+        ksort($jd);
+        return $jd;
+    }
+
 }
 
 // error_log("_______________________________________".$mediaWikiVersion."_______________________________________");
