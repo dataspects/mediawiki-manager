@@ -88,6 +88,12 @@ switch($action) {
             "status" => $logger->write("App catalogue loaded")
         );
         break;
+    case "installedApps":
+        $response = array(
+            "installedApps" => $mediawiki->installedApps(),
+            "status" => $logger->write("Installed apps loaded")
+        );
+        break;
     case "upgradesCatalogue":
         $response = array(
             "upgradesCatalogue" => $upgrades->upgradesCatalogue(),

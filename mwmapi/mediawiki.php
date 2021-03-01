@@ -16,12 +16,29 @@ class MediaWiki {
         $this->logger->write("Ran maintenance/update.php");
     }
 
+    public function runMaintenanceJobsPHP() {
+        $this->logger->write("Running maintenance/runJobs.php...");
+        exec("cd /var/www/html/w && php maintenance/runJobs.php", $output, $retval);
+        $this->logger->write("Ran maintenance/runJobs.php");
+    }
+
+    public function runExtensionsSemanticMediaWikiMaintenanceRebuildDataPHP() {
+        $this->logger->write("Running extensions/SemanticMediaWiki/maintenance/rebuildData.php...");
+        exec("cd /var/www/html/w/extensions/SemanticMediaWiki && php maintenance/rebuildData.php", $output, $retval);
+        $this->logger->write("Ran extensions/SemanticMediaWiki/maintenance/rebuildData.php...");
+    }
+
     public function extensionsByMWAPI() {
         return $this->siteInfo()["extensions"];
     }
 
     public function generalSiteInfo() {
         return $this->siteInfo()["general"];
+    }
+
+    public function installedApps() {
+        $results = $this->askargs("Subcategory of::Ontology");
+        return $results["query"]["results"];
     }
 
     public function injectContent($fullPageName, $wikitext) {
@@ -36,7 +53,16 @@ class MediaWiki {
         ));
         $output = json_decode(curl_exec($ch), true);
         curl_close($ch);
-        return $output["result"];
+        return $output;
+    }
+
+    private function askargs($conditions) {
+        $ch = $this->ch();
+        $conditions = curl_escape($ch, $conditions);
+        curl_setopt($ch, CURLOPT_URL, $this->apiURL."?action=askargs&conditions=".$conditions."&format=json");
+        $output = json_decode(curl_exec($ch), true);
+        curl_close($ch);
+        return $output;
     }
 
     private function siteInfo() {

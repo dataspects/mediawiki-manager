@@ -32,6 +32,8 @@ class App {
         $this->logger->write("Trying to enable ".$this->ap["name"]."...");
         $this->cloneRepository();
         $this->injectOntology();
+        $this->mediawiki->runMaintenanceJobsPHP();
+        $this->mediawiki->runExtensionsSemanticMediaWikiMaintenanceRebuildDataPHP();
         return "";
     }
 
