@@ -3,46 +3,61 @@
 class Extension {
 
     function __construct($name, $extensionCatalogue, $generalSiteInfo, $mediawiki, $logger) {
-        $this->mediawiki = $mediawiki;
-        $this->configFile = "LocalSettings.php";
-        $this->name = $name;
+        # $name is user input!
+        $this->unsafeName = $name;
+        $this->extensionCatalogue = $extensionCatalogue;
         $this->generalSiteInfo = $generalSiteInfo;
-        $this->extensionCatalogue = $extensionCatalogue;        
-        $this->ep = $this->getExtensionProfileByName();
+        $this->mediawiki = $mediawiki;
         $this->logger = $logger;
+        # FIXME: safe now?
+        # FIXME: Ok not to escapeshellcmd as of now?
+        $this->configFile = "LocalSettings.php";
     }
 
     private function getExtensionProfileByName() {
         foreach($this->extensionCatalogue->extensionCatalogue($this->generalSiteInfo) as $extensionProfile) {
-            if($extensionProfile["name"] == $this->name) {
+            if($extensionProfile["name"] == $this->unsafeName) {
+                $this->name = $extensionProfile["name"];
                 return $extensionProfile;
             }
         }
+        return null;
     }
 
     public function enable() {
         $this->logger->write("Trying to enable ".$this->ep["name"]."...");
+        $this->ep = $this->getExtensionProfileByName();
+        if($this->ep == null) {
+            $this->logger->write("Extension ".$this->name." unknown");
+        }
         if(array_key_exists("composer", $this->ep["installation-aspects"])) {
             // By composer
             exec("cd /var/www/html/w && COMPOSER_HOME=/var/www/html/w php composer.phar require ".$this->ep["installation-aspects"]["composer"], $output, $retval);
+            if($retval <> 0) {
+            }
         } elseif(array_key_exists("repository", $this->ep["installation-aspects"])) {
             // From repository
             $this->logger->write("Trying to clone ".$this->ep["installation-aspects"]["repository"]."...");
-            exec("git clone ".$this->ep["installation-aspects"]["repository"]." /var/www/html/w/extensions/".$this->name, $output1, $retval);
-            $this->logger->write("Successfully cloned ".$this->ep["installation-aspects"]["repository"]);
+            exec("git clone ".$this->ep["installation-aspects"]["repository"]." /var/www/html/w/extensions/".$this->name, $output, $retval);
             if($retval <> 0) {
-                // TBD: If we reenable, should we check for updates?
+                $this->logger->write($this->ep["installation-aspects"]["repository"]." already cloned");
+            } else {
+                $this->logger->write("Successfully cloned ".$this->ep["installation-aspects"]["repository"]);
             }
+        } else {
+            $this->logger->write("No useful installation aspects found for ".$this->ep["name"]);
         }
         // ".$this->configFile." directives?
         if(array_key_exists("localsettings", $this->ep["installation-aspects"])) {
             foreach($this->ep["installation-aspects"]["localsettings"] as $ls) {
-                // Try to uncomment
-                exec("sed -i \"s/^#".$ls."/".$ls."/g\" /var/www/html/w/".$this->configFile, $output, $retval);
-                // Check if line is present
-                exec("grep -c \"".$ls."\" /var/www/html/w/".$this->configFile, $output, $retval);
-                if($output[0] == 0) {
-                    // Add line if necessary
+                $this->logger->write("Checking ".$this->configFile." for line \"$ls\"...");
+                // FIXME: Ok not to escapeshellcmd here?
+                exec("grep \"^#".$ls."$\" /var/www/html/w/".$this->configFile, $output, $retval);
+                if($retval == 0) {
+                    // Uncomment line
+                    exec("sed -i \"s/^#".$ls."/".$ls."/g\" /var/www/html/w/".$this->configFile, $output, $retval);
+                } else {
+                    // Add line
                     exec("echo \"".$ls."\">> /var/www/html/w/".$this->configFile, $output, $retval);
                 }
                 $this->logger->write("Ensured existence of line \"$ls\" in ".$this->configFile);
@@ -56,6 +71,10 @@ class Extension {
 
     public function disable() {
         $this->logger->write("Trying to disable ".$this->ep["name"]."...");
+        $this->ep = $this->getExtensionProfileByName();
+        if($this->ep == null) {
+            $this->logger->write("Extension ".$this->name." unknown");
+        }
         if(array_key_exists("composer", $this->ep["installation-aspects"])) {
             // By composer
             exec("cd /var/www/html/w && COMPOSER_HOME=/var/www/html/w php composer.phar remove --no-update ".$this->ep["installation-aspects"]["composer"], $output, $retval);
@@ -69,7 +88,7 @@ class Extension {
             }
         }
         $this->mediawiki->runMaintenanceUpdatePHP();
-        return $this->logger->write("Extension ".$this->name." disabled...");
+        return $this->logger->write("Extension ".$this->name." disabled");
     }
 
 }

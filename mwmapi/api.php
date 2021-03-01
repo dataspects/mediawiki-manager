@@ -37,7 +37,7 @@ switch($action) {
         );
         http_response_code(200);
         break;
-    case "enableDisableExtension":
+    case "manageExtension":
         $mode = isset($_GET['mode']) ? $_GET['mode'] : die();
         $extensionName = isset($_GET['extensionName']) ? $_GET['extensionName'] : die();
         $extension = new Extension($extensionName, $extensionCatalogue, $generalSiteInfo, $mediawiki, $logger);
