@@ -7,6 +7,7 @@ class MediaWiki {
         $this->username = "Admin";
         $this->password = "123adminpass456";
         $this->apiURL = "https://localhost/w/api.php";
+        $this->dataspectsRepositoryURL = "https://github.com/dataspects";
         $this->wikiLogin();
     }
 
@@ -37,8 +38,15 @@ class MediaWiki {
     }
 
     public function installedApps() {
+        $apps = array();
         $results = $this->askargs("Subcategory of::Ontology");
-        return $results["query"]["results"];
+        foreach($results["query"]["results"] as $name => $data) {
+            $apps[] = array(
+                "name" => $name,
+                "dataspectsRepositoryURL" => $this->getDataspectsRepositoryURL($data["fulltext"])
+            );
+        }
+        return $apps;
     }
 
     public function injectContent($fullPageName, $wikitext) {
@@ -54,6 +62,11 @@ class MediaWiki {
         $output = json_decode(curl_exec($ch), true);
         curl_close($ch);
         return $output;
+    }
+
+    private function getDataspectsRepositoryURL($fulltext) {
+        $name = explode(":", $fulltext)[1];
+        return $this->dataspectsRepositoryURL."/".$name;
     }
 
     private function askargs($conditions) {
