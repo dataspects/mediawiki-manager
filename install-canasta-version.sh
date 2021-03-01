@@ -93,6 +93,11 @@ echo "Initialized log">> $MEDIAWIKI_ROOT_FOLDER/dsmwm.log
 chgrp www-data $MEDIAWIKI_ROOT_FOLDER/dsmwm.log
 chmod 777 $MEDIAWIKI_ROOT_FOLDER/dsmwm.log
 
+echo "Install clone location"
+mkdir $MEDIAWIKI_ROOT_FOLDER/cloneLocation/
+chgrp www-data $MEDIAWIKI_ROOT_FOLDER/cloneLocation/
+chmod 777 $MEDIAWIKI_ROOT_FOLDER/cloneLocation/
+
 echo "Inject contents..."
 source ./inject-local-WikiPageContents.sh
 source ./inject-manage-page-from-mediawiki.org.sh

@@ -11,7 +11,7 @@ class App {
         $this->logger = $logger;
         # FIXME: safe now?
         # FIXME: Ok not to escapeshellcmd as of now?
-        
+        $this->cloneLocation = "/var/www/html/cloneLocation";
     }
 
     private function getAppProfileByName() {
@@ -25,15 +25,26 @@ class App {
     }
 
     public function enable() {
-        $this->ep = $this->getAppProfileByName();
-        if($this->ep == null) {
+        $this->ap = $this->getAppProfileByName();
+        if($this->ap == null) {
             return $this->logger->write("App ".$this->name." unknown");
         }
+        $this->logger->write("Trying to enable ".$this->ap["name"]."...");
+        $this->cloneRepository();
         return "";
     }
 
     public function disable() {
         return "";
+    }
+
+    private function cloneRepository() {
+        exec("git clone ".$this->name." /var/www/html/w/".$this->cloneLocation."/".$this->name, $output, $retval);
+        if($retval <> 0) {
+            $this->logger->write($this->ap["installation-aspects"]["repository"]." already cloned");
+        } else {
+            $this->logger->write("Successfully cloned ".$this->ap["installation-aspects"]["repository"]);
+        }
     }
 
 }

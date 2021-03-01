@@ -25,11 +25,11 @@ class Extension {
     }
 
     public function enable() {
-        $this->logger->write("Trying to enable ".$this->ep["name"]."...");
         $this->ep = $this->getExtensionProfileByName();
         if($this->ep == null) {
             return $this->logger->write("Extension ".$this->name." unknown");
         }
+        $this->logger->write("Trying to enable ".$this->ep["name"]."...");
         if(array_key_exists("composer", $this->ep["installation-aspects"])) {
             // By composer
             exec("cd /var/www/html/w && COMPOSER_HOME=/var/www/html/w php composer.phar require ".$this->ep["installation-aspects"]["composer"], $output, $retval);
