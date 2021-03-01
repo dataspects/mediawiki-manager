@@ -2,11 +2,13 @@
 
 require_once "./overview.php";
 require_once "./extension.php";
+require_once "./app.php";
 require_once "./snapshots.php";
 require_once "./upgrades.php";
 require_once "./mediawiki.php";
 require_once "./system.php";
 require_once "./extensionCatalogue.php";
+require_once "./appCatalogue.php";
 require_once "./logger.php";
 
 header("Access-Control-Allow-Origin: *");
@@ -25,6 +27,7 @@ $mediawiki = new MediaWiki($logger);
 $system = new System($mediawiki, $logger);
 
 $extensionCatalogue = new ExtensionCatalogue($mediawiki);
+$appCatalogue = new AppCatalogue();
 
 $generalSiteInfo = $mediawiki->generalSiteInfo();
 
@@ -55,6 +58,24 @@ switch($action) {
         }
         http_response_code(200);
         break;
+    case "manageApp":
+        $mode = isset($_GET['mode']) ? $_GET['mode'] : die();
+        $appName = isset($_GET['appName']) ? $_GET['appName'] : die();
+        $app = new App($appName, $appCatalogue, $generalSiteInfo, $mediawiki, $logger);
+        switch($mode) {
+            case "enable":
+                $response = array(
+                    "status" => $app->enable()
+                );
+                break;
+            case "disable":
+                $response = array(
+                    "status" => $app->disable()
+                );
+                break;
+        }
+        http_response_code(200);
+        break;
     case "extensionCatalogue":        
         $response = array(
             "extensionCatalogue" => $extensionCatalogue->extensionCatalogue($generalSiteInfo),
@@ -63,7 +84,7 @@ switch($action) {
         break;
     case "appCatalogue":
         $response = array(
-            "appCatalogue" => $overview->appCatalogue(),
+            "appCatalogue" => $appCatalogue->appCatalogue(),
             "status" => $logger->write("App catalogue loaded")
         );
         break;

@@ -1,10 +1,26 @@
-{
-  "dataspects/dataspectsSystemCoreOntology": {},
-  "dataspects/TrustedWebOfColleaguesOntology": {},
-  "dataspects/dataspectsSystemCookbookOntology": {},
-  "dataspects/dataspectsSupportOntology": {},
-  "dataspects/dataspectsConferenceManagementOntology": {},
-  "dataspects/IssueManagementOntology": {},
-  "dataspects/TaskManagementOntology": {},
-  "dataspects/MeetingMinutesOntology": {}
-}
+[
+  {
+    "name": "dataspects/dataspectsSystemCoreOntology"
+  },
+  {
+    "name": "dataspects/TrustedWebOfColleaguesOntology"
+  },
+  {
+    "name": "dataspects/dataspectsSystemCookbookOntology"
+  },
+  {
+    "name": "dataspects/dataspectsSupportOntology"
+  },
+  {
+    "name": "dataspects/dataspectsConferenceManagementOntology"
+  },
+  {
+    "name": "dataspects/IssueManagementOntology"
+  },
+  {
+    "name": "dataspects/TaskManagementOntology"
+  },
+  {
+    "name": "dataspects/MeetingMinutesOntology"
+  }
+]

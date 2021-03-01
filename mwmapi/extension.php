@@ -28,7 +28,7 @@ class Extension {
         $this->logger->write("Trying to enable ".$this->ep["name"]."...");
         $this->ep = $this->getExtensionProfileByName();
         if($this->ep == null) {
-            $this->logger->write("Extension ".$this->name." unknown");
+            return $this->logger->write("Extension ".$this->name." unknown");
         }
         if(array_key_exists("composer", $this->ep["installation-aspects"])) {
             // By composer
