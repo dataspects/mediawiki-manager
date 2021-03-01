@@ -1,26 +1,50 @@
 [
   {
-    "name": "dataspects/dataspectsSystemCoreOntology"
+    "name": "dataspects/dataspectsSystemCoreOntology",
+    "installation-aspects": {
+      "repository": "https://github.com/dataspects/dataspectsSystemCoreOntology"
+    }
   },
   {
-    "name": "dataspects/TrustedWebOfColleaguesOntology"
+    "name": "dataspects/TrustedWebOfColleaguesOntology",
+    "installation-aspects": {
+      "repository": "https://github.com/dataspects/TrustedWebOfColleaguesOntology"
+    }
   },
   {
-    "name": "dataspects/dataspectsSystemCookbookOntology"
+    "name": "dataspects/dataspectsSystemCookbookOntology",
+    "installation-aspects": {
+      "repository": "https://github.com/dataspects/dataspectsSystemCookbookOntology"
+    }
   },
   {
-    "name": "dataspects/dataspectsSupportOntology"
+    "name": "dataspects/dataspectsSupportOntology",
+    "installation-aspects": {
+      "repository": "https://github.com/dataspects/dataspectsSupportOntology"
+    }
   },
   {
-    "name": "dataspects/dataspectsConferenceManagementOntology"
+    "name": "dataspects/dataspectsConferenceManagementOntology",
+    "installation-aspects": {
+      "repository": "https://github.com/dataspects/dataspectsConferenceManagementOntology"
+    }
   },
   {
-    "name": "dataspects/IssueManagementOntology"
+    "name": "dataspects/IssueManagementOntology",
+    "installation-aspects": {
+      "repository": "https://github.com/dataspects/IssueManagementOntology"
+    }
   },
   {
-    "name": "dataspects/TaskManagementOntology"
+    "name": "dataspects/TaskManagementOntology",
+    "installation-aspects": {
+      "repository": "https://github.com/dataspects/TaskManagementOntology"
+    }
   },
   {
-    "name": "dataspects/MeetingMinutesOntology"
+    "name": "dataspects/MeetingMinutesOntology",
+    "installation-aspects": {
+      "repository": "https://github.com/dataspects/MeetingMinutesOntology"
+    }
   }
 ]
