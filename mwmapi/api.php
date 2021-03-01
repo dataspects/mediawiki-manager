@@ -30,6 +30,12 @@ $extensionCatalogue = new ExtensionCatalogue($mediawiki);
 $appCatalogue = new AppCatalogue();
 
 $generalSiteInfo = $mediawiki->generalSiteInfo();
+if(is_null($generalSiteInfo)) {
+    $response = array(
+        "status" => "MediaWiki API error"
+    );
+    http_response_code(404);    
+}
 
 switch($action) {
     case "overview":        

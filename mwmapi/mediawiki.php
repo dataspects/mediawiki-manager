@@ -88,6 +88,9 @@ class MediaWiki {
         curl_setopt($ch, CURLOPT_URL, $this->apiURL."?action=query&meta=siteinfo&siprop=".join($siProps, "|")."&format=json");
         $output = json_decode(curl_exec($ch), true);
         curl_close($ch);
+        if(is_null($output)) {
+            return null;
+        }
         return $output["query"];
     }
 

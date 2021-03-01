@@ -34,7 +34,7 @@ class App {
         $this->injectOntology();
         $this->mediawiki->runMaintenanceJobsPHP();
         $this->mediawiki->runExtensionsSemanticMediaWikiMaintenanceRebuildDataPHP();
-        return "";
+        return $this->logger->write("App ".$this->name." enabled...");
     }
 
     public function disable() {
