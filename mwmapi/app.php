@@ -31,6 +31,7 @@ class App {
         }
         $this->logger->write("Trying to enable ".$this->ap["name"]."...");
         $this->cloneRepository();
+        $this->injectOntology();
         return "";
     }
 
@@ -38,8 +39,25 @@ class App {
         return "";
     }
 
+    private function injectOntology() {
+        foreach(glob($this->cloneLocation."/".$this->name."/objects/*") as $item) {
+            if(is_dir($item)) {
+                $namespace = basename($item);
+                foreach(glob($item."/*") as $item2) {
+                    $pageName = basename($item2, ".wikitext");
+                    $wikitext = file_get_contents($item2);
+                    $this->mediawiki->injectContent($namespace.":".$pageName, $wikitext);
+                }
+            } else {
+                $pageName = basename($item, ".wikitext");
+                $wikitext = file_get_contents($item);
+                $this->mediawiki->injectContent($pageName, $wikitext);
+            }
+        }
+    }
+
     private function cloneRepository() {
-        exec("git clone ".$this->ap["installation-aspects"]["repository"]." /var/www/html/w/".$this->cloneLocation."/".$this->name, $output, $retval);
+        exec("git clone ".$this->ap["installation-aspects"]["repository"]." ".$this->cloneLocation."/".$this->name, $output, $retval);
         if($retval <> 0) {
             $this->logger->write($this->ap["installation-aspects"]["repository"]." already cloned");
         } else {

@@ -24,6 +24,21 @@ class MediaWiki {
         return $this->siteInfo()["general"];
     }
 
+    public function injectContent($fullPageName, $wikitext) {
+        $editToken = $this->editToken();
+        $ch = $this->ch();
+        curl_setopt($ch, CURLOPT_URL, $this->apiURL."?action=edit&format=json");
+        curl_setopt($ch,CURLOPT_POST,true);
+        curl_setopt($ch,CURLOPT_POSTFIELDS, array(
+            "title" => $fullPageName,
+            "text" => $wikitext,
+            "token" => $editToken
+        ));
+        $output = json_decode(curl_exec($ch), true);
+        curl_close($ch);
+        return $output["result"];
+    }
+
     private function siteInfo() {
         $siProps = array(
             "general",
@@ -59,6 +74,14 @@ class MediaWiki {
         $output = json_decode(curl_exec($ch), true);
         curl_close($ch);
         return $output["query"]["tokens"]["logintoken"];
+    }
+
+    private function editToken() {
+        $ch = $this->ch();
+        curl_setopt($ch, CURLOPT_URL, $this->apiURL."?action=query&meta=tokens&type=csrf&format=json");
+        $output = json_decode(curl_exec($ch), true);
+        curl_close($ch);
+        return $output["query"]["tokens"]["csrftoken"];
     }
 
     private function ch() {
