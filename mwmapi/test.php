@@ -2,7 +2,8 @@
 
 class Test {
 
-    function __construct($extensionCatalogue, $generalSiteInfo, $mediawiki, $snapshots, $system, $logger) {
+    function __construct($appCatalogue, $extensionCatalogue, $generalSiteInfo, $mediawiki, $snapshots, $system, $logger) {
+        $this->appCatalogue = $appCatalogue;
         $this->extensionCatalogue = $extensionCatalogue; $this->generalSiteInfo = $generalSiteInfo;
         $this->mediawiki = $mediawiki;
         $this->snapshots = $snapshots;
@@ -18,6 +19,9 @@ class Test {
         // Extensions management
         $extension = new Extension("LabeledSectionTransclusion", $this->extensionCatalogue, $this->generalSiteInfo, $this->mediawiki, $this->logger);
         $extension->enable();
+        // Apps management
+        $app = new App("dataspects/dataspectsSystemCoreOntology", $this->appCatalogue, $this->generalSiteInfo, $this->mediawiki, $this->logger);
+        $app->enable();
         return $this->logger->write("Ran test");
     }
 

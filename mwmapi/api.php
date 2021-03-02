@@ -145,7 +145,7 @@ switch($action) {
         break;
     case "runTest":
         $logger->write("Running test");
-        $test = new Test($extensionCatalogue, $generalSiteInfo, $mediawiki, $snapshots, $system, $logger);
+        $test = new Test($appCatalogue, $extensionCatalogue, $generalSiteInfo, $mediawiki, $snapshots, $system, $logger);
         $response = array(
             "status" => $test->runTest()
         );
