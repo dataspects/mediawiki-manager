@@ -10,6 +10,7 @@ require_once "./system.php";
 require_once "./extensionCatalogue.php";
 require_once "./appCatalogue.php";
 require_once "./logger.php";
+require_once "./test.php";
 
 header("Access-Control-Allow-Origin: *");
 header("Access-Control-Allow-Headers: access");
@@ -21,7 +22,7 @@ $action = isset($_GET['action']) ? $_GET['action'] : die();
 
 $logger = new Logger();
 $overview = new Overview();
-$snapshots = new Snapshots();
+$snapshots = new Snapshots($logger);
 $upgrades = new Upgrades();
 $mediawiki = new MediaWiki($logger);
 $system = new System($mediawiki, $logger);
@@ -113,9 +114,8 @@ switch($action) {
         );
         break;
     case "takeSnapshot":
-        $snapshots->takeSnapshot();
         $response = array(
-            "status" => $logger->write("Snapshot taken")
+            "status" => $snapshots->takeSnapshot()
         );
         break;
     case "extensionsByMWAPI":
@@ -137,6 +137,13 @@ switch($action) {
         break;
     case "viewLog":
         $response = $logger->viewLog();
+        break;
+    case "runTest":
+        $logger->write("Running test");
+        $test = new Test($extensionCatalogue, $generalSiteInfo, $mediawiki, $snapshots, $system, $logger);
+        $response = array(
+            "status" => $test->runTest()
+        );
         break;
     default:
         $response = array();

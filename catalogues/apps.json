@@ -1,5 +1,11 @@
 [
   {
+    "name": "com.wikiworks.books-demo-cargo",
+    "installation-aspects": {
+      "repository": "com.wikiworks.books-demo-cargo"
+    }
+  },
+  {
     "name": "dataspects/dataspectsSystemCoreOntology",
     "installation-aspects": {
       "repository": "https://github.com/dataspects/dataspectsSystemCoreOntology"

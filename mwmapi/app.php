@@ -59,7 +59,7 @@ class App {
     }
 
     private function cloneRepository() {
-        exec("git clone ".$this->ap["installation-aspects"]["repository"]." ".$this->cloneLocation."/".$this->name, $output, $retval);
+        exec("git clone ".escapeshellarg($this->ap["installation-aspects"]["repository"])." ".escapeshellarg($this->cloneLocation."/".$this->name), $output, $retval);
         if($retval <> 0) {
             $this->logger->write($this->ap["installation-aspects"]["repository"]." already cloned");
         } else {

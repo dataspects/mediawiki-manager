@@ -20,7 +20,7 @@ class System {
 
     private function downloadNew() {
         $this->logger->write("Trying to wget ".$this->newVersionURL."...");
-        exec("wget -c --output-document ../".$this->newVersion." ".$this->newVersionURL, $output, $retval);
+        exec("wget -c --output-document ../".escapeshellarg($this->newVersion)." ".escapeshellarg($this->newVersionURL), $output, $retval);
         if ($retval <> 0) {
             return $retval;
         }
@@ -43,7 +43,7 @@ class System {
 
     private function extractNew() {
         $this->logger->write("Trying to extract ".$this->newVersion."...");
-        exec("tar -xzf ../".$this->newVersion." -C ../w", $output, $retval);
+        exec("tar -xzf ../".escapeshellarg($this->newVersion)." -C ../w", $output, $retval);
         if ($retval <> 0) {
             return $retval;
         }

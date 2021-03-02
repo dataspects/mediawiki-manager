@@ -2,7 +2,8 @@
 
 class Snapshots {
 
-    function __construct() {
+    function __construct($logger) {
+        $this->logger = $logger;
         $this->mysqlHost = "mysql";
         $this->databaseName = "mediawiki";
         $this->mysqlUser = "mediawiki";
@@ -16,15 +17,16 @@ class Snapshots {
     }
 
     public function takeSnapshot() {
-        $output1 = $this->mysqldump();
+        $this->mysqldump();
         // FIXME!
+        $this->logger->write("Taking snapshot...");
         exec("restic --repo /var/www/html/restic-repo backup /var/www/html/w", $output, $retval);
-        exec("chgrp -R www-data /var/www/html/restic-repo && chmod -R 770 /var/www/html/restic-repo", $output, $retval);
-        return $output1;
+        // exec("chgrp -R www-data /var/www/html/restic-repo && chmod -R 770 /var/www/html/restic-repo", $output, $retval);
+        return $this->logger->write("Snapshot taken...");;
     }
 
     private function mysqldump() {
-        exec("mysqldump -h ".$this->mysqlHost." -u ".$this->mysqlUser." -p".$this->mysqlPassword." ".$this->databaseName." > /var/www/html/w/".$this->mysqlDumpFileName, $output, $retval);
+        exec("mysqldump -h ".escapeshellarg($this->mysqlHost)." -u ".escapeshellarg($this->mysqlUser)." -p".escapeshellarg($this->mysqlPassword)." ".escapeshellarg($this->databaseName)." > /var/www/html/w/".escapeshellarg($this->mysqlDumpFileName), $output, $retval);
         if ($retval <> 0) {
             return $retval;
         }

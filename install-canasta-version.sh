@@ -81,22 +81,18 @@ echo "Install mwm API"
 mkdir $MEDIAWIKI_ROOT_FOLDER/api/
 cp -r mwmapi/* $MEDIAWIKI_ROOT_FOLDER/api/
 
-echo "Install mwm catalogues"
-mkdir $MEDIAWIKI_ROOT_FOLDER/api/
-cp -r catalogues/* $MEDIAWIKI_ROOT_FOLDER/api/
-
 echo "Install mwm UI"
 mkdir $MEDIAWIKI_ROOT_FOLDER/ui/
 cp -r mwmui/* $MEDIAWIKI_ROOT_FOLDER/ui/
 
 echo "Initialized log">> $MEDIAWIKI_ROOT_FOLDER/dsmwm.log
-chgrp www-data $MEDIAWIKI_ROOT_FOLDER/dsmwm.log
-chmod 777 $MEDIAWIKI_ROOT_FOLDER/dsmwm.log
+sudo chgrp www-data $MEDIAWIKI_ROOT_FOLDER/dsmwm.log
+sudo chmod 777 $MEDIAWIKI_ROOT_FOLDER/dsmwm.log
 
 echo "Install clone location"
 mkdir $MEDIAWIKI_ROOT_FOLDER/cloneLocation/
-chgrp www-data $MEDIAWIKI_ROOT_FOLDER/cloneLocation/
-chmod 777 $MEDIAWIKI_ROOT_FOLDER/cloneLocation/
+sudo chgrp www-data $MEDIAWIKI_ROOT_FOLDER/cloneLocation/
+sudo chmod 777 $MEDIAWIKI_ROOT_FOLDER/cloneLocation/
 
 echo "Inject contents..."
 source ./inject-local-WikiPageContents.sh
