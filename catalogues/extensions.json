@@ -58,7 +58,7 @@
     {
       "name": "LabeledSectionTransclusion",
       "installation-aspects": {
-        "repository": "https://gerrit.wikimedia.org/r/mediawiki/extensions/LabeledSectionTransclusion.git",
+        "repository": "https://github.com/wikimedia/mediawiki-extensions-LabeledSectionTransclusion",
         "localsettings": [
                 "wfLoadExtension( 'LabeledSectionTransclusion' );"
             ]
