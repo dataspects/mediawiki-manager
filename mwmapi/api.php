@@ -138,6 +138,11 @@ switch($action) {
     case "viewLog":
         $response = $logger->viewLog();
         break;
+    case "systemSettings":
+        $response = array(
+            "systemSettings" => $system->systemSettings()
+        );
+        break;
     case "runTest":
         $logger->write("Running test");
         $test = new Test($extensionCatalogue, $generalSiteInfo, $mediawiki, $snapshots, $system, $logger);
