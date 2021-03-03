@@ -13,15 +13,15 @@ do
   fi
 done
 
+echo "Extract..."
+mkdir --parents $MEDIAWIKI_ROOT_FOLDER/w
+tar -xzf $CANASTA_INSTANCE_ROOT/$CURRENT_CANASTA_ARCHIVE -C $MEDIAWIKI_ROOT_FOLDER/w
+sleep 1
+
 echo "Run docker-compose..."
 sudo -S docker-compose --env-file ./CanastaInstanceSettings.env down \
   && sudo -S docker-compose --env-file ./CanastaInstanceSettings.env up -d \
   && sudo -S chown -R $CANASTA_INSTANCE_ROOT_OWNER:www-data mediawiki_root
-sleep 1
-
-echo "Extract..."
-mkdir --parents $MEDIAWIKI_ROOT_FOLDER/w
-tar -xzf $CANASTA_INSTANCE_ROOT/$CURRENT_CANASTA_ARCHIVE -C $MEDIAWIKI_ROOT_FOLDER/w
 sleep 1
 
 echo "Ensure permissions..."
@@ -29,32 +29,28 @@ sudo chown -R $CANASTA_INSTANCE_ROOT_OWNER:www-data $MEDIAWIKI_ROOT_FOLDER
 sudo chmod -R 770 $MEDIAWIKI_ROOT_FOLDER
 sleep 1
 
-echo "Copy AfterSettings.php"
-cp conf/AfterSettings.php mediawiki_root/w/
-
-echo "Include AfterSettings.php in LocalSettings.php"
-echo "require_once 'AfterSettings.php'; ">> $MEDIAWIKI_ROOT_FOLDER/w/LocalSettings.php
-
 echo "Set domain name..."
-echo "\$wgServer = 'https://$CANASTA_DOMAIN_NAME';">> mediawiki_root/w/AfterSettings.php
+echo "\$wgServer = 'https://$CANASTA_DOMAIN_NAME';">> mediawiki_root/w/LocalSettings.php
 sleep 1
 
 echo "Set database password..."
-echo "\$wgDBpassword = '$WG_DB_PASSWORD';">> mediawiki_root/w/AfterSettings.php
+echo "\$wgDBpassword = '$WG_DB_PASSWORD';">> mediawiki_root/w/LocalSettings.php
 sleep 1
 
 echo "Set database server..."
-echo "\$wgDBserver = '$MYSQL_HOST';">> mediawiki_root/w/AfterSettings.php
+echo "\$wgDBserver = '$MYSQL_HOST';">> mediawiki_root/w/LocalSettings.php
 sleep 1
 
 # FIXME: Wait for MariaDB to be ready...
+sleep 10
 
 echo "Create database and user..."
 sudo -S docker exec $APACHE_CONTAINER_NAME bash -c \
   "mysql -h $MYSQL_HOST -u root -p$MARIADB_ROOT_PASSWORD \
   -e \" CREATE DATABASE $DATABASE_NAME;
         CREATE USER '$MYSQL_USER'@'%' IDENTIFIED BY '$WG_DB_PASSWORD';
-        GRANT ALL PRIVILEGES ON $DATABASE_NAME.* TO '$MYSQL_USER'@'%'; \""
+        GRANT ALL PRIVILEGES ON $DATABASE_NAME.* TO '$MYSQL_USER'@'%';
+        FLUSH PRIVILEGES;\""
 sleep 1
 
 echo "Import database..."
