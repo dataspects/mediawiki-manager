@@ -15,7 +15,7 @@ class Test {
         // Snapshots
         $this->snapshots->takeSnapshot();
         // Upgrade
-        $this->system->upgradeNow();
+        // $this->system->upgradeNow();
         // Extensions management
         $extension = new Extension("LabeledSectionTransclusion", $this->extensionCatalogue, $this->generalSiteInfo, $this->mediawiki, $this->logger);
         $extension->enable();

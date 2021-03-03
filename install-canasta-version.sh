@@ -2,26 +2,27 @@
 
 source ./CanastaInstanceSettings.env
 
-####################################
+###########
+# GENERAL #
+###########
 
-requiredFiles=( "docker-compose.yml" "$CURRENT_CANASTA_ARCHIVE" )
-for file in "${requiredFiles[@]}"
-do
-  if [ ! -e "$file" ]; then
-    echo "$file is missing!"
-    exit 1
-  fi
-done
+mkdir --parents $MEDIAWIKI_ROOT_FOLDER/w
+echo "Initialized log">> $MEDIAWIKI_ROOT_FOLDER/dsmwm.log
+sudo chgrp www-data $MEDIAWIKI_ROOT_FOLDER/dsmwm.log
+sudo chmod 777 $MEDIAWIKI_ROOT_FOLDER/dsmwm.log
+
+############
+# RESTIC 1 #
+############
+
+cp conf/restic_password $MEDIAWIKI_ROOT_FOLDER/
+
+#############
+# MEDIAWIKI #
+#############
 
 echo "Extract..."
-mkdir --parents $MEDIAWIKI_ROOT_FOLDER/w
 tar -xzf $CANASTA_INSTANCE_ROOT/$CURRENT_CANASTA_ARCHIVE -C $MEDIAWIKI_ROOT_FOLDER/w
-sleep 1
-
-echo "Run docker-compose..."
-sudo -S docker-compose --env-file ./CanastaInstanceSettings.env down \
-  && sudo -S docker-compose --env-file ./CanastaInstanceSettings.env up -d \
-  && sudo -S chown -R $CANASTA_INSTANCE_ROOT_OWNER:www-data mediawiki_root
 sleep 1
 
 echo "Ensure permissions..."
@@ -39,6 +40,12 @@ sleep 1
 
 echo "Set database server..."
 echo "\$wgDBserver = '$MYSQL_HOST';">> mediawiki_root/w/LocalSettings.php
+sleep 1
+
+echo "Run docker-compose..."
+sudo -S docker-compose --env-file ./CanastaInstanceSettings.env down \
+  && sudo -S docker-compose --env-file ./CanastaInstanceSettings.env up -d \
+  && sudo -S chown -R $CANASTA_INSTANCE_ROOT_OWNER:www-data mediawiki_root
 sleep 1
 
 # FIXME: Wait for MariaDB to be ready...
@@ -63,8 +70,15 @@ echo "Update..."
 sudo -S docker exec $APACHE_CONTAINER_NAME /bin/bash -c \
   'cd w; php maintenance/update.php --quick'
 
+echo "Inject contents..."
+source ./inject-local-WikiPageContents.sh
+source ./inject-manage-page-from-mediawiki.org.sh
+
+############
+# RESTIC 2 #
+############
+
 echo "Initialize restic backup repository"
-cp conf/restic_password $MEDIAWIKI_ROOT_FOLDER/
 sudo -S docker exec $APACHE_CONTAINER_NAME /bin/bash -c \
   "restic --password-file restic_password --verbose init --repo /var/www/html/restic-repo"
 
@@ -73,23 +87,26 @@ sudo chown -R $CANASTA_INSTANCE_ROOT_OWNER:www-data restic_data
 sudo chmod -R 770 restic_data
 sleep 1
 
+###########
+# MWM API #
+###########
+
 echo "Install mwm API"
-mkdir $MEDIAWIKI_ROOT_FOLDER/api/
 cp -r mwmapi/* $MEDIAWIKI_ROOT_FOLDER/api/
 
+##########
+# MWM UI #
+##########
+
 echo "Install mwm UI"
-mkdir $MEDIAWIKI_ROOT_FOLDER/ui/
 cp -r mwmui/* $MEDIAWIKI_ROOT_FOLDER/ui/
 
-echo "Initialized log">> $MEDIAWIKI_ROOT_FOLDER/dsmwm.log
-sudo chgrp www-data $MEDIAWIKI_ROOT_FOLDER/dsmwm.log
-sudo chmod 777 $MEDIAWIKI_ROOT_FOLDER/dsmwm.log
+######################
+# GIT CLONE LOCATION #
+######################
 
 echo "Install clone location"
-mkdir $MEDIAWIKI_ROOT_FOLDER/cloneLocation/
 sudo chgrp www-data $MEDIAWIKI_ROOT_FOLDER/cloneLocation/
 sudo chmod 777 $MEDIAWIKI_ROOT_FOLDER/cloneLocation/
 
-echo "Inject contents..."
-source ./inject-local-WikiPageContents.sh
-source ./inject-manage-page-from-mediawiki.org.sh
+
