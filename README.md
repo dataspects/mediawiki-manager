@@ -1,5 +1,9 @@
 # mediawiki-manager
 
+This repository represents the development workbench for [MWStake MediaWiki Manager](https://mwstake.org/mwstake/wiki/MWStake_MediaWiki_Manager).
+
+***It is not meant to be used in production (yet)!***
+
 ![DSMWM screenshot](images/mwmscreenshot.png)
 ![DSMWM screenshot](images/mwstakeextensionstore.png)
 

@@ -4,12 +4,18 @@ services:
     env_file:
       - CanastaInstanceSettings.env
     container_name: mediawiki_canasta
-    image: dataspects/php-apache:7.4.7_210226
+    image: dataspects/php-apache:7.4.7_2103030905f
     ports:
       - 80:80
       - 443:443
     volumes:
-      - ./mediawiki_root:/var/www/html
+      # Uncomment next line for MWMSafeMode
+      - ./mediawiki_root/w:/var/www/html/w
+      - ./mediawiki_root/api:/var/www/html/api
+      - ./mediawiki_root/dsmwm.log:/var/www/html/dsmwm.log
+      - ./mediawiki_root/restic_password:/var/www/html/restic_password
+      - ./mediawiki_root/ui:/var/www/html/ui
+      - ./mediawiki_root/cloneLocation:/var/www/html/cloneLocation
       - ./restic_data:/var/www/html/restic-repo
       - ./conf:/etc/apache2/sites-available
     # https://phabricator.wikimedia.org/source/mediawiki/browse/master/docker-compose.yml
