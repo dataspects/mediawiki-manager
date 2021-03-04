@@ -4,14 +4,14 @@ services:
     env_file:
       - CanastaInstanceSettings.env
     container_name: mediawiki_canasta
-    image: dataspects/php-apache:7.4.7_2103031212incsamo
+    image: dataspects/mediawiki:1.35.0-2103040820
     ports:
       - 80:80
       - 443:443
     volumes:
       # MediaWiki >>>
-      #- ./mediawiki_root/w/LocalSettings.php:/var/www/html/w/LocalSettings.php
-      #- ./mediawiki_root/w/extensions:/var/www/html/w/extensions
+      - ./mediawiki_root/w/LocalSettings.php:/var/www/html/w/LocalSettings.php
+      - ./mediawiki_root/w/extensions:/var/www/html/w/extensions
       - ./mediawiki_root/w/images:/var/www/html/w/images
       # MediaWiki Manager >>>
       - ./mediawiki_root/api:/var/www/html/api
