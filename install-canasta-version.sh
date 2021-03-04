@@ -43,9 +43,9 @@ echo "\$wgDBserver = '$MYSQL_HOST';">> mediawiki_root/w/LocalSettings.php
 sleep 1
 
 echo "Run docker-compose..."
-sudo -S docker-compose --env-file ./CanastaInstanceSettings.env down \
-  && sudo -S docker-compose --env-file ./CanastaInstanceSettings.env up -d \
-  && sudo -S chown -R $CANASTA_INSTANCE_ROOT_OWNER:www-data mediawiki_root
+./stop.sh
+./start.sh
+sudo -S chown -R $CANASTA_INSTANCE_ROOT_OWNER:www-data mediawiki_root
 sleep 1
 
 # FIXME: Wait for MariaDB to be ready...
