@@ -26,9 +26,14 @@ services:
     # https://phabricator.wikimedia.org/source/mediawiki/browse/master/docker-compose.yml
     # https://phoenixnap.com/kb/how-to-share-data-between-docker-containers
     # + mysql
-  # mwmapi:
-  #   container_name: mwmapi
-  #   image: dataspects/mwmapi:210303
+  mwmapi:
+    container_name: mwmapi
+    image: dataspects/mwmapi:210303
+    environment:
+      - MWAPI=http://mediawiki/w/api.php
+      - MWROOT=/home/lex/mediawiki-manager/mediawiki_root/w
+    ports:
+      - 3000:3000
   mysql:
     container_name: mysql_canasta
     image: mariadb:10.5.5
