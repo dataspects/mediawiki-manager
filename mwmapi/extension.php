@@ -11,7 +11,8 @@ class Extension {
         $this->logger = $logger;
         # FIXME: safe now?
         # FIXME: Ok not to escapeshellcmd as of now?
-        $this->configFile = "LocalSettings.php";
+        $this->configFile = "/var/www/html/w/LocalSettings.php";
+        $this->configFileBAK = "/var/www/html/w/LocalSettings.php.bak";
     }
 
     private function getExtensionProfileByName() {
@@ -32,13 +33,14 @@ class Extension {
         $this->logger->write("Trying to enable ".$this->ep["name"]."...");
         if(array_key_exists("composer", $this->ep["installation-aspects"])) {
             // By composer
-            exec("cd /var/www/html/w && COMPOSER_HOME=/var/www/html/w php composer.phar require ".escapeshellarg($this->ep["installation-aspects"]["composer"]), $output, $retval);
+            exec("cd /var/www/html/w && COMPOSER_HOME=/var/www/html/w php composer.phar require ".$this->ep["installation-aspects"]["composer"], $output, $retval);
             if($retval <> 0) {
+                $this->logger->write("Composer retval ".$retval."...");
             }
         } elseif(array_key_exists("repository", $this->ep["installation-aspects"])) {
             // From repository
             $this->logger->write("Trying to clone ".$this->ep["installation-aspects"]["repository"]."...");
-            exec("git clone ".escapeshellarg($this->ep["installation-aspects"]["repository"])." /var/www/html/w/extensions/".escapeshellarg($this->name), $output, $retval);
+            exec("git clone ".$this->ep["installation-aspects"]["repository"]." /var/www/html/w/extensions/".$this->name, $output, $retval);
             if($retval <> 0) {
                 $this->logger->write($this->ep["installation-aspects"]["repository"]." already cloned");
             } else {
@@ -52,13 +54,13 @@ class Extension {
             foreach($this->ep["installation-aspects"]["localsettings"] as $ls) {
                 $this->logger->write("Checking ".$this->configFile." for line \"$ls\"...");
                 // FIXME: Ok not to escapeshellcmd here?
-                exec("grep \"^#".$ls."$\" /var/www/html/w/".escapeshellarg($this->configFile), $output, $retval);
+                exec("grep \"^#".$ls."$\" ".$this->configFile, $output, $retval);
                 if($retval == 0) {
                     // Uncomment line
-                    exec("sed -i \"s/^#".$ls."/".$ls."/g\" /var/www/html/w/".escapeshellarg($this->configFile), $output, $retval);
+                    $this->sedLocalSettings("s/^#".$ls."/".$ls."/g");
                 } else {
                     // Add line
-                    exec("echo \"".$ls."\">> /var/www/html/w/".escapeshellarg($this->configFile), $output, $retval);
+                    exec("echo \"".$ls."\">> ".$this->configFile, $output, $retval);
                 }
                 $this->logger->write("Ensured existence of line \"$ls\" in ".$this->configFile);
             }
@@ -77,18 +79,35 @@ class Extension {
         }
         if(array_key_exists("composer", $this->ep["installation-aspects"])) {
             // By composer
-            exec("cd /var/www/html/w && COMPOSER_HOME=/var/www/html/w php composer.phar remove --no-update ".escapeshellarg($this->ep["installation-aspects"]["composer"]), $output, $retval);
+            $this->logger->write("Running composer...");
+            exec("cd /var/www/html/w && COMPOSER_HOME=/var/www/html/w php composer.phar remove ".$this->ep["installation-aspects"]["composer"], $output, $retval);
+            if($retval <> 0) {
+                $this->logger->write("Composer retval ".$retval."...");
+            }
+            $this->logger->write("Ran composer...");
         } elseif(array_key_exists("repository", $this->ep["installation-aspects"])) {
             // TBD: Remove extensions/repository?
         }
         // ".$this->configFile." directives?
         if(array_key_exists("localsettings", $this->ep["installation-aspects"])) {
             foreach($this->ep["installation-aspects"]["localsettings"] as $ls) {
-                exec("sed -i \"s/^".$ls."/#".$ls."/g\" /var/www/html/w/".escapeshellarg($this->configFile), $output, $retval);
+                $this->sedLocalSettings("s/^".$ls."/#".$ls."/g");
             }
         }
         $this->mediawiki->runMaintenanceUpdatePHP();
         return $this->logger->write("Extension ".$this->name." disabled");
+    }
+
+    private function sedLocalSettings($sedArg) {
+        $this->logger->write("Sedding LocalSettings.php...");
+        // Backup LocalSettings.php before sedding...
+        exec("cp ".$this->configFile." ".$this->configFileBAK);
+        // ...and then sed
+        exec("sed \"".$sedArg."\" ".$this->configFileBAK." > ".$this->configFile, $output, $retval);
+        if($retval <> 0) {
+            $this->logger->write("sed retval ".$retval."...");
+        }
+        $this->logger->write("Backed up and sedded LocalSettings.php");
     }
 
 }

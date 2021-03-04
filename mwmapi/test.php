@@ -19,6 +19,8 @@ class Test {
         // Extensions management
         $extension = new Extension("LabeledSectionTransclusion", $this->extensionCatalogue, $this->generalSiteInfo, $this->mediawiki, $this->logger);
         $extension->enable();
+        $extension = new Extension("Mermaid", $this->extensionCatalogue, $this->generalSiteInfo, $this->mediawiki, $this->logger);
+        $extension->disable();
         // Apps management
         $app = new App("dataspects/dataspectsSystemCoreOntology", $this->appCatalogue, $this->generalSiteInfo, $this->mediawiki, $this->logger);
         $app->enable();

@@ -11,7 +11,8 @@ dockerDirectives=(
 
 for dd in ${!dockerDirectives[@]}
 do
-    sed -i "s/${dockerDirectives[$dd]}/#${dockerDirectives[$dd]}/g" docker-compose.yml
+    cp docker-compose.yml docker-compose.yml.bak
+    sed "s/${dockerDirectives[$dd]}/#${dockerDirectives[$dd]}/g" docker-compose.yml.bak > docker-compose.yml
 done
 
 sudo docker-compose --env-file ./CanastaInstanceSettings.env up -d

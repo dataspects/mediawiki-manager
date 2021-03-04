@@ -10,8 +10,8 @@ services:
       - 443:443
     volumes:
       # MediaWiki >>>
-      - ./mediawiki_root/w/LocalSettings.php:/var/www/html/w/LocalSettings.php
-      - ./mediawiki_root/w/extensions:/var/www/html/w/extensions
+      #- ./mediawiki_root/w/LocalSettings.php:/var/www/html/w/LocalSettings.php
+      #- ./mediawiki_root/w/extensions:/var/www/html/w/extensions
       - ./mediawiki_root/w/images:/var/www/html/w/images
       # MediaWiki Manager >>>
       - ./mediawiki_root/api:/var/www/html/api
