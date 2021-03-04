@@ -7,6 +7,7 @@ echo "Turn off MWMSafeMode"
 dockerDirectives=(
     "- \.\/mediawiki_root\/w\/LocalSettings\.php:\/var\/www\/html\/w\/LocalSettings\.php"
     "- \.\/mediawiki_root\/w\/extensions:\/var\/www\/html\/w\/extensions"
+    "- \.\/mediawiki_root\/w\/skins:\/var\/www\/html\/w\/skins"
     "- \.\/mediawiki_root\/w\/vendor:\/var\/www\/html\/w\/vendor"
 )
 
