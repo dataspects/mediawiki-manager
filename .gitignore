@@ -5,3 +5,6 @@ restic_data
 wikicj
 dataspectsSystemCoreOntology
 docker-compose.yml.bak
+restic-backup-repository
+tmp
+ui_(submodule)
