@@ -10,10 +10,16 @@ getPageData () {
 }
 
 initializeSystemLog () {
+    rm ./logs/system.log
     touch ./logs/system.log
 }
 
 writeToSystemLog () {
     # TODO: fix timestamp
     echo $(date "+%Y-%m-%d") $1>> ./logs/system.log
+}
+
+addToLocalSettings () {
+    echo $1>> mediawiki_root/w/LocalSettings.php
+    writeToSystemLog "Written to system.log: $1"
 }

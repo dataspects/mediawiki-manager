@@ -1,6 +1,6 @@
 #!/bin/bash
 
-source ./CanastaInstanceSettings.env
+source ./envs/my-new-system.env
 
 ./stop.sh
 
@@ -19,7 +19,7 @@ do
     sed "s/${dockerDirectives[$dd]}/#${dockerDirectives[$dd]}/g" docker-compose.yml.bak > docker-compose.yml
 done
 
-sudo docker-compose --env-file ./CanastaInstanceSettings.env up -d
+sudo docker-compose --env-file ./envs/my-new-system.env up -d
 
 # FIXME: Wait for MariaDB to be ready...
 sleep 10

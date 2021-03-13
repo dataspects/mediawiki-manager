@@ -43,25 +43,20 @@ sleep 1
 
 setPermissionsOnSystemInstanceRoot
 
-exit
-
 echo "Set domain name..."
-echo "\$wgServer = 'https://$SYSTEM_DOMAIN_NAME';">> mediawiki_root/w/LocalSettings.php
-sleep 1
+addToLocalSettings "\$wgServer = 'https://$SYSTEM_DOMAIN_NAME';"
 
-echo "Set database password..."
-echo "\$wgDBpassword = '$WG_DB_PASSWORD';">> mediawiki_root/w/LocalSettings.php
-sleep 1
-
-echo "Set database server..."
-echo "\$wgDBserver = '$MYSQL_HOST';">> mediawiki_root/w/LocalSettings.php
-sleep 1
+echo "Configure database access..."
+addToLocalSettings "\$wgDBpassword = '$WG_DB_PASSWORD';"
+addToLocalSettings "\$wgDBserver = '$MYSQL_HOST';"
 
 echo "Run docker-compose..."
-./stop.sh
-./start.sh
-sudo -S chown -R $SYSTEM_INSTANCE_ROOT_OWNER:www-data mediawiki_root
-sleep 1
+./cli/manage-system/stop.sh
+./cli/manage-system/start.sh
+writeToSystemLog "Ran docker-compose..."
+
+setPermissionsOnSystemInstanceRoot
+exit
 
 # FIXME: Wait for MariaDB to be ready...
 sleep 10

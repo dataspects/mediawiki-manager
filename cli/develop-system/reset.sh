@@ -1,8 +1,10 @@
 #!/bin/bash
 
+./cli/manage-system/stop.sh
+
 sudo rm -rf \
     mediawiki_root \
     restic_data \
     mysql_data
 
-./install-canasta-version.sh
+./cli/install-system/install-system.sh

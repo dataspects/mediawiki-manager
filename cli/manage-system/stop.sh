@@ -1,3 +1,3 @@
 #!/bin/bash
-
-sudo docker-compose --env-file ./CanastaInstanceSettings.env down
+echo $PWD
+sudo docker-compose --env-file ./envs/my-new-system.env down

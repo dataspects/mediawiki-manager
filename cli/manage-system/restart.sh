@@ -1,6 +1,6 @@
 #!/bin/bash
 
-source ./CanastaInstanceSettings.env
+source ./envs/my-new-system.env
 
 ./stop.sh
 ./start.sh

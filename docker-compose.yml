@@ -2,8 +2,8 @@ version: "3.7"
 services:
   mediawiki:
     env_file:
-      - CanastaInstanceSettings.env
-    container_name: mediawiki_canasta
+      - envs/my-new-system.env
+    container_name: mwm_mediawiki
     image: dataspects/mediawiki:1.35.0-2103040820
     ports:
       - 80:80
@@ -35,7 +35,7 @@ services:
     ports:
       - 3000:3000
   mysql:
-    container_name: mysql_canasta
+    container_name: mwm_mariadb
     image: mariadb:10.5.5
     volumes:
       - ./mysql_data:/var/lib/mysql

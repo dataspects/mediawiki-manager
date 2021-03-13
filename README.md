@@ -20,7 +20,7 @@ The following procedures are currently tested on Ubuntu 20.04 including:
     * `user@server:~/mediawiki-manager$ wget -c https://www.dropbox.com/s/p5r2qsar1q0u4i3/mediawiki-root-w-folder-1.35.0-3.2.1.tar.gz`
     * `user@server:~/mediawiki-manager$ wget -c https://www.dropbox.com/s/zncf0q288um5gic/mediawiki-root-w-folder-1.35.1-3.2.2.tar.gz`
     * ...
-5. Configure `~/mediawiki-manager/CanastaInstanceSettings.env`
+5. Configure `~/mediawiki-manager/my-new-system.env`
     * SYSTEM_INSTANCE_ROOT to the mediawiki-manager directory (e.g. `/home/ubuntu/mediawiki-manager`)
     * SYSTEM_INSTANCE_ROOT_OWNER to the correct user (e.g. `ubuntu`)
     * MARIADB_ROOT_PASSWORD a new root password if required
@@ -37,11 +37,11 @@ The following procedures are currently tested on Ubuntu 20.04 including:
 
 **START the MediaWiki Canasta instance**
 
-`user@server:~/mediawiki-manager$ sudo docker-compose --env-file ./CanastaInstanceSettings.env up -d`
+`user@server:~/mediawiki-manager$ sudo docker-compose --env-file ./envs/my-new-system.env up -d`
 
 **STOP the MediaWiki Canasta instance**
 
-`user@server:~/mediawiki-manager$ sudo docker-compose --env-file ./CanastaInstanceSettings.env down`
+`user@server:~/mediawiki-manager$ sudo docker-compose --env-file ./envs/my-new-system.env down`
 
 ## Manage
 
