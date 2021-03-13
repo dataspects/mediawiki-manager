@@ -1,37 +1,52 @@
 #!/bin/bash
 
-source ./CanastaInstanceSettings.env
+# TODO: foreach systems
+source ./envs/my-new-system.env
+
+##################
+# SOURCE CLI LIB #
+##################
+
+source ./cli/lib/utils.sh
+source ./cli/lib/permissions.sh
+
+##############
+# INITIALIZE #
+##############
+
+initializeSystemLog
+
+################################
+# DOWNLOAD SYSTEM CORE ARCHIVE #
+################################
+
+# TODO: handle already downloaded
+# wget -c $SYSTEM_CORE_ARCHIVE
+writeToSystemLog "Downloaded: $SYSTEM_CORE_ARCHIVE"
 
 ###########
 # GENERAL #
 ###########
 
-mkdir --parents $MEDIAWIKI_ROOT_FOLDER/w
-echo "Initialized log">> $MEDIAWIKI_ROOT_FOLDER/dsmwm.log
-sudo chgrp www-data $MEDIAWIKI_ROOT_FOLDER/dsmwm.log
-sudo chmod 777 $MEDIAWIKI_ROOT_FOLDER/dsmwm.log
-
-############
-# RESTIC 1 #
-############
-
-cp conf/restic_password $MEDIAWIKI_ROOT_FOLDER/
+# Initialize MediaWiki script path
+mkdir --parents $MEDIAWIKI_ROOT/w
+writeToSystemLog "Initialized: $MEDIAWIKI_ROOT"
 
 #############
 # MEDIAWIKI #
 #############
 
-echo "Extract..."
-tar -xzf $CANASTA_INSTANCE_ROOT/$CURRENT_CANASTA_ARCHIVE -C $MEDIAWIKI_ROOT_FOLDER/w
+echo "Extracting $SYSTEM_CORE_ARCHIVE ..."
+tar -xzf $(basename $SYSTEM_INSTANCE_ROOT/$SYSTEM_CORE_ARCHIVE) -C $MEDIAWIKI_ROOT/w
+writeToSystemLog "Extracted: $SYSTEM_CORE_ARCHIVE"
 sleep 1
 
-echo "Ensure permissions..."
-sudo chown -R $CANASTA_INSTANCE_ROOT_OWNER:www-data $MEDIAWIKI_ROOT_FOLDER
-sudo chmod -R 770 $MEDIAWIKI_ROOT_FOLDER
-sleep 1
+setPermissionsOnSystemInstanceRoot
+
+exit
 
 echo "Set domain name..."
-echo "\$wgServer = 'https://$CANASTA_DOMAIN_NAME';">> mediawiki_root/w/LocalSettings.php
+echo "\$wgServer = 'https://$SYSTEM_DOMAIN_NAME';">> mediawiki_root/w/LocalSettings.php
 sleep 1
 
 echo "Set database password..."
@@ -45,7 +60,7 @@ sleep 1
 echo "Run docker-compose..."
 ./stop.sh
 ./start.sh
-sudo -S chown -R $CANASTA_INSTANCE_ROOT_OWNER:www-data mediawiki_root
+sudo -S chown -R $SYSTEM_INSTANCE_ROOT_OWNER:www-data mediawiki_root
 sleep 1
 
 # FIXME: Wait for MariaDB to be ready...
@@ -83,7 +98,7 @@ sudo -S docker exec $APACHE_CONTAINER_NAME /bin/bash -c \
   "restic --password-file restic_password --verbose init --repo /var/www/html/restic-repo"
 
 echo "Ensure permissions..."
-sudo chown -R $CANASTA_INSTANCE_ROOT_OWNER:www-data restic_data
+sudo chown -R $SYSTEM_INSTANCE_ROOT_OWNER:www-data restic_data
 sudo chmod -R 770 restic_data
 sleep 1
 
@@ -92,21 +107,21 @@ sleep 1
 ###########
 
 echo "Install mwm API"
-cp -r mwmapi/* $MEDIAWIKI_ROOT_FOLDER/api/
+cp -r mwmapi/* $MEDIAWIKI_ROOT/api/
 
 ##########
 # MWM UI #
 ##########
 
 echo "Install mwm UI"
-cp -r mwmui/* $MEDIAWIKI_ROOT_FOLDER/ui/
+cp -r mwmui/* $MEDIAWIKI_ROOT/ui/
 
 ######################
 # GIT CLONE LOCATION #
 ######################
 
 echo "Install clone location"
-sudo chgrp www-data $MEDIAWIKI_ROOT_FOLDER/cloneLocation/
-sudo chmod 777 $MEDIAWIKI_ROOT_FOLDER/cloneLocation/
+sudo chgrp www-data $MEDIAWIKI_ROOT/cloneLocation/
+sudo chmod 777 $MEDIAWIKI_ROOT/cloneLocation/
 
-
+setPermissionsOnSystemInstanceRoot

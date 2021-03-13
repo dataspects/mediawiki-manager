@@ -21,8 +21,8 @@ The following procedures are currently tested on Ubuntu 20.04 including:
     * `user@server:~/mediawiki-manager$ wget -c https://www.dropbox.com/s/zncf0q288um5gic/mediawiki-root-w-folder-1.35.1-3.2.2.tar.gz`
     * ...
 5. Configure `~/mediawiki-manager/CanastaInstanceSettings.env`
-    * CANASTA_INSTANCE_ROOT to the mediawiki-manager directory (e.g. `/home/ubuntu/mediawiki-manager`)
-    * CANASTA_INSTANCE_ROOT_OWNER to the correct user (e.g. `ubuntu`)
+    * SYSTEM_INSTANCE_ROOT to the mediawiki-manager directory (e.g. `/home/ubuntu/mediawiki-manager`)
+    * SYSTEM_INSTANCE_ROOT_OWNER to the correct user (e.g. `ubuntu`)
     * MARIADB_ROOT_PASSWORD a new root password if required
     * WG_DB_PASSWORD to a new db password if required
 6. `user@server:~/mediawiki-manager$ ./install-canasta-version.sh`
@@ -47,7 +47,7 @@ The following procedures are currently tested on Ubuntu 20.04 including:
 
 ### Extensions
 
-To install new and enable/disable existing extensions, visit **https://$CANASTA_DOMAIN_NAME/w/manage.php**
+To install new and enable/disable existing extensions, visit **https://$SYSTEM_DOMAIN_NAME/w/manage.php**
 
 ### Content
 
@@ -58,7 +58,7 @@ To install new and enable/disable existing extensions, visit **https://$CANASTA_
 ## Switch (Upgrade)
 
 1. Edit `~/mediawiki-manager/switch-canasta-version.sh`:
-    * NEW_CANASTA_ARCHIVE=`mediawiki-root-w-folder-1.35.1-3.2.2.tar.gz`
+    * NEW_SYSTEM_ARCHIVE=`mediawiki-root-w-folder-1.35.1-3.2.2.tar.gz`
 2. `user@server:~/mediawiki-manager$ ./switch-canasta-version.sh`
 
 ### Check what has changed
@@ -75,7 +75,7 @@ The installer creates a restic repository at `~/mediawiki-manager/$RESTIC_REPOSI
 
 **TAKE snapshot**
 
-Currently this snapshoots `$MEDIAWIKI_ROOT_FOLDER` into `~/mediawiki-manager/$RESTIC_REPOSITORY`.
+Currently this snapshoots `$MEDIAWIKI_ROOT` into `~/mediawiki-manager/$RESTIC_REPOSITORY`.
 
 `user@server:~/mediawiki-manager$ ./take-restic-snapshot.sh`
 
@@ -127,3 +127,7 @@ Currently this restores the latest snapshot into `~/mediawiki-manager/$RESTIC_RE
 
 1. `user@workstation:~/mwmui$ gatsby build --prefix-paths && cp -r public/* ../mediawiki-manager/mwmui`
 2. `user@workstation:~/mediawiki-manager$ # git commit ...`
+
+## TODOs
+
+* Handle trailing slashes present or not

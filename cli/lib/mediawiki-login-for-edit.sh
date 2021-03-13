@@ -14,8 +14,8 @@ fi
 
 source ./scripts/utils.sh
 
-WIKI=https://$CANASTA_DOMAIN_NAME/w
-WIKIAPI=https://$CANASTA_DOMAIN_NAME/w/api.php
+WIKI=https://$SYSTEM_DOMAIN_NAME/w
+WIKIAPI=https://$SYSTEM_DOMAIN_NAME/w/api.php
 
 CR=$(curl -S \
     $OPTION_INSECURE \
