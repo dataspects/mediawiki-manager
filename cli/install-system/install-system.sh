@@ -36,7 +36,7 @@ writeToSystemLog "Initialized: $MEDIAWIKI_ROOT"
 # MEDIAWIKI #
 #############
 
-echo "Extracting $SYSTEM_CORE_ARCHIVE ..."
+echo "Extracting $SYSTEM_CORE_ARCHIVE..."
 tar -xzf $(basename $SYSTEM_INSTANCE_ROOT/$SYSTEM_CORE_ARCHIVE) -C $MEDIAWIKI_ROOT/w
 writeToSystemLog "Extracted: $SYSTEM_CORE_ARCHIVE"
 sleep 1
@@ -56,6 +56,8 @@ echo "Run docker-compose..."
 writeToSystemLog "Ran docker-compose..."
 
 setPermissionsOnSystemInstanceRoot
+
+source ./cli/lib/waitForMariaDB.sh
 exit
 
 # FIXME: Wait for MariaDB to be ready...
