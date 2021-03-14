@@ -9,23 +9,23 @@ services:
       - 80:80
       - 443:443
     volumes:
-      # MediaWiki >>>
+      # MediaWiki
       - ./mediawiki_root/w/LocalSettings.php:/var/www/html/w/LocalSettings.php
       - ./mediawiki_root/w/extensions:/var/www/html/w/extensions
       - ./mediawiki_root/w/skins:/var/www/html/w/skins
       - ./mediawiki_root/w/vendor:/var/www/html/w/vendor
       - ./mediawiki_root/w/images:/var/www/html/w/images
-      # MediaWiki Manager >>>
-      - ./mediawiki_root/api:/var/www/html/api
-      - ./mediawiki_root/dsmwm.log:/var/www/html/dsmwm.log
-      - ./mediawiki_root/restic_password:/var/www/html/restic_password
-      - ./mediawiki_root/ui:/var/www/html/ui
-      - ./mediawiki_root/cloneLocation:/var/www/html/cloneLocation
+      # MediaWiki Manager
+      - ./logs:/var/www/logs
+      # MediaWiki Manager >>> Restic
+      - ./conf/restic/restic_password:/var/www/restic_password
       - ./restic_data:/var/www/html/restic-repo
-      - ./conf:/etc/apache2/sites-available
-    # https://phabricator.wikimedia.org/source/mediawiki/browse/master/docker-compose.yml
-    # https://phoenixnap.com/kb/how-to-share-data-between-docker-containers
-    # + mysql
+      # MediaWiki Manager >>> Clone
+      - ./cloneLocation:/var/www/cloneLocation
+      # Apache
+      - ./conf/apache/sites-available:/etc/apache2/sites-available
+      # UI
+      - ./mediawiki_root/ui:/var/www/html/ui
   mwmapi:
     container_name: mwmapi
     image: dataspects/mwmapi:210303

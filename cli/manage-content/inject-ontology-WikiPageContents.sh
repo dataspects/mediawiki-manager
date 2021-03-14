@@ -4,14 +4,14 @@ source ./envs/my-new-system.env
 
 ####################################
 
-source ./scripts/utils.sh
+source ./cli/lib/utils.sh
 
 echo -n "Enter ontology name to inject: "
 read ONTOLOGY_NAME
 
 git clone https://github.com/dataspects/$ONTOLOGY_NAME.git
 
-source ./scripts/mediawiki-login-for-edit.sh
+source ./cli/manage-content/mediawiki-login-for-edit.sh
 
 for filename in $ONTOLOGY_NAME/objects/*; do
     if [[ -d $filename ]]; then
@@ -19,11 +19,11 @@ for filename in $ONTOLOGY_NAME/objects/*; do
         for filename2 in $filename/*; do
             getPageData "$filename2"
             PAGENAME=$NAMESPACE:$PAGENAME
-            source ./scripts/mediawiki-inject.sh
+            source ./cli/manage-content/mediawiki-inject.sh
         done
     else
         getPageData "$filename"
-        source ./scripts/mediawiki-inject.sh
+        source ./cli/manage-content/mediawiki-inject.sh
     fi    
 done
 

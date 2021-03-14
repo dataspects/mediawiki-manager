@@ -12,7 +12,7 @@ fi
 
 ####################################
 
-source ./scripts/utils.sh
+source ./cli/lib/utils.sh
 
 WIKI=https://$SYSTEM_DOMAIN_NAME/w
 WIKIAPI=https://$SYSTEM_DOMAIN_NAME/w/api.php

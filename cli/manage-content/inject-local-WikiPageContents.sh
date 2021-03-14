@@ -4,13 +4,13 @@ source ./envs/my-new-system.env
 
 ####################################
 
-source ./scripts/utils.sh
+source ./cli/lib/utils.sh
 
-source ./scripts/mediawiki-login-for-edit.sh
+source ./cli/lib/mediawiki-login-for-edit.sh
 
 for filename in WikiPageContents/*.wikitext; do
     getPageData "$filename"
-    source ./scripts/mediawiki-inject.sh
+    source ./cli/manage-content/mediawiki-inject.sh
 done
 
 sudo -S docker exec $APACHE_CONTAINER_NAME bash -c \

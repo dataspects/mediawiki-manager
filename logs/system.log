@@ -1,9 +1,10 @@
-2021-03-13 Downloaded: https://www.dropbox.com/s/p5r2qsar1q0u4i3/mediawiki-root-w-folder-1.35.0-3.2.1.tar.gz
-2021-03-13 Initialized: /home/lex/mediawiki-manager/mediawiki_root
-2021-03-13 Extracted: https://www.dropbox.com/s/p5r2qsar1q0u4i3/mediawiki-root-w-folder-1.35.0-3.2.1.tar.gz
-2021-03-13 Permissions set on /home/lex/mediawiki-manager
-2021-03-13 Written to system.log: $wgServer = 'https://dserver';
-2021-03-13 Written to system.log: $wgDBpassword = 'wgdbpassword';
-2021-03-13 Written to system.log: $wgDBserver = 'mysql';
-2021-03-13 Ran docker-compose...
-2021-03-13 Permissions set on /home/lex/mediawiki-manager
+2021-03-14 Downloaded: https://www.dropbox.com/s/p5r2qsar1q0u4i3/mediawiki-root-w-folder-1.35.0-3.2.1.tar.gz
+2021-03-14 Initialized: /home/lex/mediawiki-manager/mediawiki_root
+2021-03-14 Extracted: https://www.dropbox.com/s/p5r2qsar1q0u4i3/mediawiki-root-w-folder-1.35.0-3.2.1.tar.gz
+2021-03-14 Permissions set on /home/lex/mediawiki-manager
+2021-03-14 Written to system.log: $wgServer = 'https://dserver';
+2021-03-14 Written to system.log: $wgDBpassword = 'wgdbpassword';
+2021-03-14 Written to system.log: $wgDBserver = 'mwm_mariadb';
+2021-03-14 Ran docker-compose...
+2021-03-14 Permissions set on /home/lex/mediawiki-manager
+2021-03-14 Permissions set on /home/lex/mediawiki-manager

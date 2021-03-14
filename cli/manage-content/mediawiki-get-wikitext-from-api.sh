@@ -4,7 +4,7 @@ source ./envs/my-new-system.env
 
 ####################################
 
-source ./scripts/utils.sh
+source ./cli/lib/utils.sh
 
 CR=$(curl -S \
 	$OPTION_INSECURE \

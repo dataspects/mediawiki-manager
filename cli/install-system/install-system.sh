@@ -39,7 +39,6 @@ writeToSystemLog "Initialized: $MEDIAWIKI_ROOT"
 echo "Extracting $SYSTEM_CORE_ARCHIVE..."
 tar -xzf $(basename $SYSTEM_INSTANCE_ROOT/$SYSTEM_CORE_ARCHIVE) -C $MEDIAWIKI_ROOT/w
 writeToSystemLog "Extracted: $SYSTEM_CORE_ARCHIVE"
-sleep 1
 
 setPermissionsOnSystemInstanceRoot
 
@@ -58,10 +57,6 @@ writeToSystemLog "Ran docker-compose..."
 setPermissionsOnSystemInstanceRoot
 
 source ./cli/lib/waitForMariaDB.sh
-exit
-
-# FIXME: Wait for MariaDB to be ready...
-sleep 10
 
 echo "Create database and user..."
 sudo -S docker exec $APACHE_CONTAINER_NAME bash -c \
@@ -70,55 +65,39 @@ sudo -S docker exec $APACHE_CONTAINER_NAME bash -c \
         CREATE USER '$MYSQL_USER'@'%' IDENTIFIED BY '$WG_DB_PASSWORD';
         GRANT ALL PRIVILEGES ON $DATABASE_NAME.* TO '$MYSQL_USER'@'%';
         FLUSH PRIVILEGES;\""
-sleep 1
 
 echo "Import database..."
 sudo -S docker exec $APACHE_CONTAINER_NAME /bin/bash -c \
   "mysql -h $MYSQL_HOST -u $MYSQL_USER -p$WG_DB_PASSWORD \
   mediawiki < /var/www/html/w/db.sql"
-sleep 1
 
 echo "Update..."
 sudo -S docker exec $APACHE_CONTAINER_NAME /bin/bash -c \
   'cd w; php maintenance/update.php --quick'
 
-echo "Inject contents..."
-source ./inject-local-WikiPageContents.sh
-source ./inject-manage-page-from-mediawiki.org.sh
+###############################
+# Done installing core system #
+###############################
 
-############
-# RESTIC 2 #
-############
+promptToContinue
+
+echo "Inject contents..."
+source ./cli/manage-content/inject-local-WikiPageContents.sh
+source ./cli/manage-content/inject-manage-page-from-mediawiki.org.sh
+
+##########
+# RESTIC #
+##########
 
 echo "Initialize restic backup repository"
 sudo -S docker exec $APACHE_CONTAINER_NAME /bin/bash -c \
-  "restic --password-file restic_password --verbose init --repo /var/www/html/restic-repo"
-
-echo "Ensure permissions..."
-sudo chown -R $SYSTEM_INSTANCE_ROOT_OWNER:www-data restic_data
-sudo chmod -R 770 restic_data
-sleep 1
-
-###########
-# MWM API #
-###########
-
-echo "Install mwm API"
-cp -r mwmapi/* $MEDIAWIKI_ROOT/api/
+  "restic --password-file /var/www/restic_password --verbose init --repo /var/www/html/restic-repo"
 
 ##########
 # MWM UI #
 ##########
 
 echo "Install mwm UI"
-cp -r mwmui/* $MEDIAWIKI_ROOT/ui/
-
-######################
-# GIT CLONE LOCATION #
-######################
-
-echo "Install clone location"
-sudo chgrp www-data $MEDIAWIKI_ROOT/cloneLocation/
-sudo chmod 777 $MEDIAWIKI_ROOT/cloneLocation/
+cp -r ui/* $MEDIAWIKI_ROOT/ui/
 
 setPermissionsOnSystemInstanceRoot
