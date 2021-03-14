@@ -16,14 +16,6 @@ source ./cli/lib/permissions.sh
 
 initializeSystemLog
 
-################################
-# DOWNLOAD SYSTEM CORE ARCHIVE #
-################################
-
-# TODO: handle already downloaded
-# wget -c $SYSTEM_CORE_ARCHIVE
-writeToSystemLog "Downloaded: $SYSTEM_CORE_ARCHIVE"
-
 ###########
 # GENERAL #
 ###########
@@ -32,15 +24,38 @@ writeToSystemLog "Downloaded: $SYSTEM_CORE_ARCHIVE"
 mkdir --parents $MEDIAWIKI_ROOT/w
 writeToSystemLog "Initialized: $MEDIAWIKI_ROOT"
 
+##########
+# DOCKER #
+##########
+
+MWM_MEDIAWIKI_CONTAINER_ID=$(sudo docker run \
+  --detach \
+  dataspects/mediawiki:1.35.0-2103040820)
+declare -a vols=(
+  "var/www/html/w/LocalSettings.php"
+  "var/www/html/w/extensions"
+  "var/www/html/w/skins"
+  "var/www/html/w/vendor"
+)
+for vol in "${vols[@]}"
+do
+  sudo docker cp $MWM_MEDIAWIKI_CONTAINER_ID:$vol $MEDIAWIKI_ROOT/w
+done
+sudo docker stop $MWM_MEDIAWIKI_CONTAINER_ID
+setPermissionsOnSystemInstanceRoot
+
+##################
+# DOCKER COMPOSE #
+##################
+
+echo "Run docker-compose..."
+./cli/manage-system/stop.sh
+./cli/manage-system/start.sh
+writeToSystemLog "Ran docker-compose..."
+
 #############
 # MEDIAWIKI #
 #############
-
-echo "Extracting $SYSTEM_CORE_ARCHIVE..."
-tar -xzf $(basename $SYSTEM_INSTANCE_ROOT/$SYSTEM_CORE_ARCHIVE) -C $MEDIAWIKI_ROOT/w
-writeToSystemLog "Extracted: $SYSTEM_CORE_ARCHIVE"
-
-setPermissionsOnSystemInstanceRoot
 
 echo "Set domain name..."
 addToLocalSettings "\$wgServer = 'https://$SYSTEM_DOMAIN_NAME';"
@@ -49,10 +64,7 @@ echo "Configure database access..."
 addToLocalSettings "\$wgDBpassword = '$WG_DB_PASSWORD';"
 addToLocalSettings "\$wgDBserver = '$MYSQL_HOST';"
 
-echo "Run docker-compose..."
-./cli/manage-system/stop.sh
-./cli/manage-system/start.sh
-writeToSystemLog "Ran docker-compose..."
+
 
 setPermissionsOnSystemInstanceRoot
 

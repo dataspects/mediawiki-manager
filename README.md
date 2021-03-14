@@ -7,25 +7,12 @@ This repository represents the development workbench for [MWStake MediaWiki Mana
 ![DSMWM screenshot](images/mwmscreenshot.png)
 ![DSMWM screenshot](images/mwstakeextensionstore.png)
 
-The following procedures are currently tested on Ubuntu 20.04 including:
-* docker-compose
-* https://stedolan.github.io/jq/
-
 ## Install
 
 1. `user@server:~$ git clone https://github.com/dataspects/mediawiki-manager.git`
 2. `user@server:~$ cd mediawiki-manager`
-3. `user@server:~/mediawiki-manager$`
-4. Download MediaWiki Canasta archives into `~/mediawiki-manager`:
-    * `user@server:~/mediawiki-manager$ wget -c https://www.dropbox.com/s/p5r2qsar1q0u4i3/mediawiki-root-w-folder-1.35.0-3.2.1.tar.gz`
-    * `user@server:~/mediawiki-manager$ wget -c https://www.dropbox.com/s/zncf0q288um5gic/mediawiki-root-w-folder-1.35.1-3.2.2.tar.gz`
-    * ...
-5. Configure `~/mediawiki-manager/my-new-system.env`
-    * SYSTEM_INSTANCE_ROOT to the mediawiki-manager directory (e.g. `/home/ubuntu/mediawiki-manager`)
-    * SYSTEM_INSTANCE_ROOT_OWNER to the correct user (e.g. `ubuntu`)
-    * MARIADB_ROOT_PASSWORD a new root password if required
-    * WG_DB_PASSWORD to a new db password if required
-6. `user@server:~/mediawiki-manager$ ./install-canasta-version.sh`
+3. Configure `~/mediawiki-manager/envs/my-new-system.env`
+4. `user@server:~/mediawiki-manager$ ./cli/install-system/install-system.sh`
 
 ## View
 1. The wiki is now accessible on localhost
@@ -33,37 +20,29 @@ The following procedures are currently tested on Ubuntu 20.04 including:
 
 ## Operate
 
-*Note: MediaWiki Canasta runs on an Apache/PHP setup based on this [Dockerfile](https://github.com/dataspects/dataspectsSystemBuilder/blob/master/docker-images/php-apache/Dockerfile).*
-
-**START the MediaWiki Canasta instance**
+*Note: MediaWiki Manager uses a Apache/PHP setup based on this [Dockerfile](https://github.com/dataspects/dataspectsSystemBuilder/blob/master/docker-images/mediawiki/Dockerfile).*
 
 `user@server:~/mediawiki-manager$ sudo docker-compose --env-file ./envs/my-new-system.env up -d`
 
-**STOP the MediaWiki Canasta instance**
+## Manage system
 
-`user@server:~/mediawiki-manager$ sudo docker-compose --env-file ./envs/my-new-system.env down`
+See shell scripts under `mediawiki-manager/cli/manage-system`.
 
-## Manage
+<!-- ### Extensions
 
-### Extensions
-
-To install new and enable/disable existing extensions, visit **https://$SYSTEM_DOMAIN_NAME/w/manage.php**
+...
 
 ### Content
 
-* `./inject-local-WikiPageContents`: inject content from `WikiPageContents/`
-* `./inject-ontology-WikiPageContents.sh`: inject content from ontology repositories, e.g. https://github.com/dataspects/dataspectsSystemCoreOntology
+* `mediawiki-manager/cli/inject-local-WikiPageContents`: inject content from `WikiPageContents/`
+* `mediawiki-manager/cli/inject-ontology-WikiPageContents.sh`: inject content from ontology repositories, e.g. https://github.com/dataspects/dataspectsSystemCoreOntology
 
 
 ## Switch (Upgrade)
 
-1. Edit `~/mediawiki-manager/switch-canasta-version.sh`:
-    * NEW_SYSTEM_ARCHIVE=`mediawiki-root-w-folder-1.35.1-3.2.2.tar.gz`
-2. `user@server:~/mediawiki-manager$ ./switch-canasta-version.sh`
+...
 
 ### Check what has changed
-
-`user@server:~/mediawiki-manager$ ./check-extensions-diff.sh`
 
 ![Check MW config diffs](images/check-mw-config-diffs.png)
 
@@ -89,27 +68,6 @@ Currently this snapshoots `$MEDIAWIKI_ROOT` into `~/mediawiki-manager/$RESTIC_RE
 
 Currently this restores the latest snapshot into `~/mediawiki-manager/$RESTIC_RESTORE_FOLDER`.
 
-
-## MVP Features
-
- *<span style="color:green">&#10004;</span> = implemented at local development level*
-
-* Add sets of "certified" extensions
-* Disable existing extensions
-* "Safely" add arbitrary extension (reversible)
-* VisualEditor
-* Pretty URLs <span style="color:green">&#10004;</span>
-* TLS <span style="color:green">&#10004;</span>
-
-**Skipped features**
-* no caching
-* no CirrusSearch
-
-## Design principles considered
-
-* Keep 2 sections in LocalSettings.php separated by "# End of automatically generated settings."
-* Keep all components within mediawiki_root/
-
 ## MWM Factory
 
 * See https://github.com/dataspects/mwmui.
@@ -130,4 +88,4 @@ Currently this restores the latest snapshot into `~/mediawiki-manager/$RESTIC_RE
 
 ## TODOs
 
-* Handle trailing slashes present or not
+* Handle trailing slashes present or not -->

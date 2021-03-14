@@ -1,5 +1,5 @@
+logs
 mediawiki_root
-mediawiki-root*
 mysql_data
 restic_data
 wikicj
@@ -7,5 +7,3 @@ dataspectsSystemCoreOntology
 docker-compose.yml.bak
 restic-backup-repository
 tmp
-ui_(submodule)
-logs
