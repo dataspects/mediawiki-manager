@@ -12,25 +12,6 @@ This repository represents the development workbench for [MWStake MediaWiki Mana
 At the moment MWM is only being tested on Ubuntu 20.04 running docker-compose.
 
 ## Features
-
-### Implementation/abstraction levels
-
-Ultimately, MWM will provide 3 implementation levels with regards to the features it provides:
-
-#### CLI: Bash
-
-The bash cli can be extracted and used independently as a standalone cli. The following command will place a standalone cli next to mediawiki-manager. Please note that not all cli functionality is available.
-
-`user@server:~/mediawiki-manager$ ./extract-standalone-cli.sh`
-
-Then use it like this:
-
-`user@server:~/standalonecli$ ./cli/manage-content/inject-ontology-WikiPageContents.sh` (see below "Feature: Manage Content" for more information on this command)
-
-#### API: Go REST
-TBD, partly implemented at https://github.com/dataspects/mwmapi
-#### UI: React/Material-UI
-TBD, partly implemented at https://github.com/dataspects/mwmui
 ### Feature: Install System Instance
 
 #### [Abstraction Layer ALcli](https://mwstake.org/mwstake/wiki/MWStake_MediaWiki_Manager#Abstraction_Layers)
@@ -78,6 +59,29 @@ TBD
 The following command asks for ontologies organized in accordance with the dataspects ontology repository structure, e.g. https://github.com/dataspects/dataspectsSystemCoreOntology, and injects all ontology pages into the wiki:
 
 `user@server:~/mediawiki-manager$ ./cli/manage-content/inject-ontology-WikiPageContents.sh`
+
+## Implementation/abstraction levels
+
+Ultimately, MWM will provide 3 implementation levels with regards to the features it provides:
+
+### Containerization: Docker
+
+1. The [mediawiki docker image](https://hub.docker.com/r/dataspects/mediawiki/tags?page=1&ordering=last_updated) contains a [full MediaWiki installation](https://github.com/dataspects/dataspectsSystemBuilder/blob/master/docker-images/mediawiki/Dockerfile).
+2. 
+### CLI: Bash
+
+The bash cli can be extracted and used independently as a standalone cli. The following command will place a standalone cli next to mediawiki-manager. Please note that not all cli functionality is available.
+
+`user@server:~/mediawiki-manager$ ./extract-standalone-cli.sh`
+
+Then use it like this:
+
+`user@server:~/standalonecli$ ./cli/manage-content/inject-ontology-WikiPageContents.sh` (see below "Feature: Manage Content" for more information on this command)
+
+### API: Go REST
+TBD, partly implemented at https://github.com/dataspects/mwmapi
+### UI: React/Material-UI
+TBD, partly implemented at https://github.com/dataspects/mwmui
 <!-- ### Extensions
 
 ...

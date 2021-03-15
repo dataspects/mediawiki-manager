@@ -26,19 +26,8 @@ writeToSystemLog "Initialized: $MEDIAWIKI_ROOT"
 
 ### >>>
 # MWM Concept: initialize persistent mediawiki service volumes
-MWM_MEDIAWIKI_CONTAINER_ID=$(sudo docker run \
-  --detach \
-  dataspects/mediawiki:1.35.0-2103040820)
-declare -a vols=(
-  "var/www/html/w/LocalSettings.php"
-  "var/www/html/w/extensions"
-  "var/www/html/w/skins"
-  "var/www/html/w/vendor"
-)
-for vol in "${vols[@]}"
-do
-  sudo docker cp $MWM_MEDIAWIKI_CONTAINER_ID:$vol $MEDIAWIKI_ROOT/w
-done
+source ./cli/install-system/initialize-persistent-mediawiki-service-volumes.sh
+promptToContinue
 # <<<
 
 sudo docker stop $MWM_MEDIAWIKI_CONTAINER_ID
