@@ -1,6 +1,6 @@
 #!/bin/bash
 
-# TODO: foreach systems
+# FIXME: multiple systems
 source ./envs/my-new-system.env
 
 ##################

@@ -7,3 +7,5 @@ dataspectsSystemCoreOntology
 docker-compose.yml.bak
 restic-backup-repository
 tmp
+_secrets.sh
+dsrepository-cli
