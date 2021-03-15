@@ -66,9 +66,6 @@ Ultimately, MWM will provide 3 implementation levels with regards to the feature
 
 ### Containerization: Docker
 
-1. The [mediawiki docker image](https://hub.docker.com/r/dataspects/mediawiki/tags?page=1&ordering=last_updated) contains a [full MediaWiki installation](https://github.com/dataspects/dataspectsSystemBuilder/blob/master/docker-images/mediawiki/Dockerfile).
-2. [initialize-persistent-mediawiki-service-volumes.sh](https://github.com/dataspects/mediawiki-manager/blob/main/cli/install-system/initialize-persistent-mediawiki-service-volumes.sh) will copy the 5 persistence-relevant files/directories out to the host so they can be volumed in when starting the mediawiki container.
-3. This shall allow for [start-SAFE-MODE.sh](https://github.com/dataspects/mediawiki-manager/blob/main/cli/manage-system/start-SAFE-MODE.sh).
 ### CLI: Bash
 
 The bash cli can be extracted and used independently as a standalone cli. The following command will place a standalone cli next to mediawiki-manager. Please note that not all cli functionality is available.
@@ -83,42 +80,3 @@ Then use it like this:
 TBD, partly implemented at https://github.com/dataspects/mwmapi
 ### UI: React/Material-UI
 TBD, partly implemented at https://github.com/dataspects/mwmui
-<!-- ### Extensions
-
-...
-
-### Content
-
-* `mediawiki-manager/cli/inject-local-WikiPageContents`: inject content from `WikiPageContents/`
-* `mediawiki-manager/cli/inject-ontology-WikiPageContents.sh`: inject content from ontology repositories, e.g. https://github.com/dataspects/dataspectsSystemCoreOntology
-
-
-## Switch (Upgrade)
-
-...
-
-### Check what has changed
-
-![Check MW config diffs](images/check-mw-config-diffs.png)
-
-## MWM Factory
-
-* See https://github.com/dataspects/mwmui.
-* Docker images are built by https://github.com/dataspects/dataspectsSystemBuilder.
-### Develop MWM UI
-
-1. `user@workstation:~/mwmui$ gatsby develop -H 0.0.0.0`
-2. `user@workstation:~/mediawiki-manager$ cp mwmapi/* mediawiki_root/api/` for all changes in `mwmapi/`
-
-### Locally test production MWM UI
-
-* `user@workstation:~/mwmui$ gatsby build --prefix-paths && cp -r public/* ../mediawiki-manager/mediawiki_root/ui`
-
-### Deploy production MWM UI
-
-1. `user@workstation:~/mwmui$ gatsby build --prefix-paths && cp -r public/* ../mediawiki-manager/mwmui`
-2. `user@workstation:~/mediawiki-manager$ # git commit ...`
-
-## TODOs
-
-* Handle trailing slashes present or not -->
