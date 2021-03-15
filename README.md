@@ -7,6 +7,10 @@ This repository represents the development workbench for [MWStake MediaWiki Mana
 ![DSMWM screenshot](images/mwmscreenshot.png)
 ![DSMWM screenshot](images/mwstakeextensionstore.png)
 
+## System Requirements
+
+At the moment MWM is only being tested on Ubuntu 20.04 running docker-compose.
+
 ## Features
 
 ### Implementation/abstraction levels
