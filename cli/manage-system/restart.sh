@@ -1,13 +1,13 @@
 #!/bin/bash
 
+# MWMBashScript: restart MWM System
+
+source ./cli/lib/utils.sh
+source ./cli/lib/permissions.sh
+
 source ./envs/my-new-system.env
 
-./stop.sh
-./start.sh
+./cli/manage-system/stop.sh
+./cli/manage-system/start.sh
 
-# FIXME: Wait for MariaDB to be ready...
-sleep 10
-
-echo "Update..."
-sudo -S docker exec $APACHE_CONTAINER_NAME /bin/bash -c \
-  'cd w; php maintenance/update.php --quick'
+source ./cli/lib/waitForMariaDB.sh

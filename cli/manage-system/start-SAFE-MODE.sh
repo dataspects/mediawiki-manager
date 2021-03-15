@@ -21,9 +21,5 @@ done
 
 sudo docker-compose --env-file ./envs/my-new-system.env up -d
 
-# FIXME: Wait for MariaDB to be ready...
-sleep 10
-
-echo "Update..."
-sudo -S docker exec $APACHE_CONTAINER_NAME /bin/bash -c \
-  'cd w; php maintenance/update.php --quick'
+source ./cli/lib/waitForMariaDB.sh
+runMWUpdatePHP

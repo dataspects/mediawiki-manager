@@ -2,8 +2,7 @@
 
 source ./envs/my-new-system.env
 
-echo "Turn off MWMSafeMode"
-
+echo "Ensure MWMSafeMode is turned off..."
 dockerDirectives=(
     "- \.\/mediawiki_root\/w\/LocalSettings\.php:\/var\/www\/html\/w\/LocalSettings\.php"
     "- \.\/mediawiki_root\/w\/extensions:\/var\/www\/html\/w\/extensions"
