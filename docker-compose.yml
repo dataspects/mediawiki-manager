@@ -24,16 +24,14 @@ services:
       - ./cloneLocation:/var/www/cloneLocation
       # Apache
       - ./conf/apache/sites-available:/etc/apache2/sites-available
-      # UI
-      - ./mediawiki_root/ui:/var/www/html/ui
-  mwmapi:
-    container_name: mwmapi
-    image: dataspects/mwmapi:210303
-    environment:
-      - MWAPI=http://mediawiki/w/api.php
-      - MWROOT=/home/lex/mediawiki-manager/mediawiki_root/w
-    ports:
-      - 3000:3000
+  # mwmapi:
+  #   container_name: mwmapi
+  #   image: dataspects/mwmapi:210303
+  #   environment:
+  #     - MWAPI=http://mediawiki/w/api.php
+  #     - MWROOT=/home/lex/mediawiki-manager/mediawiki_root/w
+  #   ports:
+  #     - 3000:3000
   mysql:
     container_name: mwm_mariadb
     image: mariadb:10.5.5

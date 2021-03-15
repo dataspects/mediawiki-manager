@@ -1,19 +1,22 @@
 #!/bin/bash
 
 source ./envs/my-new-system.env
-
-####################################
-
 source ./cli/lib/utils.sh
 
-echo -n "Enter ontology name to inject: "
-read ONTOLOGY_NAME
+# Ask user
+echo -n "Enter full GitHub clone URL, e.g. 'https://github.com/dataspects/dataspectsSystemCoreOntology.git': "
+read ONTOLOGY_URL
 
-git clone https://github.com/dataspects/$ONTOLOGY_NAME.git
+# Clone
+mkdir -p ontologies
+ONTOLOGY_NAME=`basename $ONTOLOGY_URL .git`
+git clone $ONTOLOGY_URL ontologies/$ONTOLOGY_NAME
 
-source ./cli/manage-content/mediawiki-login-for-edit.sh
+# Log in to MW
+source ./cli/lib/mediawiki-login-for-edit.sh
 
-for filename in $ONTOLOGY_NAME/objects/*; do
+# Inject
+for filename in ontologies/$ONTOLOGY_NAME/objects/*; do
     if [[ -d $filename ]]; then
         NAMESPACE=$(sed -r 's/.*\/(.*)/\1/g' <<< $filename)
         for filename2 in $filename/*; do
@@ -27,5 +30,5 @@ for filename in $ONTOLOGY_NAME/objects/*; do
     fi    
 done
 
-sudo -S docker exec $APACHE_CONTAINER_NAME bash -c \
-    "cd w && php maintenance/runJobs.php && php extensions/SemanticMediaWiki/maintenance/rebuildData.php"
+runMWUpdatePHP
+runSMWRebuildData

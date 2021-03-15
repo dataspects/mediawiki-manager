@@ -9,7 +9,22 @@ This repository represents the development workbench for [MWStake MediaWiki Mana
 
 ## Features
 
-### Install System Instance
+### Implementation/abstraction levels
+
+Ultimately, MWM will provide 3 implementation levels with regards to the features it provides:
+
+#### Bash CLI
+
+The bash cli can be extracted and used independently as a standalone cli:
+
+1. `user@server:~/mediawiki-manager$ mkdir ../standalonecli`
+2. `user@server:~/mediawiki-manager$ cp -r cli ../standalonecli/`
+2. `user@server:~/mediawiki-manager$ cp -r envs ../standalonecli/`
+#### Go REST API
+
+#### React/Material-UI UI
+
+### Feature: Install System Instance
 
 #### [Abstraction Layer ALcli](https://mwstake.org/mwstake/wiki/MWStake_MediaWiki_Manager#Abstraction_Layers)
 
@@ -23,7 +38,7 @@ TBD
 #### [Abstraction Layer ALui](https://mwstake.org/mwstake/wiki/MWStake_MediaWiki_Manager#Abstraction_Layers)
 TBD
 
-### Operate System Instance
+### Feature: Operate System Instance
 
 #### [Abstraction Layer ALcli](https://mwstake.org/mwstake/wiki/MWStake_MediaWiki_Manager#Abstraction_Layers)
 
@@ -37,7 +52,7 @@ TBD
 TBD
 #### [Abstraction Layer ALui](https://mwstake.org/mwstake/wiki/MWStake_MediaWiki_Manager#Abstraction_Layers)
 TBD
-### System Instance Snapshots
+### Feature: System Instance Snapshots
 
 #### [Abstraction Layer ALcli](https://mwstake.org/mwstake/wiki/MWStake_MediaWiki_Manager#Abstraction_Layers)
 
@@ -48,6 +63,14 @@ TBD
 TBD
 #### [Abstraction Layer ALui](https://mwstake.org/mwstake/wiki/MWStake_MediaWiki_Manager#Abstraction_Layers)
 TBD
+
+### Feature: Manage Content
+
+#### [Abstraction Layer ALcli](https://mwstake.org/mwstake/wiki/MWStake_MediaWiki_Manager#Abstraction_Layers)
+
+The following command asks for ontologies organized in accordance with the dataspects ontology repository structure, e.g. https://github.com/dataspects/dataspectsSystemCoreOntology, and injects all ontology pages into the wiki:
+
+`user@server:~/mediawiki-manager$ ./cli/manage-content/inject-ontology-WikiPageContents.sh`
 <!-- ### Extensions
 
 ...
@@ -65,28 +88,6 @@ TBD
 ### Check what has changed
 
 ![Check MW config diffs](images/check-mw-config-diffs.png)
-
-## Snapshooting (Backup/Restore)
-
-MediaWiki Canasta uses https://restic.net.
-
-The installer creates a restic repository at `~/mediawiki-manager/$RESTIC_REPOSITORY` protected by `$RESTIC_PASSWORD`.
-
-**TAKE snapshot**
-
-Currently this snapshoots `$MEDIAWIKI_ROOT` into `~/mediawiki-manager/$RESTIC_REPOSITORY`.
-
-`user@server:~/mediawiki-manager$ ./take-restic-snapshot.sh`
-
-**VIEW snapshots**
-
-`user@server:~/mediawiki-manager$ ./view-restic-snapshots.sh`
-
-**RESTORE snapshot**
-
-`user@server:~/mediawiki-manager$ ./restore-restic-snapshot.sh`
-
-Currently this restores the latest snapshot into `~/mediawiki-manager/$RESTIC_RESTORE_FOLDER`.
 
 ## MWM Factory
 

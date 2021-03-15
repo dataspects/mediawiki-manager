@@ -1,5 +1,7 @@
 #!/bin/bash
 
+source ./cli/lib/utils.sh
+
 ./cli/manage-system/stop.sh
 
 sudo rm -rf \

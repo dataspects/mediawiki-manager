@@ -47,6 +47,12 @@ runMWUpdatePHP () {
 }
 
 # Public MWMBashFunction
+runSMWRebuildData () {
+    sudo -S docker exec $APACHE_CONTAINER_NAME /bin/bash -c \
+        'cd w; php extensions/SemanticMediaWiki/maintenance/rebuildData.php'
+}
+
+# Public MWMBashFunction
 promptToContinue () {
     read -p "Continue? (y/n)" -n 1 -r
     echo ""
