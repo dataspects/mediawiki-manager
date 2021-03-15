@@ -1,6 +1,6 @@
 #!/bin/bash
 
 sudo restic \
-    --repo restic_data/ \
-    --password-file mediawiki_root/restic_password \
-        ls latest
+    --repo restic-backup-repository/ \
+    --password-file conf/restic/restic_password \
+        snapshots

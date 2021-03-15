@@ -7,26 +7,23 @@ This repository represents the development workbench for [MWStake MediaWiki Mana
 ![DSMWM screenshot](images/mwmscreenshot.png)
 ![DSMWM screenshot](images/mwstakeextensionstore.png)
 
-## Install
+## Features
+
+### Install System Instance
 
 1. `user@server:~$ git clone https://github.com/dataspects/mediawiki-manager.git`
 2. `user@server:~$ cd mediawiki-manager`
 3. Configure `~/mediawiki-manager/envs/my-new-system.env`
 4. `user@server:~/mediawiki-manager$ ./cli/install-system/install-system.sh`
 
-## View
-1. The wiki is now accessible on localhost
-2. Install lynx to view the wiki from the command line
+### Operate System Instance
 
-## Operate
+* `user@server:~/mediawiki-manager$ ./cli/manage-system/start.sh`
+* `user@server:~/mediawiki-manager$ ./cli/manage-system/stop.sh`
+* `user@server:~/mediawiki-manager$ ./cli/manage-system/restart.sh`
+* `user@server:~/mediawiki-manager$ ./cli/manage-system/start-SAFE-MODE.sh`
 
-*Note: MediaWiki Manager uses a Apache/PHP setup based on this [Dockerfile](https://github.com/dataspects/dataspectsSystemBuilder/blob/master/docker-images/mediawiki/Dockerfile).*
-
-`user@server:~/mediawiki-manager$ sudo docker-compose --env-file ./envs/my-new-system.env up -d`
-
-## Manage system
-
-See shell scripts under `mediawiki-manager/cli/manage-system`.
+### System Instance Snapshots
 
 <!-- ### Extensions
 

@@ -9,12 +9,14 @@ getPageData () {
     WIKITEXT=`cat "$1"`
 }
 
+# Public MWMBashFunction
 initializeSystemLog () {
     mkdir --parents logs
     rm ./logs/system.log
     touch ./logs/system.log
 }
 
+# Public MWMBashFunction
 writeToSystemLog () {
     # TODO: fix timestamp
     echo $(date "+%Y-%m-%d") $1>> ./logs/system.log
@@ -44,12 +46,7 @@ runMWUpdatePHP () {
         'cd w; php maintenance/update.php --quick'
 }
 
-# Private MWMBashFunction
-backupLocalSettingsPHP () {
-    cp mediawiki_root/w/LocalSettings.php mediawiki_root/w/LocalSettings.php.bak
-}
-
-# Private MWMBashFunction
+# Public MWMBashFunction
 promptToContinue () {
     read -p "Continue? (y/n)" -n 1 -r
     echo ""
@@ -57,4 +54,9 @@ promptToContinue () {
     then
         exit 1
     fi
+}
+
+# Private MWMBashFunction
+backupLocalSettingsPHP () {
+    cp mediawiki_root/w/LocalSettings.php mediawiki_root/w/LocalSettings.php.bak
 }

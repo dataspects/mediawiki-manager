@@ -4,7 +4,7 @@
 
 sudo rm -rf \
     mediawiki_root \
-    restic_data \
+    restic-backup-repository \
     mysql_data
 
 ./cli/install-system/install-system.sh

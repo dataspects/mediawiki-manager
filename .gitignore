@@ -1,7 +1,7 @@
 logs
 mediawiki_root
 mysql_data
-restic_data
+restic-backup-repository
 wikicj
 dataspectsSystemCoreOntology
 docker-compose.yml.bak

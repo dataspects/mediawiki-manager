@@ -1,5 +1,13 @@
 #!/bin/bash
 
+# MWM Feature
+#
+# The dataspects MediaWiki Docker images in itself provide a working MediaWiki System setup if
+# operated by the means of MWM.
+#
+# This means that here is an EPHEMERAL working MediaWiki System setup if the mediawiki service
+# in docker-compose.yml is deprived of all ./mediawiki_root/w/* volumes.
+
 source ./envs/my-new-system.env
 
 ./stop.sh

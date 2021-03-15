@@ -18,7 +18,7 @@ setPermissionsOnSystemInstanceRoot () {
         sudo chmod -R 770 $dir
     fi
 
-    dir=$MEDIAWIKI_ROOT/restic_data
+    dir=$MEDIAWIKI_ROOT/restic-backup-repository
     if [ -d $dir ]
     then
         sudo chown -R $SYSTEM_INSTANCE_ROOT_OWNER:www-data $dir

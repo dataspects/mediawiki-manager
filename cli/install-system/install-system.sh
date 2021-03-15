@@ -24,10 +24,8 @@ initializeSystemLog
 mkdir --parents $MEDIAWIKI_ROOT/w
 writeToSystemLog "Initialized: $MEDIAWIKI_ROOT"
 
-##########
-# DOCKER #
-##########
-
+### >>>
+# MWM Concept: initialize persistent mediawiki service volumes
 MWM_MEDIAWIKI_CONTAINER_ID=$(sudo docker run \
   --detach \
   dataspects/mediawiki:1.35.0-2103040820)
@@ -41,6 +39,8 @@ for vol in "${vols[@]}"
 do
   sudo docker cp $MWM_MEDIAWIKI_CONTAINER_ID:$vol $MEDIAWIKI_ROOT/w
 done
+# <<<
+
 sudo docker stop $MWM_MEDIAWIKI_CONTAINER_ID
 setPermissionsOnSystemInstanceRoot
 
@@ -106,5 +106,11 @@ source ./cli/manage-content/inject-manage-page-from-mediawiki.org.sh
 echo "Initialize restic backup repository"
 sudo -S docker exec $APACHE_CONTAINER_NAME /bin/bash -c \
   "restic --password-file /var/www/restic_password --verbose init --repo /var/www/html/restic-repo"
+
+### >>>
+# MWM Concept: take initial snapshot and view snapshots
+source ./cli/system-snapshots/take-restic-snapshot.sh
+source ./cli/system-snapshots/view-restic-snapshots.sh
+# <<<
 
 setPermissionsOnSystemInstanceRoot

@@ -19,7 +19,7 @@ services:
       - ./logs:/var/www/logs
       # MediaWiki Manager >>> Restic
       - ./conf/restic/restic_password:/var/www/restic_password
-      - ./restic_data:/var/www/html/restic-repo
+      - ./restic-backup-repository:/var/www/html/restic-repo
       # MediaWiki Manager >>> Clone
       - ./cloneLocation:/var/www/cloneLocation
       # Apache
