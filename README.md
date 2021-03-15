@@ -67,7 +67,8 @@ Ultimately, MWM will provide 3 implementation levels with regards to the feature
 ### Containerization: Docker
 
 1. The [mediawiki docker image](https://hub.docker.com/r/dataspects/mediawiki/tags?page=1&ordering=last_updated) contains a [full MediaWiki installation](https://github.com/dataspects/dataspectsSystemBuilder/blob/master/docker-images/mediawiki/Dockerfile).
-2. 
+2. [initialize-persistent-mediawiki-service-volumes.sh](https://github.com/dataspects/mediawiki-manager/blob/main/cli/install-system/initialize-persistent-mediawiki-service-volumes.sh) will copy the 5 persistence-relevant files/directories out to the host so they can be volumed in when starting the mediawiki container.
+3. This shall allow for [start-SAFE-MODE.sh](https://github.com/dataspects/mediawiki-manager/blob/main/cli/manage-system/start-SAFE-MODE.sh).
 ### CLI: Bash
 
 The bash cli can be extracted and used independently as a standalone cli. The following command will place a standalone cli next to mediawiki-manager. Please note that not all cli functionality is available.

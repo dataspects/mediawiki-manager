@@ -10,4 +10,4 @@ source ./envs/my-new-system.env
 ./cli/manage-system/stop.sh
 ./cli/manage-system/start.sh
 
-source ./cli/lib/waitForMariaDB.sh
+runMWUpdatePHP

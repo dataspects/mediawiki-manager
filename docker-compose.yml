@@ -14,6 +14,7 @@ services:
       - ./mediawiki_root/w/extensions:/var/www/html/w/extensions
       - ./mediawiki_root/w/skins:/var/www/html/w/skins
       - ./mediawiki_root/w/vendor:/var/www/html/w/vendor
+      - ./mediawiki_root/w/composer.json:/var/www/html/w/composer.json
       - ./mediawiki_root/w/images:/var/www/html/w/images
       # MediaWiki Manager
       - ./logs:/var/www/logs

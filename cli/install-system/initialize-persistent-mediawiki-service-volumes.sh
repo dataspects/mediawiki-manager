@@ -8,6 +8,7 @@ declare -a vols=(
   "var/www/html/w/extensions"
   "var/www/html/w/skins"
   "var/www/html/w/vendor"
+  "var/www/html/w/composer.json"
 )
 for vol in "${vols[@]}"
 do
