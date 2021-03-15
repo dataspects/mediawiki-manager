@@ -11,20 +11,43 @@ This repository represents the development workbench for [MWStake MediaWiki Mana
 
 ### Install System Instance
 
+#### [Abstraction Layer ALcli](https://mwstake.org/mwstake/wiki/MWStake_MediaWiki_Manager#Abstraction_Layers)
+
 1. `user@server:~$ git clone https://github.com/dataspects/mediawiki-manager.git`
 2. `user@server:~$ cd mediawiki-manager`
 3. Configure `~/mediawiki-manager/envs/my-new-system.env`
 4. `user@server:~/mediawiki-manager$ ./cli/install-system/install-system.sh`
 
+#### [Abstraction Layer ALapi](https://mwstake.org/mwstake/wiki/MWStake_MediaWiki_Manager#Abstraction_Layers)
+TBD
+#### [Abstraction Layer ALui](https://mwstake.org/mwstake/wiki/MWStake_MediaWiki_Manager#Abstraction_Layers)
+TBD
+
 ### Operate System Instance
 
+#### [Abstraction Layer ALcli](https://mwstake.org/mwstake/wiki/MWStake_MediaWiki_Manager#Abstraction_Layers)
+
+* `user@server:~/mediawiki-manager$ ./cli/view-logs.sh`
 * `user@server:~/mediawiki-manager$ ./cli/manage-system/start.sh`
 * `user@server:~/mediawiki-manager$ ./cli/manage-system/stop.sh`
 * `user@server:~/mediawiki-manager$ ./cli/manage-system/restart.sh`
 * `user@server:~/mediawiki-manager$ ./cli/manage-system/start-SAFE-MODE.sh`
 
+#### [Abstraction Layer ALapi](https://mwstake.org/mwstake/wiki/MWStake_MediaWiki_Manager#Abstraction_Layers)
+TBD
+#### [Abstraction Layer ALui](https://mwstake.org/mwstake/wiki/MWStake_MediaWiki_Manager#Abstraction_Layers)
+TBD
 ### System Instance Snapshots
 
+#### [Abstraction Layer ALcli](https://mwstake.org/mwstake/wiki/MWStake_MediaWiki_Manager#Abstraction_Layers)
+
+* `user@server:~/mediawiki-manager$ ./cli/system-snapshots/take-restic-snapshot.sh`
+* `user@server:~/mediawiki-manager$ ./cli/system-snapshots/view-restic-snapshots.sh`
+
+#### [Abstraction Layer ALapi](https://mwstake.org/mwstake/wiki/MWStake_MediaWiki_Manager#Abstraction_Layers)
+TBD
+#### [Abstraction Layer ALui](https://mwstake.org/mwstake/wiki/MWStake_MediaWiki_Manager#Abstraction_Layers)
+TBD
 <!-- ### Extensions
 
 ...
