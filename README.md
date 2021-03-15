@@ -15,15 +15,18 @@ Ultimately, MWM will provide 3 implementation levels with regards to the feature
 
 #### Bash CLI
 
-The bash cli can be extracted and used independently as a standalone cli:
+The bash cli can be extracted and used independently as a standalone cli. The following command will place a standalone cli next to mediawiki-manager. Please note that not all cli functionality is available.
 
-1. `user@server:~/mediawiki-manager$ mkdir ../standalonecli`
-2. `user@server:~/mediawiki-manager$ cp -r cli ../standalonecli/`
-2. `user@server:~/mediawiki-manager$ cp -r envs ../standalonecli/`
+`user@server:~/mediawiki-manager$ ./extract-standalone-cli.sh`
+
+The use it like this:
+
+`user@server:~/standalonecli$ ./cli/manage-content/inject-ontology-WikiPageContents.sh` (see below "Feature: Manage Content" for more information on this command)
+
 #### Go REST API
-
+TBD, partly implemented at https://github.com/dataspects/mwmapi
 #### React/Material-UI UI
-
+TBD, partly implemented at https://github.com/dataspects/mwmui
 ### Feature: Install System Instance
 
 #### [Abstraction Layer ALcli](https://mwstake.org/mwstake/wiki/MWStake_MediaWiki_Manager#Abstraction_Layers)
