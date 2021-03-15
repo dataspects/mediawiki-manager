@@ -13,19 +13,19 @@ This repository represents the development workbench for [MWStake MediaWiki Mana
 
 Ultimately, MWM will provide 3 implementation levels with regards to the features it provides:
 
-#### Bash CLI
+#### CLI: Bash
 
 The bash cli can be extracted and used independently as a standalone cli. The following command will place a standalone cli next to mediawiki-manager. Please note that not all cli functionality is available.
 
 `user@server:~/mediawiki-manager$ ./extract-standalone-cli.sh`
 
-The use it like this:
+Then use it like this:
 
 `user@server:~/standalonecli$ ./cli/manage-content/inject-ontology-WikiPageContents.sh` (see below "Feature: Manage Content" for more information on this command)
 
-#### Go REST API
+#### API: Go REST
 TBD, partly implemented at https://github.com/dataspects/mwmapi
-#### React/Material-UI UI
+#### UI: React/Material-UI
 TBD, partly implemented at https://github.com/dataspects/mwmui
 ### Feature: Install System Instance
 
