@@ -8,7 +8,7 @@ index () {
     ./dsrepository-cli \
         --key $MWM_KEY \
         --id $MWM_ID \
-        --dir /home/lex/mediawiki-manager/ \
+        --dir `pwd` \
         --single-file $fullFilePath \
         --url $DATASPECTS_API_URL
 }
@@ -39,7 +39,7 @@ inotifywait \
     . \
     | while read FILE
     do
-        # FIXME: handle double reporting
+        # Some applications report a single event more than once.
         if [ "$lastFile" != "$FILE" ]
         then
             lastFile=$FILE
