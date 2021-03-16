@@ -1,5 +1,6 @@
 #!/bin/bash
 
+# CURL utils
 OPTION_INSECURE=--insecure
 cookie_jar="wikicj"
 folder="/tmp"

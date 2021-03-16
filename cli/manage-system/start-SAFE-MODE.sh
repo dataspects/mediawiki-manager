@@ -1,6 +1,6 @@
 #!/bin/bash
 
-# MWM Feature
+# MWM Feature:
 #
 # The dataspects MediaWiki Docker images in itself provide a working MediaWiki System setup if
 # operated by the means of MWM.

@@ -1,5 +1,7 @@
 #!/bin/bash
 
+# This script is used in the context of https://mwstake.org/mwstake/wiki/MWStake_MediaWiki_Manager#ALcontainerization:_Docker
+
 MWM_MEDIAWIKI_CONTAINER_ID=$(sudo docker run \
   --detach \
   dataspects/mediawiki:1.35.0-2103040820)

@@ -1,6 +1,6 @@
 #!/bin/bash
 
-# FIXME: multiple systems
+# FIXME: handle multiple system setups
 source ./envs/my-new-system.env
 
 ##################

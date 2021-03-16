@@ -1,6 +1,10 @@
 #!/bin/bash
 
+# How to handle this component?
+
 source ./_secrets.sh
+
+PWD=`pwd`
 
 index () {
     fullFilePath=$(cd "$(dirname "$1")"; pwd -P)/$(basename "$1")
@@ -8,7 +12,7 @@ index () {
     ./dsrepository-cli \
         --key $MWM_KEY \
         --id $MWM_ID \
-        --dir `pwd` \
+        --dir $PWD \
         --single-file $fullFilePath \
         --url $DATASPECTS_API_URL
 }
@@ -23,6 +27,7 @@ EXCLUDE=(
     'wikicj'
     'docker-compose.yml.bak'
     '_secrets.sh'
+    'repository-cli'
 )
 
 EXL=$(IFS='|' ; echo "${EXCLUDE[*]}")

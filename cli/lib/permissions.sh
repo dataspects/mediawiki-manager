@@ -1,6 +1,8 @@
 #!/bin/bash
 
-
+# TODO:
+#
+#   1. Reconsider entire permissions structure
 
 setPermissionsOnSystemInstanceRoot () {
 
