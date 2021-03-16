@@ -3,12 +3,13 @@
 source ./_secrets.sh
 
 index () {
-    echo "Indexing $1..."
+    fullFilePath=$(cd "$(dirname "$1")"; pwd -P)/$(basename "$1")
+    echo "Indexing $fullFilePath..."
     ./dsrepository-cli \
         --key $MWM_KEY \
         --id $MWM_ID \
         --dir /home/lex/mediawiki-manager/ \
-        --regex "$1$" \
+        --single-file $fullFilePath \
         --url $DATASPECTS_API_URL
 }
 
