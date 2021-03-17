@@ -73,6 +73,11 @@ spec:
         # Apache
         - mountPath: /etc/apache2/sites-available
           name: apache_sites_available
+        # Restic
+        - mountPath: /var/www/restic_password
+          name: restic_password
+        - mountPath: /var/www/html/restic-repo
+          name: restic-backup-repository
       env_file:
         - envs/my-new-system.env
       ports:

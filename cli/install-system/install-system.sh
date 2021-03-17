@@ -42,8 +42,6 @@ echo "Start pod..."
 ./cli/manage-system/start.sh
 writeToSystemLog "Started: pod"
 
-promptToContinue
-
 #############
 # MEDIAWIKI #
 #############

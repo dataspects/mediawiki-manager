@@ -2,6 +2,7 @@
 
 source ./envs/my-new-system.env
 
+# REFACTOR!
 # echo "Ensure MWMSafeMode is turned off..."
 # dockerDirectives=(
 #     "- \.\/mediawiki_root\/w\/LocalSettings\.php:\/var\/www\/html\/w\/LocalSettings\.php"
@@ -17,6 +18,6 @@ source ./envs/my-new-system.env
 #     sed -E "s/#{1,}${dockerDirectives[$dd]}/${dockerDirectives[$dd]}/g" docker-compose.yml.bak > docker-compose.yml
 # done
 
-# sudo docker-compose --env-file ./envs/my-new-system.env up -d
 podman pod start mwm
+
 source ./cli/lib/waitForMariaDB.sh
