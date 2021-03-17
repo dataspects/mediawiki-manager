@@ -14,8 +14,8 @@ fi
 
 source ./cli/lib/utils.sh
 
-WIKI=https://$SYSTEM_DOMAIN_NAME/w
-WIKIAPI=https://$SYSTEM_DOMAIN_NAME/w/api.php
+WIKI=https://$SYSTEM_DOMAIN_NAME:4443/w
+WIKIAPI=https://$SYSTEM_DOMAIN_NAME:4443/w/api.php
 
 CR=$(curl -S \
     $OPTION_INSECURE \

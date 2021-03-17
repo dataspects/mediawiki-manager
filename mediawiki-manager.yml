@@ -76,9 +76,8 @@ spec:
       env_file:
         - envs/my-new-system.env
       ports:
-        - port: 443
-          targetPort: 443
-          nodePort: 443
+        - containerPort: 443
+          hostPort: 4443
     - image: docker.io/library/mariadb:10.5.5
       name: mariadb
       env:

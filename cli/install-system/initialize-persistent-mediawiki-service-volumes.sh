@@ -19,4 +19,8 @@ do
   podman cp $MWM_MEDIAWIKI_CONTAINER_ID:$vol $MEDIAWIKI_ROOT/w
 done
 podman stop $MWM_MEDIAWIKI_CONTAINER_ID
+
+# FIXME
+sudo chmod -R 777 $MEDIAWIKI_ROOT/w
+
 echo "Initialized persistent mediawiki service volumes"

@@ -29,7 +29,9 @@ writeToSystemLog "Initialized: $MEDIAWIKI_ROOT"
 source ./cli/install-system/initialize-persistent-mediawiki-service-volumes.sh
 # <<<
 
-setPermissionsOnSystemInstanceRoot
+podman play kube mediawiki-manager.yml
+
+# setPermissionsOnSystemInstanceRoot
 
 ##################
 # DOCKER COMPOSE #
@@ -40,14 +42,14 @@ echo "Start pod..."
 ./cli/manage-system/start.sh
 writeToSystemLog "Started: pod"
 
-
+promptToContinue
 
 #############
 # MEDIAWIKI #
 #############
 
 echo "Set domain name..."
-addToLocalSettings "\$wgServer = 'https://$SYSTEM_DOMAIN_NAME';"
+addToLocalSettings "\$wgServer = 'https://$SYSTEM_DOMAIN_NAME:4443';"
 
 echo "Configure database access..."
 addToLocalSettings "\$wgDBpassword = '$WG_DB_PASSWORD';"
@@ -55,7 +57,7 @@ addToLocalSettings "\$wgDBserver = '$MYSQL_HOST';"
 
 removeFromLocalSettings "/\$wgSiteNotice = '================ MWM Safe Mode ================';/d"
 
-setPermissionsOnSystemInstanceRoot
+# setPermissionsOnSystemInstanceRoot
 
 source ./cli/lib/waitForMariaDB.sh
 
@@ -96,4 +98,4 @@ source ./cli/system-snapshots/take-restic-snapshot.sh
 source ./cli/system-snapshots/view-restic-snapshots.sh
 # <<<
 
-setPermissionsOnSystemInstanceRoot
+# setPermissionsOnSystemInstanceRoot
