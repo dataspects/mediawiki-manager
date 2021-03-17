@@ -9,7 +9,7 @@ This repository represents the development workbench for [MWStake MediaWiki Mana
 
 ## System Requirements
 
-At the moment MWM is only being tested on Ubuntu 20.04 running docker-compose.
+At the moment MWM is only being tested on Ubuntu 20.04 running [Podman](https://podman.io/).
 
 ## Features
 ### Feature: Install System Instance
@@ -64,7 +64,7 @@ The following command asks for ontologies organized in accordance with the datas
 
 Ultimately, MWM will provide 3 implementation levels with regards to the features it provides:
 
-### Containerization: Docker
+### Containerization: Podman
 
 ### CLI: Bash
 
