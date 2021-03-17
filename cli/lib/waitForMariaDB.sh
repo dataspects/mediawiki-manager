@@ -7,8 +7,8 @@ counter=1
 
 echo "Waiting for MariaDB..."
 
-while ! sudo -S docker exec $APACHE_CONTAINER_NAME bash -c \
-  "mysql --protocol TCP -h $MYSQL_HOST -u root -p$MARIADB_ROOT_PASSWORD -e \"show databases;\"" > /dev/null 2>&1; do
+while ! podman exec $APACHE_CONTAINER_NAME bash -c \
+  "mysql -h $MYSQL_HOST -u root -p$MARIADB_ROOT_PASSWORD -e \"show databases;\"" > /dev/null 2>&1; do
     sleep 1
     counter=`expr $counter + 1`
     if [ $counter -gt $maxcounter ]; then

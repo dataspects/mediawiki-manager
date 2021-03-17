@@ -1,10 +1,9 @@
 logs
 mediawiki_root
-mysql_data
+mariadb_data
 restic-backup-repository
 wikicj
 dataspectsSystemCoreOntology
-docker-compose.yml.bak
 restic-backup-repository
 tmp
 _secrets.sh
