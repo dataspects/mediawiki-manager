@@ -13,5 +13,5 @@ for filename in WikiPageContents/*.wikitext; do
     source ./cli/manage-content/mediawiki-inject.sh
 done
 
-sudo -S docker exec $APACHE_CONTAINER_NAME bash -c \
-    "cd w && php maintenance/runJobs.php && php extensions/SemanticMediaWiki/maintenance/rebuildData.php"
+runMWUpdatePHP
+runSMWRebuildData

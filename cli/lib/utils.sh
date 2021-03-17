@@ -43,13 +43,13 @@ removeFromLocalSettings () {
 
 # Public MWMBashFunction
 runMWUpdatePHP () {
-    sudo -S docker exec $APACHE_CONTAINER_NAME /bin/bash -c \
+    podman exec $APACHE_CONTAINER_NAME /bin/bash -c \
         'cd w; php maintenance/update.php --quick'
 }
 
 # Public MWMBashFunction
 runSMWRebuildData () {
-    sudo -S docker exec $APACHE_CONTAINER_NAME /bin/bash -c \
+    podman exec $APACHE_CONTAINER_NAME /bin/bash -c \
         'cd w; php extensions/SemanticMediaWiki/maintenance/rebuildData.php'
 }
 

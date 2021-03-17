@@ -27,27 +27,29 @@ writeToSystemLog "Initialized: $MEDIAWIKI_ROOT"
 ### >>>
 # MWM Concept: initialize persistent mediawiki service volumes
 source ./cli/install-system/initialize-persistent-mediawiki-service-volumes.sh
-promptToContinue
 # <<<
 
-sudo docker stop $MWM_MEDIAWIKI_CONTAINER_ID
-setPermissionsOnSystemInstanceRoot
+podman play kube mediawiki-manager.yml
+
+# setPermissionsOnSystemInstanceRoot
 
 ##################
 # DOCKER COMPOSE #
 ##################
 
-echo "Run docker-compose..."
+echo "Start pod..."
 ./cli/manage-system/stop.sh
 ./cli/manage-system/start.sh
-writeToSystemLog "Ran docker-compose..."
+writeToSystemLog "Started: pod"
+
+promptToContinue
 
 #############
 # MEDIAWIKI #
 #############
 
 echo "Set domain name..."
-addToLocalSettings "\$wgServer = 'https://$SYSTEM_DOMAIN_NAME';"
+addToLocalSettings "\$wgServer = 'https://$SYSTEM_DOMAIN_NAME:4443';"
 
 echo "Configure database access..."
 addToLocalSettings "\$wgDBpassword = '$WG_DB_PASSWORD';"
@@ -55,16 +57,12 @@ addToLocalSettings "\$wgDBserver = '$MYSQL_HOST';"
 
 removeFromLocalSettings "/\$wgSiteNotice = '================ MWM Safe Mode ================';/d"
 
-
-
-setPermissionsOnSystemInstanceRoot
-
-
+# setPermissionsOnSystemInstanceRoot
 
 source ./cli/lib/waitForMariaDB.sh
 
 echo "Create database and user..."
-sudo -S docker exec $APACHE_CONTAINER_NAME bash -c \
+podman exec $APACHE_CONTAINER_NAME bash -c \
   "mysql -h $MYSQL_HOST -u root -p$MARIADB_ROOT_PASSWORD \
   -e \" CREATE DATABASE $DATABASE_NAME;
         CREATE USER '$MYSQL_USER'@'%' IDENTIFIED BY '$WG_DB_PASSWORD';
@@ -72,7 +70,7 @@ sudo -S docker exec $APACHE_CONTAINER_NAME bash -c \
         FLUSH PRIVILEGES;\""
 
 echo "Import database..."
-sudo -S docker exec $APACHE_CONTAINER_NAME /bin/bash -c \
+podman exec $APACHE_CONTAINER_NAME /bin/bash -c \
   "mysql -h $MYSQL_HOST -u $MYSQL_USER -p$WG_DB_PASSWORD \
   mediawiki < /var/www/html/w/db.sql"
 
@@ -81,8 +79,6 @@ runMWUpdatePHP
 ###############################
 # Done installing core system #
 ###############################
-
-
 
 echo "Inject contents..."
 source ./cli/manage-content/inject-local-WikiPageContents.sh
@@ -93,7 +89,7 @@ source ./cli/manage-content/inject-manage-page-from-mediawiki.org.sh
 ##########
 
 echo "Initialize restic backup repository"
-sudo -S docker exec $APACHE_CONTAINER_NAME /bin/bash -c \
+podman exec $APACHE_CONTAINER_NAME /bin/bash -c \
   "restic --password-file /var/www/restic_password --verbose init --repo /var/www/html/restic-repo"
 
 ### >>>
@@ -102,4 +98,4 @@ source ./cli/system-snapshots/take-restic-snapshot.sh
 source ./cli/system-snapshots/view-restic-snapshots.sh
 # <<<
 
-setPermissionsOnSystemInstanceRoot
+# setPermissionsOnSystemInstanceRoot

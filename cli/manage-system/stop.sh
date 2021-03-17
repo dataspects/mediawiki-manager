@@ -1,3 +1,4 @@
 #!/bin/bash
-echo $PWD
-sudo docker-compose --env-file ./envs/my-new-system.env down
+
+# sudo docker-compose --env-file ./envs/my-new-system.env down
+podman pod stop mwm
