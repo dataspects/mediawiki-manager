@@ -31,7 +31,6 @@ getExtensionData () {
     do
         if [[ "$name" == "$1" ]]
         then
-            i=$i
             extensionData=`echo $catalogue | jq .[$i]`
         fi
         i=$((i+1))
