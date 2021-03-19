@@ -52,6 +52,21 @@ TBD
 #### [Abstraction Layer ALui](https://mwstake.org/mwstake/wiki/MWStake_MediaWiki_Manager#Abstraction_Layers)
 TBD
 
+### Feature: Extension Management
+
+With regard to the idea of a [MediaWiki Stakeholders Group Certified Extensions Service](https://mwstake.org/mwstake/wiki/MWStake_MediaWiki_Manager#MediaWiki_Stakeholders_Group_Certified_Extensions_Service), all extension management abstraction layers refer back to a [catalogue](https://raw.githubusercontent.com/dataspects/mediawiki-manager/main/catalogues/extensions.json) from which extensions can/shall/must be chosen.
+
+#### [Abstraction Layer ALcli](https://mwstake.org/mwstake/wiki/MWStake_MediaWiki_Manager#Abstraction_Layers)
+
+* `user@server:~/mediawiki-manager$ ./cli/manage-extensions/show-extension-catalogue.sh`
+* `user@server:~/mediawiki-manager$ ./cli/manage-extensions/enable.sh`
+* `user@server:~/mediawiki-manager$ ./cli/manage-extensions/disable.sh`
+
+#### [Abstraction Layer ALapi](https://mwstake.org/mwstake/wiki/MWStake_MediaWiki_Manager#Abstraction_Layers)
+TBD
+#### [Abstraction Layer ALui](https://mwstake.org/mwstake/wiki/MWStake_MediaWiki_Manager#Abstraction_Layers)
+TBD
+
 ### Feature: Manage Content
 
 #### [Abstraction Layer ALcli](https://mwstake.org/mwstake/wiki/MWStake_MediaWiki_Manager#Abstraction_Layers)

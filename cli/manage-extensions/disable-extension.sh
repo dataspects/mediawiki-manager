@@ -8,16 +8,21 @@ source ./cli/lib/permissions.sh
 
 # https://cameronnokes.com/blog/working-with-json-in-bash-using-jq/
 
-getExtensionNames
-echo $extensionNamesString
+EXTNAME="PageForms"
+getExtensionData $EXTNAME
+# aspect=`echo $extensionData | jq '."installation-aspects"'`
+aspect=$extensionData
+name=`getExtensionDataByKey "name"`
+echo $name
+requires=`getExtensionDataByKey "installation-aspects"`
+echo "$requires"
 
-getExtensionData "PageForms"
-echo $extensionData | jq '.categories'
 
 exit
 
 
-getExtensionName
+
+
 
 # If applicable, uncomment wfLoadExtension
 backupLocalSettingsPHP

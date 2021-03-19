@@ -63,6 +63,7 @@ promptToContinue () {
     fi
 }
 
+
 # Private MWMBashFunction
 backupLocalSettingsPHP () {
     cp mediawiki_root/w/LocalSettings.php mediawiki_root/w/LocalSettings.php.bak

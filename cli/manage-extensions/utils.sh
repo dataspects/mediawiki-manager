@@ -1,5 +1,9 @@
 #!/bin/bash
 
+CATALOGUE_URL=https://raw.githubusercontent.com/dataspects/mediawiki-manager/main/catalogues/extensions.json
+
+# https://cameronnokes.com/blog/working-with-json-in-bash-using-jq/
+
 getExtensionName () {
     # Check if the EXTENSION_NAME is of format abc/xyz
     if [[ $EXTENSION_NAME =~ \/ ]]; then
@@ -18,9 +22,23 @@ backupLocalSettingsPHP () {
     cp mediawiki_root/w/LocalSettings.php mediawiki_root/w/LocalSettings.php.bak
 }
 
+getExtensionJSON () {
+    catalogueJSON=$(curl -S \
+        $OPTION_INSECURE \
+        --silent \
+        --retry 2 \
+        --retry-delay 5\
+        --user-agent "Curl Shell Script" \
+        --keepalive-time 60 \
+        --header "Accept-Language: en-us" \
+        --header "Connection: keep-alive" \
+        --compressed \
+        --request "GET" "${CATALOGUE_URL}")
+}
+
 getExtensionNames () {
-    catalogue=`cat catalogues/extensions.json`
-    extensionNamesString=`echo $catalogue | jq '.[]' | jq -r '.name'`
+    getExtensionJSON
+    extensionNamesString=`echo $catalogueJSON | jq '.[]' | jq -r '.name'`
 }
 
 getExtensionData () {
@@ -31,8 +49,19 @@ getExtensionData () {
     do
         if [[ "$name" == "$1" ]]
         then
-            extensionData=`echo $catalogue | jq .[$i]`
+            extensionData=`echo $catalogueJSON | jq .[$i]`
         fi
         i=$((i+1))
     done
+}
+
+getExtensionDataByKey () {
+    DATA=`echo $aspect | jq '."'$1'"'`
+    DATAKEYS=`echo $aspect | jq 'keys'`
+    if [ "$DATA" == "null" ]
+    then
+        echo "'$1' not found for '$EXTNAME' in $DATAKEYS"
+    else
+        echo "$DATA"
+    fi
 }
