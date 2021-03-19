@@ -56,7 +56,7 @@ getExtensionData () {
 }
 
 getExtensionDataByKey () {
-    DATA=`echo $aspect | jq '."'$1'"'`
+    DATA=`echo $2 | jq '."'$1'"'`
     DATAKEYS=`echo $aspect | jq 'keys'`
     if [ "$DATA" == "null" ]
     then

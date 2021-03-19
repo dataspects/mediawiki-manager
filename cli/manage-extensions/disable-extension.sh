@@ -10,12 +10,17 @@ source ./cli/lib/permissions.sh
 
 EXTNAME="PageForms"
 getExtensionData $EXTNAME
-# aspect=`echo $extensionData | jq '."installation-aspects"'`
-aspect=$extensionData
-name=`getExtensionDataByKey "name"`
-echo $name
-requires=`getExtensionDataByKey "installation-aspects"`
-echo "$requires"
+
+name=`getExtensionDataByKey "name" "$extensionData"`
+installationAspects=`getExtensionDataByKey "installation-aspects" "$extensionData"`
+requires=`getExtensionDataByKey "requires" "$installationAspects"`
+localSettings=`getExtensionDataByKey "localsettings" "$installationAspects"`
+
+echo $localSettings
+
+
+
+
 
 
 exit
@@ -25,7 +30,7 @@ exit
 
 
 # If applicable, uncomment wfLoadExtension
-backupLocalSettingsPHP
-sed -i "s/^wfLoadExtension( '$EXTNAME_CC' );/#wfLoadExtension( '$EXTNAME_CC' );/g" mediawiki_root/w/LocalSettings.php
+# backupLocalSettingsPHP
+# sed -i "s/^wfLoadExtension( '$EXTNAME_CC' );/#wfLoadExtension( '$EXTNAME_CC' );/g" mediawiki_root/w/LocalSettings.php
 
-runMWUpdatePHP
+# runMWUpdatePHP
