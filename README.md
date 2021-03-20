@@ -59,8 +59,8 @@ With regard to the idea of a [MediaWiki Stakeholders Group Certified Extensions 
 #### [Abstraction Layer ALcli](https://mwstake.org/mwstake/wiki/MWStake_MediaWiki_Manager#Abstraction_Layers)
 
 * `user@server:~/mediawiki-manager$ ./cli/manage-extensions/show-extension-catalogue.sh`
-* `user@server:~/mediawiki-manager$ ./cli/manage-extensions/enable.sh`
-* `user@server:~/mediawiki-manager$ ./cli/manage-extensions/disable.sh`
+* `user@server:~/mediawiki-manager$ ./cli/manage-extensions/enable.sh "PageForms"` (Example)
+* `user@server:~/mediawiki-manager$ ./cli/manage-extensions/disable-extension.sh "PageForms"` (Example)
 
 #### [Abstraction Layer ALapi](https://mwstake.org/mwstake/wiki/MWStake_MediaWiki_Manager#Abstraction_Layers)
 TBD

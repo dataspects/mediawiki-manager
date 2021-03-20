@@ -7,30 +7,23 @@ source ./cli/lib/utils.sh
 source ./cli/lib/permissions.sh
 
 # https://cameronnokes.com/blog/working-with-json-in-bash-using-jq/
+# https://edoras.sdsu.edu/doc/sed-oneliners.html
 
-EXTNAME="PageForms"
+EXTNAME=$1
+
+# Load data
 getExtensionData $EXTNAME
-
-name=`getExtensionDataByKey "name" "$extensionData"`
 installationAspects=`getExtensionDataByKey "installation-aspects" "$extensionData"`
-requires=`getExtensionDataByKey "requires" "$installationAspects"`
 localSettings=`getExtensionDataByKey "localsettings" "$installationAspects"`
 
-echo $localSettings
+# Backup
+backupfile=$MYLOCALSETTINGSFILE.bak.`date +"%Y-%m-%d_%H-%M-%S"`
+cp $MYLOCALSETTINGSFILE $backupfile
 
-
-
-
-
-
-exit
-
-
-
-
-
-# If applicable, uncomment wfLoadExtension
-# backupLocalSettingsPHP
-# sed -i "s/^wfLoadExtension( '$EXTNAME_CC' );/#wfLoadExtension( '$EXTNAME_CC' );/g" mediawiki_root/w/LocalSettings.php
+# Sed
+echo $localSettings | jq -r '.[]' | while read lsLine
+do
+    sed -i "s/$lsLine/#$lsLine/g" $MYLOCALSETTINGSFILE
+done
 
 # runMWUpdatePHP
