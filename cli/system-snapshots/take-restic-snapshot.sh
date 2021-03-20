@@ -16,10 +16,9 @@ printf "MWM snapshot: mysqldump mediawiki completed.\n"
 ######
 # STEP 2: Run restic backup
 printf "MWM snapshot: Trying to run restic backup...\n"
-podman run \
-  --env-file ./envs/my-new-system.env \
-  --volume $MEDIAWIKI_ROOT/w:/data \
-  --volume $SYSTEM_INSTANCE_ROOT/$RESTIC_REPOSITORY:/$RESTIC_REPOSITORY \
-  restic/restic \
-  --verbose backup /data
+podman exec $APACHE_CONTAINER_NAME bash -c \
+  "restic \
+    --password-file /var/www/restic_password \
+    --repo /var/www/html/restic-repo \
+      backup /var/www/html/w"
 printf "MWM snapshot: Completed running restic backup.\n"

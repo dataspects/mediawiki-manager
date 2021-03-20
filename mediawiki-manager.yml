@@ -37,9 +37,13 @@ spec:
       hostPath:
         path: /home/lex/mediawiki-manager/conf/apache/sites-available
     # MWM
-    - name: logs
+    - name: mwmCLI
+      hostPath:
+        path: /home/lex/mediawiki-manager/cli
+    - name: mwmLogs
       hostPath:
         path: /home/lex/mediawiki-manager/logs
+    # Restic
     - name: restic_password
       hostPath:
         path: /home/lex/mediawiki-manager/conf/restic/restic_password
@@ -70,6 +74,11 @@ spec:
           name: mediawiki_root_w_composerJSON
         - mountPath: /var/www/html/w/images
           name: mediawiki_root_w_images
+        # MWM
+        - mountPath: /var/www/html/logs
+          name: mwmLogs
+        - mountPath: /var/www/html/cli
+          name: mwmCLI
         # Apache
         - mountPath: /etc/apache2/sites-available
           name: apache_sites_available
@@ -78,6 +87,8 @@ spec:
           name: restic_password
         - mountPath: /var/www/html/restic-repo
           name: restic-backup-repository
+        - mountPath: /var/www/html/clone-location
+          name: cloneLocation
       env_file:
         - envs/my-new-system.env
       ports:
