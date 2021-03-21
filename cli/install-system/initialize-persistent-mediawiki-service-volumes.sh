@@ -6,7 +6,7 @@ MWM_MEDIAWIKI_CONTAINER_ID=$(podman run \
   --restart=no \
   --detach \
   --rm=true \
-  dataspects/mediawiki:1.35.0-2103040820)
+  dataspects/mediawiki:1.35.0-2103211629)
 declare -a vols=(
   "/var/www/html/w/LocalSettings.php"
   "/var/www/html/w/extensions"

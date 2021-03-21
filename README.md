@@ -12,6 +12,11 @@ This repository represents the development workbench for [MWStake MediaWiki Mana
 At the moment MWM is only being tested on Ubuntu 20.04 running [Podman](https://podman.io/).
 
 ## Features
+
+General features across abstraction layers:
+
+1. LocalSettings.php backups in `w/LocalSettingsPHPBACKUP`
+
 ### Feature: Install System Instance
 
 #### [Abstraction Layer ALcli](https://mwstake.org/mwstake/wiki/MWStake_MediaWiki_Manager#Abstraction_Layers)
@@ -54,7 +59,10 @@ TBD
 
 ### Feature: Extension Management
 
-With regard to the idea of a [MediaWiki Stakeholders Group Certified Extensions Service](https://mwstake.org/mwstake/wiki/MWStake_MediaWiki_Manager#MediaWiki_Stakeholders_Group_Certified_Extensions_Service), all extension management abstraction layers refer back to a [catalogue](https://raw.githubusercontent.com/dataspects/mediawiki-manager/main/catalogues/extensions.json) from which extensions can/shall/must be chosen.
+Common features across abstraction layers:
+
+1. With regard to the idea of a [MediaWiki Stakeholders Group Certified Extensions Service](https://mwstake.org/mwstake/wiki/MWStake_MediaWiki_Manager#MediaWiki_Stakeholders_Group_Certified_Extensions_Service), available extensions are organized in a [catalog](https://raw.githubusercontent.com/dataspects/mediawiki-manager/main/catalogues/extensions.json) from which extensions can/shall/must be chosen.
+2. Handle composer-based, repository-based and enable-only extensions
 
 #### [Abstraction Layer ALcli](https://mwstake.org/mwstake/wiki/MWStake_MediaWiki_Manager#Abstraction_Layers)
 

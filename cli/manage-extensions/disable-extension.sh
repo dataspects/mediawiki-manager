@@ -12,7 +12,7 @@ source ./cli/lib/permissions.sh
 
 EXTNAME=$1
 
-MYLOCALSETTINGSFILE=/var/www/html/w/LocalSettings.php
+
 
 ###
 # Collect installation aspects
@@ -37,6 +37,7 @@ fi
 
 ###
 # Run installation aspects
+backupLocalSettingsPHP
 if [ $cInstrFound ]
 then
     echo "Running composer..."
@@ -51,12 +52,12 @@ if [ $lsInstrFound ]
 then
     echo "Running localsettings"
     # Backup
-    backupfile=$MYLOCALSETTINGSFILE.bak.`date +"%Y-%m-%d_%H-%M-%S"`
+    backupfile=$CONTAINERINTERNALLSFILE.bak.`date +"%Y-%m-%d_%H-%M-%S"`
     # Sed
     echo $localSettings | jq -r '.[]' | while read lsLine
     do
-        cp $MYLOCALSETTINGSFILE $backupfile
-        sed "s/$lsLine/#$lsLine/g" $backupfile > $MYLOCALSETTINGSFILE
+        cp $CONTAINERINTERNALLSFILE $backupfile
+        sed "s/$lsLine/#$lsLine/g" $backupfile > $CONTAINERINTERNALLSFILE
     done
 fi
 ###

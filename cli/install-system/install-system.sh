@@ -24,6 +24,8 @@ initializeSystemLog
 mkdir --parents $MEDIAWIKI_ROOT/w
 writeToSystemLog "Initialized: $MEDIAWIKI_ROOT"
 
+mkdir --parents $MEDIAWIKI_ROOT/w/LocalSettingsPHPBACKUP
+
 ### >>>
 # MWM Concept: initialize persistent mediawiki service volumes
 source ./cli/install-system/initialize-persistent-mediawiki-service-volumes.sh
@@ -33,9 +35,9 @@ podman play kube mediawiki-manager.yml
 
 # setPermissionsOnSystemInstanceRoot
 
-##################
-# DOCKER COMPOSE #
-##################
+##############
+# RUN PODMAN #
+##############
 
 echo "Start pod..."
 ./cli/manage-system/stop.sh
@@ -47,13 +49,17 @@ writeToSystemLog "Started: pod"
 #############
 
 echo "Set domain name..."
-addToLocalSettings "\$wgServer = 'https://$SYSTEM_DOMAIN_NAME:4443';"
+podman exec $APACHE_CONTAINER_NAME /bin/bash -c \
+  "source ./cli/lib/utils.sh && addToLocalSettings '\$wgServer = \"https://$SYSTEM_DOMAIN_NAME:4443\";'"
 
 echo "Configure database access..."
-addToLocalSettings "\$wgDBpassword = '$WG_DB_PASSWORD';"
-addToLocalSettings "\$wgDBserver = '$MYSQL_HOST';"
+podman exec $APACHE_CONTAINER_NAME /bin/bash -c \
+  "source ./cli/lib/utils.sh && addToLocalSettings '\$wgDBpassword = \"$WG_DB_PASSWORD\";'"
+podman exec $APACHE_CONTAINER_NAME /bin/bash -c \
+  "source ./cli/lib/utils.sh && addToLocalSettings '\$wgDBserver = \"$MYSQL_HOST\";'"
 
-removeFromLocalSettings "/\$wgSiteNotice = '================ MWM Safe Mode ================';/d"
+podman exec $APACHE_CONTAINER_NAME /bin/bash -c \
+  "source ./cli/lib/utils.sh && removeFromLocalSettings \"/\$wgSiteNotice = ['|\\\"]================ MWM Safe Mode ================['|\\\"];/d\""
 
 # setPermissionsOnSystemInstanceRoot
 

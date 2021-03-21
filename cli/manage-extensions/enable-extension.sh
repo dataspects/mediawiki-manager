@@ -10,7 +10,6 @@ source ./cli/lib/permissions.sh
 # https://edoras.sdsu.edu/doc/sed-oneliners.html
 
 EXTNAME=$1
-MYLOCALSETTINGSFILE=/var/www/html/w/LocalSettings.php
 
 ###
 # Collect installation aspects
@@ -35,6 +34,7 @@ fi
 
 ###
 # Run installation aspects
+backupLocalSettingsPHP
 if [ $cInstrFound ]
 then
     echo "Running composer..."
@@ -50,17 +50,17 @@ if [ $lsInstrFound ]
 then
     echo "Running localsettings"
     # Backup
-    backupfile=$MYLOCALSETTINGSFILE.bak.`date +"%Y-%m-%d_%H-%M-%S"`
+    backupfile=$CONTAINERINTERNALLSFILE.bak.`date +"%Y-%m-%d_%H-%M-%S"`
     # Sed
     echo $localSettings | jq -r '.[]' | while read lsLine
     do
-        cp $MYLOCALSETTINGSFILE $backupfile
-        grep "^#$lsLine$" $MYLOCALSETTINGSFILE
+        cp $CONTAINERINTERNALLSFILE $backupfile
+        grep "^#$lsLine$" $CONTAINERINTERNALLSFILE
         if [[ $? == 0 ]]
         then
-            sed "s/#\{1,\}$lsLine/$lsLine/g" $backupfile > $MYLOCALSETTINGSFILE
+            sed "s/#\{1,\}$lsLine/$lsLine/g" $backupfile > $CONTAINERINTERNALLSFILE
         else
-            echo $lsLine>> $MYLOCALSETTINGSFILE
+            addToLocalSettings "$lsLine"
         fi
     done
 fi

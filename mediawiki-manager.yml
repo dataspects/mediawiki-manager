@@ -17,6 +17,9 @@ spec:
     - name: mediawiki_root_w_LocalSettingsPHP
       hostPath:
         path: /home/lex/mediawiki-manager/mediawiki_root/w/LocalSettings.php
+    - name: mediawiki_root_w_LocalSettingsPHPBACKUP
+      hostPath:
+        path: /home/lex/mediawiki-manager/mediawiki_root/w/LocalSettingsPHPBACKUP
     - name: mediawiki_root_w_extensions
       hostPath:
         path: /home/lex/mediawiki-manager/mediawiki_root/w/extensions
@@ -58,12 +61,14 @@ spec:
       hostPath:
         path: /home/lex/mediawiki-manager/mariadb_data
   containers:
-    - image: docker.io/dataspects/mediawiki:1.35.0-2103211057
+    - image: docker.io/dataspects/mediawiki:1.35.0-2103211629
       name: mediawiki
       volumeMounts:
         # MediaWiki
         - mountPath: /var/www/html/w/LocalSettings.php
           name: mediawiki_root_w_LocalSettingsPHP
+        - mountPath: /var/www/html/w/LocalSettingsPHPBACKUP
+          name: mediawiki_root_w_LocalSettingsPHPBACKUP
         - mountPath: /var/www/html/w/extensions
           name: mediawiki_root_w_extensions
         - mountPath: /var/www/html/w/skins

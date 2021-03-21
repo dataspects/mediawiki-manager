@@ -4,10 +4,6 @@ CATALOGUE_URL=https://raw.githubusercontent.com/dataspects/mediawiki-manager/mai
 
 # https://cameronnokes.com/blog/working-with-json-in-bash-using-jq/
 
-backupLocalSettingsPHP () {
-    cp mediawiki_root/w/LocalSettings.php mediawiki_root/w/LocalSettings.php.bak
-}
-
 getExtensionJSON () {
     catalogueJSON=$(curl -S \
         $OPTION_INSECURE \

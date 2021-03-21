@@ -49,18 +49,17 @@ writeToSystemLog () {
 addToLocalSettings () {
     backupLocalSettingsPHP
     # Ensure new line at end of file
-    sed -e '$a\' mediawiki_root/w/LocalSettings.php.bak > mediawiki_root/w/LocalSettings.php
-    backupLocalSettingsPHP
+    sed -e '$a\' $CONTAINERINTERNALLSFILEBACKUP > $CONTAINERINTERNALLSFILE
     # Add line to end of file
-    echo $1>> mediawiki_root/w/LocalSettings.php
-    writeToSystemLog "Added to LocalSettings.php: $1"
+    echo $1>> $CONTAINERINTERNALLSFILE
+    # writeToSystemLog "Added to LocalSettings.php: $1"
 }
 
 # Public MWMBashFunction
 removeFromLocalSettings () {
     backupLocalSettingsPHP
-    sed "$1" mediawiki_root/w/LocalSettings.php.bak > mediawiki_root/w/LocalSettings.php
-    writeToSystemLog "Removed from LocalSettings.php: $1"
+    sed "$1" $CONTAINERINTERNALLSFILEBACKUP > $CONTAINERINTERNALLSFILE
+    # writeToSystemLog "Removed from LocalSettings.php: $1"
 }
 
 # Public MWMBashFunction
@@ -88,5 +87,9 @@ runSMWRebuildData () {
 
 # Private MWMBashFunction
 backupLocalSettingsPHP () {
-    cp mediawiki_root/w/LocalSettings.php mediawiki_root/w/LocalSettings.php.bak
+    sleep 1
+    date=`date +"%Y-%m-%d_%H-%M-%S"`
+    CONTAINERINTERNALLSFILE=/var/www/html/w/LocalSettings.php
+    CONTAINERINTERNALLSFILEBACKUP=/var/www/html/w/LocalSettingsPHPBACKUP/LocalSettings.php.bak.$date
+    cp $CONTAINERINTERNALLSFILE $CONTAINERINTERNALLSFILEBACKUP
 }
