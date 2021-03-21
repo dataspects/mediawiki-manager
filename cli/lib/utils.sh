@@ -1,5 +1,27 @@
 #!/bin/bash
 
+# Public MWMBashFunction
+promptToContinue () {
+    printf "\033[0m\n"
+    read -p "Continue? (y/n)" -n 1 -r
+    if [[ ! $REPLY =~ ^[Yy]$ ]]
+    then
+        exit 1
+    fi
+    printf "\n"
+}
+
+#######################
+# CHECK IF IN CONTAINER
+if [[ $runInContainerOnly == "true" ]] && [ "`ls /home`" != "" ]
+then
+    printf "INFO: \x1b[31mredirecting run command to \033[1mpodman exec mwm-mediawiki `dirname $0`/`basename $0` "$1""
+    promptToContinue
+    podman exec mwm-mediawiki /bin/bash -c "`dirname $0`/`basename $0` $1"
+    exit
+fi
+#######################
+
 # CURL utils
 OPTION_INSECURE=--insecure
 cookie_jar="wikicj"
@@ -43,25 +65,25 @@ removeFromLocalSettings () {
 
 # Public MWMBashFunction
 runMWUpdatePHP () {
-    podman exec $APACHE_CONTAINER_NAME /bin/bash -c \
-        'cd w; php maintenance/update.php --quick'
+    if [ "`ls /home`" != "" ]
+    then
+        podman exec $APACHE_CONTAINER_NAME /bin/bash -c "cd w; php maintenance/update.php --quick"
+    else
+        cd w; php maintenance/update.php --quick
+    fi
 }
 
 # Public MWMBashFunction
 runSMWRebuildData () {
-    podman exec $APACHE_CONTAINER_NAME /bin/bash -c \
-        'cd w; php extensions/SemanticMediaWiki/maintenance/rebuildData.php'
-}
-
-# Public MWMBashFunction
-promptToContinue () {
-    read -p "Continue? (y/n)" -n 1 -r
-    echo ""
-    if [[ ! $REPLY =~ ^[Yy]$ ]]
+    if [ "`ls /home`" != "" ]
     then
-        exit 1
+        podman exec $APACHE_CONTAINER_NAME /bin/bash -c "cd w; php extensions/SemanticMediaWiki/maintenance/rebuildData.php"
+    else
+        cd w; php extensions/SemanticMediaWiki/maintenance/rebuildData.php
     fi
 }
+
+
 
 
 # Private MWMBashFunction

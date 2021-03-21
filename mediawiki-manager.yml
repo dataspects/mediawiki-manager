@@ -58,7 +58,7 @@ spec:
       hostPath:
         path: /home/lex/mediawiki-manager/mariadb_data
   containers:
-    - image: docker.io/dataspects/mediawiki:1.35.0-2103040820
+    - image: docker.io/dataspects/mediawiki:1.35.0-2103211057
       name: mediawiki
       volumeMounts:
         # MediaWiki

@@ -60,7 +60,7 @@ removeFromLocalSettings "/\$wgSiteNotice = '================ MWM Safe Mode =====
 source ./cli/lib/waitForMariaDB.sh
 
 echo "Create database and user..."
-podman exec $APACHE_CONTAINER_NAME bash -c \
+podman exec $APACHE_CONTAINER_NAME /bin/bash -c \
   "mysql -h $MYSQL_HOST -u root -p$MARIADB_ROOT_PASSWORD \
   -e \" CREATE DATABASE $DATABASE_NAME;
         CREATE USER '$MYSQL_USER'@'%' IDENTIFIED BY '$WG_DB_PASSWORD';

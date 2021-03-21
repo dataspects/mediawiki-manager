@@ -1,6 +1,6 @@
 #!/bin/bash
 
-clear
+source ./cli/lib/utils.sh
 
 printf "Comparing mediawiki_root/w/extensions/ <<<>>> existing_version/extensions/\n\n"
 diff --brief \
