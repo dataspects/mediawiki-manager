@@ -4,7 +4,6 @@ mariadb_data
 restic-backup-repository
 wikicj
 dataspectsSystemCoreOntology
-restic-backup-repository
 tmp
 _secrets.sh
 dsrepository-cli

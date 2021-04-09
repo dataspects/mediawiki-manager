@@ -33,9 +33,10 @@ mkdir --parents $MEDIAWIKI_ROOT/w/LocalSettingsPHPBACKUP
 source ./cli/install-system/initialize-persistent-mediawiki-service-volumes.sh
 # <<<
 
+mkdir restic-backup-repository cloneLocation mariadb_data
 podman play kube mediawiki-manager.yml
 
-# setPermissionsOnSystemInstanceRoot
+setPermissionsOnSystemInstanceRoot
 
 ##############
 # RUN PODMAN #

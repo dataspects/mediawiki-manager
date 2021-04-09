@@ -16,50 +16,50 @@ spec:
     # MediaWiki
     - name: mediawiki_root_w_LocalSettingsPHP
       hostPath:
-        path: /home/lex/mediawiki-manager/mediawiki_root/w/LocalSettings.php
+        path: /home/dserver/mediawiki-manager/mediawiki_root/w/LocalSettings.php
     - name: mediawiki_root_w_LocalSettingsPHPBACKUP
       hostPath:
-        path: /home/lex/mediawiki-manager/mediawiki_root/w/LocalSettingsPHPBACKUP
+        path: /home/dserver/mediawiki-manager/mediawiki_root/w/LocalSettingsPHPBACKUP
     - name: mediawiki_root_w_extensions
       hostPath:
-        path: /home/lex/mediawiki-manager/mediawiki_root/w/extensions
+        path: /home/dserver/mediawiki-manager/mediawiki_root/w/extensions
     - name: mediawiki_root_w_skins
       hostPath:
-        path: /home/lex/mediawiki-manager/mediawiki_root/w/skins
+        path: /home/dserver/mediawiki-manager/mediawiki_root/w/skins
     - name: mediawiki_root_w_vendor
       hostPath:
-        path: /home/lex/mediawiki-manager/mediawiki_root/w/vendor
+        path: /home/dserver/mediawiki-manager/mediawiki_root/w/vendor
     - name: mediawiki_root_w_composerJSON
       hostPath:
-        path: /home/lex/mediawiki-manager/mediawiki_root/w/composer.json
+        path: /home/dserver/mediawiki-manager/mediawiki_root/w/composer.json
     - name: mediawiki_root_w_images
       hostPath:
-        path: /home/lex/mediawiki-manager/mediawiki_root/w/images
+        path: /home/dserver/mediawiki-manager/mediawiki_root/w/images
     # Apache
     - name: apache_sites_available
       hostPath:
-        path: /home/lex/mediawiki-manager/conf/apache/sites-available
+        path: /home/dserver/mediawiki-manager/conf/apache/sites-available
     # MWM
     - name: mwmCLI
       hostPath:
-        path: /home/lex/mediawiki-manager/cli
+        path: /home/dserver/mediawiki-manager/cli
     - name: mwmLogs
       hostPath:
-        path: /home/lex/mediawiki-manager/logs
+        path: /home/dserver/mediawiki-manager/logs
     # Restic
     - name: restic_password
       hostPath:
-        path: /home/lex/mediawiki-manager/conf/restic/restic_password
+        path: /home/dserver/mediawiki-manager/conf/restic/restic_password
     - name: restic-backup-repository
       hostPath:
-        path: /home/lex/mediawiki-manager/restic-backup-repository
+        path: /home/dserver/mediawiki-manager/restic-backup-repository
     - name: cloneLocation
       hostPath:
-        path: /home/lex/mediawiki-manager/cloneLocation
+        path: /home/dserver/mediawiki-manager/cloneLocation
     # MariaDB
     - name: mariadb_data
       hostPath:
-        path: /home/lex/mediawiki-manager/mariadb_data
+        path: /home/dserver/mediawiki-manager/mariadb_data
   containers:
     - image: docker.io/dataspects/mediawiki:1.35.0-2103211629
       name: mediawiki
