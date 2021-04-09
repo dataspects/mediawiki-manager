@@ -11,6 +11,14 @@ promptToContinue () {
     printf "\n"
 }
 
+# Public MWMBashFunction
+ensurePodmanIsInstalled () {
+    if ! podman_loc="$(type -p "podman")" || [[ -z $podman_loc ]]; then
+        promptToContinue
+        sudo apt update && sudo apt install podman
+    fi
+}
+
 #######################
 # CHECK IF IN CONTAINER
 if [[ $runInContainerOnly == "true" ]] && [ "`ls /home`" != "" ]
@@ -81,9 +89,6 @@ runSMWRebuildData () {
         cd w; php extensions/SemanticMediaWiki/maintenance/rebuildData.php
     fi
 }
-
-
-
 
 # Private MWMBashFunction
 backupLocalSettingsPHP () {

@@ -20,6 +20,8 @@ initializeSystemLog
 # GENERAL #
 ###########
 
+ensurePodmanIsInstalled
+
 # Initialize MediaWiki script path
 mkdir --parents $MEDIAWIKI_ROOT/w
 writeToSystemLog "Initialized: $MEDIAWIKI_ROOT"
