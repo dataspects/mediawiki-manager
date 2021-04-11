@@ -7,5 +7,9 @@ getExtensionJSON
 printf "\nMWStake Certified Extensions Catalog"
 printf "\n====================================\n"
 printf "$CATALOGUE_URL\n\n"
-echo $catalogueJSON | jq '.[]' | jq '.name'
-printf "\n====================================\n"
+printf "\n<EXTNAME>\n---------\n"
+echo $catalogueJSON | jq '.[]' | jq -r '.name'
+printf "\n====================================\n\n"
+printf "To enable <EXTNAME> run  : ./cli/manage-extensions/enable-extension.sh <EXTNAME>\n"
+printf "To disable <EXTNAME> run : ./cli/manage-extensions/disable-extension.sh <EXTNAME>\n"
+printf "\n"
