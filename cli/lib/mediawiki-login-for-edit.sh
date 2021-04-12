@@ -60,7 +60,7 @@ CR=$(curl -S \
 
 STATUS=$(echo $CR | jq '.clientlogin.status')
 if [[ $STATUS == *"PASS"* ]]; then
-	echo "Successfully logged in as $WIKI_ADMIN_USERNAME."
+	echo "SUCCESS: logged in as $WIKI_ADMIN_USERNAME."
 	echo "-----"
 else
 	echo "Unable to login $WIKI_ADMIN_USERNAME, is logintoken ${TOKEN} correct?"

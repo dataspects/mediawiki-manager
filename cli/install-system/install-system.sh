@@ -22,18 +22,20 @@ initializeSystemLog
 
 ensurePodmanIsInstalled
 
-# Initialize MediaWiki script path
-mkdir --parents $MEDIAWIKI_ROOT/w
-writeToSystemLog "Initialized: $MEDIAWIKI_ROOT"
-
-mkdir --parents $MEDIAWIKI_ROOT/w/LocalSettingsPHPBACKUP
+mkdir --parent \
+  mediawiki_root/w/images \
+  mediawiki_root/w/LocalSettingsPHPBACKUP \
+  restic-backup-repository \
+  cloneLocation \
+  mariadb_data
+echo "SUCCESS: Initialized host folders"
 
 ### >>>
 # MWM Concept: initialize persistent mediawiki service volumes
 source ./cli/install-system/initialize-persistent-mediawiki-service-volumes.sh
 # <<<
 
-mkdir restic-backup-repository cloneLocation mariadb_data
+envsubst < mediawiki-manager.tpl > mediawiki-manager.yml
 podman play kube mediawiki-manager.yml
 
 setPermissionsOnSystemInstanceRoot
@@ -42,10 +44,9 @@ setPermissionsOnSystemInstanceRoot
 # RUN PODMAN #
 ##############
 
-echo "Start pod..."
-./cli/manage-system/stop.sh
+echo "Starting pod..."
 ./cli/manage-system/start.sh
-writeToSystemLog "Started: pod"
+writeToSystemLog "SUCCESS: Started pod mwm"
 
 #############
 # MEDIAWIKI #
