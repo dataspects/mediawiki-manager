@@ -30,8 +30,9 @@ ensurePodmanIsInstalled () {
 if [[ $runInContainerOnly == "true" ]] && [ "`ls /home`" != "" ]
 then
     printf "INFO: \x1b[31mredirecting run command to \033[1mpodman exec mwm-mediawiki `dirname $0`/`basename $0` "$1""
+    source ./envs/my-new-system.env
     promptToContinue
-    podman exec mwm-mediawiki /bin/bash -c "`dirname $0`/`basename $0` $1"
+    podman exec $APACHE_CONTAINER_NAME /bin/bash -c "`dirname $0`/`basename $0` $1"
     exit
 fi
 #######################

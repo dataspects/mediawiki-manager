@@ -10,30 +10,20 @@
 
 # REFACTOR!
 
-# source ./cli/lib/utils.sh
-# source ./cli/lib/permissions.sh
+source ./cli/lib/utils.sh
 
-# source ./envs/my-new-system.env
+source ./envs/my-new-system.env
 
-# ./cli/manage-system/stop.sh
+podman container stop mwm-deployment-pod-0-mediawiki
+podman container start mwm-deployment-pod-0-mediawiki-safemode
 
-# echo "Turn on MWMSafeMode"
+APACHE_CONTAINER_NAME=mwm-deployment-pod-0-mediawiki-safemode
+source ./cli/lib/waitForMariaDB.sh
 
-# dockerDirectives=(
-#     "- \.\/mediawiki_root\/w\/LocalSettings\.php:\/var\/www\/html\/w\/LocalSettings\.php"
-#     "- \.\/mediawiki_root\/w\/extensions:\/var\/www\/html\/w\/extensions"
-#     "- \.\/mediawiki_root\/w\/skins:\/var\/www\/html\/w\/skins"
-#     "- \.\/mediawiki_root\/w\/vendor:\/var\/www\/html\/w\/vendor"
-#     "- \.\/mediawiki_root\/w\/composer.json:\/var\/www\/html\/w\/composer.json"
-# )
+podman exec $APACHE_CONTAINER_NAME /bin/bash -c \
+  "source ./cli/lib/utils.sh && removeFromLocalSettings \"/\$wgReadOnly = true;/d\""  
 
-# for dd in ${!dockerDirectives[@]}
-# do
-#     cp docker-compose.yml docker-compose.yml.bak
-#     sed "s/${dockerDirectives[$dd]}/#${dockerDirectives[$dd]}/g" docker-compose.yml.bak > docker-compose.yml
-# done
+runMWUpdatePHP
 
-# podman-compose --env-file ./envs/my-new-system.env up -d
-
-# source ./cli/lib/waitForMariaDB.sh
-# runMWUpdatePHP
+podman exec $APACHE_CONTAINER_NAME /bin/bash -c \
+  "source ./cli/lib/utils.sh && addToLocalSettings '\$wgReadOnly = true;'"

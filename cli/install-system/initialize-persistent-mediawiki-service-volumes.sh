@@ -11,7 +11,7 @@ MWM_MEDIAWIKI_CONTAINER_ID=$(podman run \
   --detach \
   --rm=true \
   --name=temp-mediawiki \
-  docker.io/dataspects/mediawiki:1.35.0-2103211629)
+  $MEDIAWIKI_IMAGE)
 if [[ $? == 0 ]]
 then
     echo "SUCCESS: obtained container id."

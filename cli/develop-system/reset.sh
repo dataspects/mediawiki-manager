@@ -4,7 +4,7 @@ source ./cli/lib/utils.sh
 
 ./cli/manage-system/stop.sh
 
-podman pod rm mwm
+podman pod rm mwm-deployment-pod-0
 if [[ $? == 0 ]]
 then
     echo "SUCCESS: removed pod mwm"

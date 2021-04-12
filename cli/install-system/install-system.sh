@@ -37,16 +37,9 @@ source ./cli/install-system/initialize-persistent-mediawiki-service-volumes.sh
 
 envsubst < mediawiki-manager.tpl > mediawiki-manager.yml
 podman play kube mediawiki-manager.yml
+podman container stop mwm-deployment-pod-0-mediawiki-safemode
 
 setPermissionsOnSystemInstanceRoot
-
-##############
-# RUN PODMAN #
-##############
-
-echo "Starting pod..."
-./cli/manage-system/start.sh
-writeToSystemLog "SUCCESS: Started pod mwm"
 
 #############
 # MEDIAWIKI #
@@ -64,6 +57,8 @@ podman exec $APACHE_CONTAINER_NAME /bin/bash -c \
 
 podman exec $APACHE_CONTAINER_NAME /bin/bash -c \
   "source ./cli/lib/utils.sh && removeFromLocalSettings \"/\$wgSiteNotice = ['|\\\"]================ MWM Safe Mode ================['|\\\"];/d\""
+podman exec $APACHE_CONTAINER_NAME /bin/bash -c \
+  "source ./cli/lib/utils.sh && removeFromLocalSettings \"/\$wgReadOnly = true;/d\""  
 
 # setPermissionsOnSystemInstanceRoot
 
