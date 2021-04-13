@@ -18,7 +18,7 @@ promptToContinue () {
 # Public MWMBashFunction
 ensurePodmanIsInstalled () {
     if ! podman_loc="$(type -p "podman")" || [[ -z $podman_loc ]]; then
-        echo "podman is missing. Install now?"
+        echo "podman is missing. Install upgrades and podman now?"
         promptToContinue
         . /etc/os-release
         echo "deb https://download.opensuse.org/repositories/devel:/kubic:/libcontainers:/stable/xUbuntu_${VERSION_ID}/ /" | sudo tee /etc/apt/sources.list.d/devel:kubic:libcontainers:stable.list
