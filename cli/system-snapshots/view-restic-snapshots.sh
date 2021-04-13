@@ -1,6 +1,12 @@
 #!/bin/bash
 
-sudo restic \
-    --repo restic-backup-repository/ \
-    --password-file conf/restic/restic_password \
-        snapshots
+source ./envs/my-new-system.env
+
+source ./cli/lib/utils.sh
+source ./cli/lib/permissions.sh
+
+podman exec $APACHE_CONTAINER_NAME /bin/bash -c \
+    "restic \
+        --repo /var/www/html/restic-repo \
+        --password-file /var/www/restic_password \
+            snapshots"
