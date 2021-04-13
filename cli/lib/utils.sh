@@ -1,5 +1,9 @@
 #!/bin/bash
 
+POD=mwm-deployment-pod-0
+MWCnormal=$POD-mediawiki
+MWCsafemode=$POD-mediawiki-safemode
+
 # Public MWMBashFunction
 promptToContinue () {
     printf "\033[0m\n"

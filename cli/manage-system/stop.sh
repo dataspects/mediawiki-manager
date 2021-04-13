@@ -1,8 +1,12 @@
 #!/bin/bash
-podman pod stop mwm-deployment-pod-0
+
+source ./cli/lib/utils.sh
+
+podman pod stop $POD
+
 if [[ $? == 0 ]]
 then
-    echo "SUCCESS: stopped pod mwm"
+    printf "\x1b[32mSUCCESS\033[0m: stopped pod $POD\n"
 else
-    echo "Pod mwm not found, so not stopped. Continuing..."
+    printf "Pod $POD not found, so not stopped. Continuing...\n"
 fi

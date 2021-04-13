@@ -53,8 +53,3 @@ if [[ $? == 0 ]]
 chmod -R 777 $MEDIAWIKI_ROOT/w
 
 echo "SUCCESS: Initialized persistent mediawiki service volumes"
-
-# Error: error copying "/home/dserver/.local/share/containers/storage/overlay/ead5bfe664051c7acb19766503d4a7486469612dcf1df96588e1a765dcb4e56b/merged/var/www/html/w/vendor"
-# to "/home/dserver/mediawiki-manager/mediawiki_root/w":
-# Error processing tar file(exit status 1):
-# symlink ../doctrine/dbal/bin/doctrine-dbal /bin/doctrine-dbal: operation not permitted

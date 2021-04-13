@@ -37,7 +37,7 @@ source ./cli/install-system/initialize-persistent-mediawiki-service-volumes.sh
 
 envsubst < mediawiki-manager.tpl > mediawiki-manager.yml
 podman play kube mediawiki-manager.yml
-podman container stop mwm-deployment-pod-0-mediawiki-safemode
+podman container stop $MWCsafemode
 
 setPermissionsOnSystemInstanceRoot
 

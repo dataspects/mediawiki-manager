@@ -14,10 +14,10 @@ source ./cli/lib/utils.sh
 
 source ./envs/my-new-system.env
 
-podman container stop mwm-deployment-pod-0-mediawiki
-podman container start mwm-deployment-pod-0-mediawiki-safemode
+podman container stop $MWCnormal
+podman container start $MWCsafemode
 
-APACHE_CONTAINER_NAME=mwm-deployment-pod-0-mediawiki-safemode
+APACHE_CONTAINER_NAME=$MWCsafemode
 source ./cli/lib/waitForMariaDB.sh
 
 podman exec $APACHE_CONTAINER_NAME /bin/bash -c \
