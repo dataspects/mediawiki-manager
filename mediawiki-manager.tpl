@@ -51,6 +51,9 @@ spec:
         - name: mwmCLI
           hostPath:
             path: ${SYSTEM_INSTANCE_ROOT}/cli
+        - name: mwmsqlite
+          hostPath:
+            path: ${SYSTEM_INSTANCE_ROOT}/mwm.sqlite
         - name: mwmLogs
           hostPath:
             path: ${SYSTEM_INSTANCE_ROOT}/logs
@@ -90,6 +93,8 @@ spec:
             # MWM
             - mountPath: /var/www/html/logs
               name: mwmLogs
+            - mountPath: /var/www/html/mwm.sqlite
+              name: mwmsqlite
             - mountPath: /var/www/html/cli
               name: mwmCLI
             # Apache

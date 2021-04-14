@@ -109,3 +109,11 @@ backupLocalSettingsPHP () {
     CONTAINERINTERNALLSFILEBACKUP=/var/www/html/w/LocalSettingsPHPBACKUP/LocalSettings.php.bak.$date
     cp $CONTAINERINTERNALLSFILE $CONTAINERINTERNALLSFILEBACKUP
 }
+
+initializeSQLiteDB() {
+    sqlite3 mwm.sqlite "CREATE TABLE extensions (
+        id INTEGER PRIMARY KEY AUTOINCREMENT,
+        name text,
+        localsettingsdirectives text
+    );"
+}

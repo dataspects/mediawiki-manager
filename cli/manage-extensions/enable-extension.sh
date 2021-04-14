@@ -11,6 +11,8 @@ source ./cli/lib/permissions.sh
 
 EXTNAME=$1
 
+declare lsDirectives
+
 ###
 # Collect installation aspects
 getExtensionData $EXTNAME
@@ -51,19 +53,22 @@ then
     echo "Running localsettings"
     # Backup
     backupfile=$CONTAINERINTERNALLSFILE.bak.`date +"%Y-%m-%d_%H-%M-%S"`
-    # Sed
-    echo $localSettings | jq -r '.[]' | while read lsLine
-    do
-        cp $CONTAINERINTERNALLSFILE $backupfile
-        grep "^#$lsLine$" $CONTAINERINTERNALLSFILE
+    cp $CONTAINERINTERNALLSFILE $backupfile
+    lsDirectives=""
+    echo $localSettings | jq -r '.[]' | { 
+        while read lsLine
+        do
+            lsDirectives="$lsDirectives $lsLine"
+        done
+        php ./cli/lib/addToMWMSQLite.php "$EXTNAME" "$lsDirectives"
         if [[ $? == 0 ]]
         then
-            sed "s/#\{1,\}$lsLine/$lsLine/g" $backupfile > $CONTAINERINTERNALLSFILE
+            echo "SUCCESS: $?"
         else
-            addToLocalSettings "$lsLine"
+            echo "ERROR: $?"
         fi
-    done
+    }
 fi
 ###
 
-runMWUpdatePHP
+# runMWUpdatePHP
