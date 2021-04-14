@@ -12,8 +12,6 @@ source ./cli/lib/permissions.sh
 
 EXTNAME=$1
 
-
-
 ###
 # Collect installation aspects
 getExtensionData $EXTNAME
@@ -61,4 +59,5 @@ then
 fi
 ###
 
-runMWUpdatePHP
+php ./cli/lib/updateMWMLocalSettings.php
+# runMWUpdatePHP

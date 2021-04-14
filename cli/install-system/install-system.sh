@@ -47,6 +47,10 @@ setPermissionsOnSystemInstanceRoot
 #############
 # MEDIAWIKI #
 #############
+echo "Initialize mwmLocalSettings.php..."
+mwmls="mwmLocalSettings.php"
+podman exec $APACHE_CONTAINER_NAME /bin/bash -c \
+  "touch $mwmls && source ./cli/lib/utils.sh && addToLocalSettings '\$mwmls = \"../$mwmls\"; if(file_exists(\$mwmls)) {require_once(\$mwmls); } else { echo \"ERROR: MWM include not loaded.\"; }'"
 
 echo "Set domain name..."
 podman exec $APACHE_CONTAINER_NAME /bin/bash -c \
