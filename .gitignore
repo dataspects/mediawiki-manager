@@ -9,3 +9,4 @@ _secrets.sh
 dsrepository-cli
 ontologies
 mediawiki-manager.yml
+mwm.sqlite

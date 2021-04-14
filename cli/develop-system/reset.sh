@@ -1,5 +1,6 @@
 #!/bin/bash
 
+source ./envs/my-new-system.env
 source ./cli/lib/utils.sh
 
 ./cli/manage-system/stop.sh
@@ -17,6 +18,7 @@ sudo rm -rf \
     mediawiki_root \
     restic-backup-repository \
     mariadb_data \
-    cloneLocation
+    cloneLocation \
+    mwm.sqlite
 
 ./cli/install-system/install-system.sh

@@ -1,13 +1,15 @@
 #!/bin/bash
+source ./envs/my-new-system.env
+source ./cli/lib/utils.sh
 
 # FIXME: handle multiple system setups
-source ./envs/my-new-system.env
+
+initializeSQLiteDB
 
 ##################
 # SOURCE CLI LIB #
 ##################
 
-source ./cli/lib/utils.sh
 source ./cli/lib/permissions.sh
 
 ##############
@@ -34,6 +36,7 @@ echo "SUCCESS: Initialized host folders"
 # MWM Concept: initialize persistent mediawiki service volumes
 source ./cli/install-system/initialize-persistent-mediawiki-service-volumes.sh
 # <<<
+
 
 envsubst < mediawiki-manager.tpl > mediawiki-manager.yml
 podman play kube mediawiki-manager.yml
