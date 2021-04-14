@@ -71,4 +71,4 @@ then
 fi
 ###
 
-# runMWUpdatePHP
+runMWUpdatePHP

@@ -53,11 +53,10 @@ then
     echo "Running localsettings"
     # Backup
     backupfile=$CONTAINERINTERNALLSFILE.bak.`date +"%Y-%m-%d_%H-%M-%S"`
-    # Sed
+    cp $CONTAINERINTERNALLSFILE $backupfile
     echo $localSettings | jq -r '.[]' | while read lsLine
     do
-        cp $CONTAINERINTERNALLSFILE $backupfile
-        sed "s/$lsLine/#$lsLine/g" $backupfile > $CONTAINERINTERNALLSFILE
+        php ./cli/lib/removeFromMWMSQLite.php "$EXTNAME"
     done
 fi
 ###
