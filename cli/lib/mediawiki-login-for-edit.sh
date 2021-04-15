@@ -2,16 +2,6 @@
 
 source ./envs/my-new-system.env
 
-####################################
-
-if ! command -v jq &> /dev/null
-then
-    echo "Installing jq..."
-    sudo apt install jq
-fi
-
-####################################
-
 source ./cli/lib/utils.sh
 
 WIKI=https://$SYSTEM_DOMAIN_NAME:4443/w

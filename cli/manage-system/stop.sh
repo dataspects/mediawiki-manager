@@ -1,5 +1,6 @@
 #!/bin/bash
 
+source ./envs/my-new-system.env
 source ./cli/lib/utils.sh
 
 podman pod stop $POD

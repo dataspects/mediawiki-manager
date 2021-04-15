@@ -1,73 +1,46 @@
 #!/bin/bash
 source ./envs/my-new-system.env
+source ./cli/config-db/lib.sh
+source ./cli/logging/lib.sh
 source ./cli/lib/utils.sh
-
-# FIXME: handle multiple system setups
-
-initializeSQLiteDB
-
-##################
-# SOURCE CLI LIB #
-##################
-
 source ./cli/lib/permissions.sh
 
-##############
-# INITIALIZE #
-##############
-
+source ./cli/check-and-complete-environment.sh
 initializeSystemLog
-
-###########
-# GENERAL #
-###########
-
-ensurePodmanIsInstalled
+initializeSQLiteDB
 
 mkdir --parent \
   mediawiki_root/w/images \
   mediawiki_root/w/LocalSettingsPHPBACKUP \
+  mediawiki_root/mwmSQLiteBACKUP \
   restic-backup-repository \
   cloneLocation \
   mariadb_data
-echo "SUCCESS: Initialized host folders"
+writeToSystemLog "Initialized hostPath folders"
 
 ### >>>
 # MWM Concept: initialize persistent mediawiki service volumes
 source ./cli/install-system/initialize-persistent-mediawiki-service-volumes.sh
 # <<<
 
-
+touch $MEDIAWIKI_ROOT/mwmLocalSettings.php
 envsubst < mediawiki-manager.tpl > mediawiki-manager.yml
 podman play kube mediawiki-manager.yml
-podman container stop $MWCsafemode
 
 setPermissionsOnSystemInstanceRoot
 
-#############
-# MEDIAWIKI #
-#############
-echo "Initialize mwmLocalSettings.php..."
-mwmls="mwmLocalSettings.php"
-podman exec $APACHE_CONTAINER_NAME /bin/bash -c \
-  "touch $mwmls"
-
-echo "Set domain name..."
-podman exec $APACHE_CONTAINER_NAME /bin/bash -c \
-  "source ./cli/lib/utils.sh && addToLocalSettings '\$wgServer = \"https://$SYSTEM_DOMAIN_NAME:4443\";'"
-
-echo "Configure database access..."
-podman exec $APACHE_CONTAINER_NAME /bin/bash -c \
-  "source ./cli/lib/utils.sh && addToLocalSettings '\$wgDBpassword = \"$WG_DB_PASSWORD\";'"
-podman exec $APACHE_CONTAINER_NAME /bin/bash -c \
-  "source ./cli/lib/utils.sh && addToLocalSettings '\$wgDBserver = \"$MYSQL_HOST\";'"
+initializeMWMLocalSettings
 
 podman exec $APACHE_CONTAINER_NAME /bin/bash -c \
-  "source ./cli/lib/utils.sh && removeFromLocalSettings \"/\$wgSiteNotice = ['|\\\"]================ MWM Safe Mode ================['|\\\"];/d\""
-podman exec $APACHE_CONTAINER_NAME /bin/bash -c \
-  "source ./cli/lib/utils.sh && removeFromLocalSettings \"/\$wgReadOnly = true;/d\""  
+"php ./cli/lib/addToMWMSQLite.php \"ls\" \"
+\\\$wgServer = 'https://$SYSTEM_DOMAIN_NAME:4443';
+\\\$wgDBpassword = '$WG_DB_PASSWORD';
+\\\$wgDBserver = '$MYSQL_HOST';
+\""
 
-# setPermissionsOnSystemInstanceRoot
+compileMWMLocalSettings
+
+setPermissionsOnSystemInstanceRoot
 
 source ./cli/lib/waitForMariaDB.sh
 

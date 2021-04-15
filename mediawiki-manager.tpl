@@ -22,12 +22,12 @@ spec:
     spec:
       volumes:
         # MediaWiki
-        - name: mediawiki_root_w_LocalSettingsPHP
+        - name: mediawiki_root_mwmLocalSettingsPHP
           hostPath:
-            path: ${SYSTEM_INSTANCE_ROOT}/mediawiki_root/w/LocalSettings.php
-        - name: mediawiki_root_w_LocalSettingsPHPBACKUP
+            path: ${SYSTEM_INSTANCE_ROOT}/mediawiki_root/mwmLocalSettings.php
+        - name: mediawiki_root_mwmSQLiteBACKUP
           hostPath:
-            path: ${SYSTEM_INSTANCE_ROOT}/mediawiki_root/w/LocalSettingsPHPBACKUP
+            path: ${SYSTEM_INSTANCE_ROOT}/mediawiki_root/mwmSQLiteBACKUP
         - name: mediawiki_root_w_extensions
           hostPath:
             path: ${SYSTEM_INSTANCE_ROOT}/mediawiki_root/w/extensions
@@ -76,10 +76,10 @@ spec:
           name: mediawiki
           volumeMounts:
             # MediaWiki
-            - mountPath: /var/www/html/w/LocalSettings.php
-              name: mediawiki_root_w_LocalSettingsPHP
-            - mountPath: /var/www/html/w/LocalSettingsPHPBACKUP
-              name: mediawiki_root_w_LocalSettingsPHPBACKUP
+            - mountPath: /var/www/html/mwmLocalSettings.php
+              name: mediawiki_root_mwmLocalSettingsPHP
+            - mountPath: /var/www/html/w/mwmSQLiteBACKUP
+              name: mediawiki_root_mwmSQLiteBACKUP
             - mountPath: /var/www/html/w/extensions
               name: mediawiki_root_w_extensions
             - mountPath: /var/www/html/w/skins
@@ -119,32 +119,6 @@ spec:
           ports:
             - containerPort: 443
               hostPort: 4443
-        - image: ${MEDIAWIKI_IMAGE}
-          name: mediawiki-safemode
-          volumeMounts:
-            # MediaWiki
-            - mountPath: /var/www/html/w/LocalSettingsPHPBACKUP
-              name: mediawiki_root_w_LocalSettingsPHPBACKUP
-            - mountPath: /var/www/html/w/images
-              name: mediawiki_root_w_images
-            # MWM
-            - mountPath: /var/www/html/cli
-              name: mwmCLI              
-            # Apache
-            - mountPath: /etc/apache2/sites-available
-              name: apache_sites_available
-          env:
-            - name: MYSQL_HOST
-              value: ${MYSQL_HOST}
-            - name: DATABASE_NAME
-              value: ${DATABASE_NAME}
-            - name: MYSQL_USER
-              value: ${MYSQL_USER}
-            - name: WG_DB_PASSWORD
-              value: ${WG_DB_PASSWORD}
-          ports:
-            - containerPort: 443
-              hostPort: 4444
         - image: docker.io/library/mariadb:10.5.5
           name: mariadb
           env:

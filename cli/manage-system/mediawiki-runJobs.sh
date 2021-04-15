@@ -1,5 +1,5 @@
 #!/bin/bash
-runInContainerOnly=false
+source ./cli/lib/runInContainerOnly.sh=false
 
 source ./cli/lib/utils.sh
 

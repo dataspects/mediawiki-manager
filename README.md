@@ -1,25 +1,19 @@
-# mediawiki-manager
+# MWStake MediaWiki Manager (MWM)
 
 This repository represents the development workbench for [MWStake MediaWiki Manager](https://mwstake.org/mwstake/wiki/MWStake_MediaWiki_Manager).
 
 ***It is not meant to be used in production (yet)!***
 
-![DSMWM screenshot](images/mwmscreenshot.png)
-![DSMWM screenshot](images/mwstakeextensionstore.png)
-
 ## System Requirements
 
-At the moment MWM is only being tested on Ubuntu 20.04 running [Podman](https://podman.io/).
+* **Ubuntu 20.04**
+* *Other Linux distros pending*
+* *Windows pending*
+* *Mac pending*
 
-## Features
+The installer will take care of everything else.
 
-General features across abstraction layers:
-
-1. LocalSettings.php backups in `w/LocalSettingsPHPBACKUP`
-
-### Feature: Install System Instance
-
-#### [Abstraction Layer ALcli](https://mwstake.org/mwstake/wiki/MWStake_MediaWiki_Manager#Abstraction_Layers)
+## Installation
 
 1. `user@server:~$ git clone https://github.com/dataspects/mediawiki-manager.git`
 2. `user@server:~$ cd mediawiki-manager`

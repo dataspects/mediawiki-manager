@@ -1,5 +1,5 @@
 #!/bin/bash
-runInContainerOnly=true
+source ./cli/lib/runInContainerOnly.sh
 
 # FIXME: handle multiple system setups
 source ./cli/manage-extensions/utils.sh
@@ -35,7 +35,6 @@ fi
 
 ###
 # Run installation aspects
-backupLocalSettingsPHP
 if [ $cInstrFound ]
 then
     echo "Running composer..."
@@ -49,9 +48,6 @@ fi
 if [ $lsInstrFound ]
 then
     echo "Running localsettings"
-    # Backup
-    backupfile=$CONTAINERINTERNALLSFILE.bak.`date +"%Y-%m-%d_%H-%M-%S"`
-    cp $CONTAINERINTERNALLSFILE $backupfile
     echo $localSettings | jq -r '.[]' | while read lsLine
     do
         php ./cli/lib/removeFromMWMSQLite.php "$EXTNAME"

@@ -21,7 +21,6 @@ else
 fi
 
 declare -a vols=(
-  "/var/www/html/w/LocalSettings.php"
   "/var/www/html/w/extensions"
   "/var/www/html/w/skins"
   "/var/www/html/w/vendor"

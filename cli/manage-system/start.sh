@@ -1,12 +1,11 @@
 #!/bin/bash
 
-source ./cli/lib/utils.sh
-
 source ./envs/my-new-system.env
+source ./cli/lib/utils.sh
+source ./cli/config-db/lib.sh
+source ./cli/logging/lib.sh
 
 podman pod start $POD
-podman container stop $MWCsafemode
-podman container start $MWCnormal
-
+podman container start $POD-mediawiki
+compileMWMLocalSettings
 source ./cli/lib/waitForMariaDB.sh
-runMWUpdatePHP
