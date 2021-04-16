@@ -16,9 +16,8 @@ fi
 #FIXME: Why sudo?
 sudo rm -rf \
     mediawiki_root \
-    restic-backup-repository \
+    snapshots \
     mariadb_data \
-    cloneLocation \
-    mwm.sqlite
+    mwmconfigdb.sqlite
 
 ./cli/install-system/install-system.sh

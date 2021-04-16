@@ -1,7 +1,7 @@
 <?php
 $name  = $argv[1];
 $localsettingsdirectives = $argv[2];
-$db = new SQLite3('mwm.sqlite');
+$db = new SQLite3('mwmconfigdb.sqlite');
 
 $stmt = $db->prepare('INSERT INTO extensions (name, localsettingsdirectives) VALUES ( :name, :localsettingsdirectives)');
 $stmt->bindValue(':name', $name, SQLITE3_TEXT);

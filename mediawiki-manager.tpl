@@ -21,13 +21,20 @@ spec:
         app: mwm
     spec:
       volumes:
-        # MediaWiki
-        - name: mediawiki_root_mwmLocalSettingsPHP
+        # Restic
+        - name: snapshots
           hostPath:
-            path: ${SYSTEM_INSTANCE_ROOT}/mediawiki_root/mwmLocalSettings.php
-        - name: mediawiki_root_mwmSQLiteBACKUP
+            path: ${SYSTEM_INSTANCE_ROOT}/snapshots
+        - name: currentresources
           hostPath:
-            path: ${SYSTEM_INSTANCE_ROOT}/mediawiki_root/mwmSQLiteBACKUP
+            path: ${SYSTEM_INSTANCE_ROOT}/currentresources
+        - name: restic_password
+          hostPath:
+            path: ${SYSTEM_INSTANCE_ROOT}/conf/restic/restic_password
+        - name: mwmsqlite
+          hostPath:
+            path: ${SYSTEM_INSTANCE_ROOT}/mwmconfigdb.sqlite
+        # MediaWiki        
         - name: mediawiki_root_w_extensions
           hostPath:
             path: ${SYSTEM_INSTANCE_ROOT}/mediawiki_root/w/extensions
@@ -51,22 +58,9 @@ spec:
         - name: mwmCLI
           hostPath:
             path: ${SYSTEM_INSTANCE_ROOT}/cli
-        - name: mwmsqlite
-          hostPath:
-            path: ${SYSTEM_INSTANCE_ROOT}/mwm.sqlite
         - name: mwmLogs
           hostPath:
             path: ${SYSTEM_INSTANCE_ROOT}/logs
-        # Restic
-        - name: restic_password
-          hostPath:
-            path: ${SYSTEM_INSTANCE_ROOT}/conf/restic/restic_password
-        - name: restic-backup-repository
-          hostPath:
-            path: ${SYSTEM_INSTANCE_ROOT}/restic-backup-repository
-        - name: cloneLocation
-          hostPath:
-            path: ${SYSTEM_INSTANCE_ROOT}/cloneLocation
         # MariaDB
         - name: mariadb_data
           hostPath:
@@ -76,10 +70,6 @@ spec:
           name: mediawiki
           volumeMounts:
             # MediaWiki
-            - mountPath: /var/www/html/mwmLocalSettings.php
-              name: mediawiki_root_mwmLocalSettingsPHP
-            - mountPath: /var/www/html/w/mwmSQLiteBACKUP
-              name: mediawiki_root_mwmSQLiteBACKUP
             - mountPath: /var/www/html/w/extensions
               name: mediawiki_root_w_extensions
             - mountPath: /var/www/html/w/skins
@@ -93,7 +83,7 @@ spec:
             # MWM
             - mountPath: /var/www/html/logs
               name: mwmLogs
-            - mountPath: /var/www/html/mwm.sqlite
+            - mountPath: /var/www/html/mwmconfigdb.sqlite
               name: mwmsqlite
             - mountPath: /var/www/html/cli
               name: mwmCLI
@@ -103,10 +93,10 @@ spec:
             # Restic
             - mountPath: /var/www/restic_password
               name: restic_password
-            - mountPath: /var/www/html/restic-repo
-              name: restic-backup-repository
-            - mountPath: /var/www/html/clone-location
-              name: cloneLocation
+            - mountPath: /var/www/html/snapshots
+              name: snapshots
+            - mountPath: /var/www/html/currentresources
+              name: currentresources
           env:
             - name: MYSQL_HOST
               value: ${MYSQL_HOST}
@@ -122,8 +112,8 @@ spec:
         - image: docker.io/library/mariadb:10.5.5
           name: mariadb
           env:
-          - name: MYSQL_ROOT_PASSWORD
-            value: 123456
+            - name: MYSQL_ROOT_PASSWORD
+              value: 123456
           volumeMounts:
             - mountPath: /var/lib/mysql
               name: mariadb_data

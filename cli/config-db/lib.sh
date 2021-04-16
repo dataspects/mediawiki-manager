@@ -3,7 +3,7 @@
 mwmLocalSettings="mwmLocalSettings.php"
 
 initializeSQLiteDB() {
-    DB=mwm.sqlite
+    DB=mwmconfigdb.sqlite
     sqlite3 $DB "CREATE TABLE IF NOT EXISTS extensions (
         id INTEGER PRIMARY KEY AUTOINCREMENT,
         name text,

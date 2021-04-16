@@ -23,7 +23,7 @@ EXCLUDE=(
     'mediawiki_root'
     'logs'
     'mysql_data'
-    'restic-backup-repository'
+    'snapshots'
     'wikicj'
     'docker-compose.yml.bak'
     '_secrets.sh'

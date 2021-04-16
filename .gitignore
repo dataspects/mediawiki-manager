@@ -1,7 +1,7 @@
 logs
 mediawiki_root
 mariadb_data
-restic-backup-repository
+snapshots
 wikicj
 dataspectsSystemCoreOntology
 tmp
@@ -9,4 +9,4 @@ _secrets.sh
 dsrepository-cli
 ontologies
 mediawiki-manager.yml
-mwm.sqlite
+mwmconfigdb.sqlite

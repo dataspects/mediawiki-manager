@@ -13,8 +13,8 @@ mkdir --parent \
   mediawiki_root/w/images \
   mediawiki_root/w/LocalSettingsPHPBACKUP \
   mediawiki_root/mwmSQLiteBACKUP \
-  restic-backup-repository \
-  cloneLocation \
+  currentresources \
+  snapshots \
   mariadb_data
 writeToSystemLog "Initialized hostPath folders"
 
@@ -73,7 +73,7 @@ source ./cli/manage-content/inject-manage-page-from-mediawiki.org.sh
 
 echo "Initialize restic backup repository"
 podman exec $APACHE_CONTAINER_NAME /bin/bash -c \
-  "restic --password-file /var/www/restic_password --verbose init --repo /var/www/html/restic-repo"
+  "restic --password-file /var/www/restic_password --verbose init --repo /var/www/html/snapshots"
 
 ### >>>
 # MWM Concept: take initial snapshot and view snapshots

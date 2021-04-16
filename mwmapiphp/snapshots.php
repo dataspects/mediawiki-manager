@@ -12,7 +12,7 @@ class Snapshots {
     }
 
     public function snapshotCatalogue() {
-        exec("restic --repo /var/www/html/restic-repo snapshots", $output, $retval);
+        exec("restic --repo /var/www/html/snapshots snapshots", $output, $retval);
         return $output;
     }
 
@@ -20,8 +20,8 @@ class Snapshots {
         $this->mysqldump();
         // FIXME!
         $this->logger->write("Taking snapshot...");
-        exec("restic --repo /var/www/html/restic-repo backup /var/www/html/w", $output, $retval);
-        // exec("chgrp -R www-data /var/www/html/restic-repo && chmod -R 770 /var/www/html/restic-repo", $output, $retval);
+        exec("restic --repo /var/www/html/snapshots backup /var/www/html/w", $output, $retval);
+        // exec("chgrp -R www-data /var/www/html/snapshots && chmod -R 770 /var/www/html/snapshots", $output, $retval);
         return $this->logger->write("Snapshot taken...");;
     }
 
