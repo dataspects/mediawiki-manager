@@ -44,9 +44,9 @@ spec:
         - name: mediawiki_root_w_vendor
           hostPath:
             path: ${SYSTEM_INSTANCE_ROOT}/mediawiki_root/w/vendor
-        - name: mediawiki_root_w_composerJSON
+        - name: mediawiki_root_w_composerLocalJSON
           hostPath:
-            path: ${SYSTEM_INSTANCE_ROOT}/mediawiki_root/w/composer.json
+            path: ${SYSTEM_INSTANCE_ROOT}/mediawiki_root/w/composer.local.json
         - name: mediawiki_root_w_images
           hostPath:
             path: ${SYSTEM_INSTANCE_ROOT}/mediawiki_root/w/images
@@ -76,8 +76,8 @@ spec:
               name: mediawiki_root_w_skins
             - mountPath: /var/www/html/w/vendor
               name: mediawiki_root_w_vendor
-            - mountPath: /var/www/html/w/composer.json
-              name: mediawiki_root_w_composerJSON
+            - mountPath: /var/www/html/w/composer.local.json
+              name: mediawiki_root_w_composerLocalJSON
             - mountPath: /var/www/html/w/images
               name: mediawiki_root_w_images
             # MWM

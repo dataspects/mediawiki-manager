@@ -8,6 +8,6 @@ diff --brief \
  existing_version/extensions/ \
  | grep --color=auto Only
 
-printf "\nComparing:\tmediawiki_root/w/composer.json/\t\tAGAINST\t\texisting_version/composer.json\n\n"
+printf "\nComparing:\tmediawiki_root/w/composer.local.json/\t\tAGAINST\t\texisting_version/composer.local.json\n\n"
 diff --side-by-side --suppress-common-lines \
-    mediawiki_root/w/composer.json existing_version/composer.json
+    mediawiki_root/w/composer.local.json existing_version/composer.local.json

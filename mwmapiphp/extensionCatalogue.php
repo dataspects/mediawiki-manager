@@ -7,7 +7,7 @@ class ExtensionCatalogue {
         $localSettingsString = file_get_contents(getcwd().'/../w/LocalSettings.php');
         $this->localSettingsArray = explode("\n", $localSettingsString);
 
-        $composerjson = file_get_contents(getcwd().'/../w/composer.json');
+        $composerjson = file_get_contents(getcwd().'/../w/composer.local.json');
         $this->composerjsonArray = json_decode($composerjson, true);
 
         $this->extensionsByMWAPI = $mediawiki->extensionsByMWAPI();

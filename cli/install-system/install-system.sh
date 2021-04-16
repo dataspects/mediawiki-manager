@@ -11,8 +11,6 @@ initializeSQLiteDB
 
 mkdir --parent \
   mediawiki_root/w/images \
-  mediawiki_root/w/LocalSettingsPHPBACKUP \
-  mediawiki_root/mwmSQLiteBACKUP \
   currentresources \
   snapshots \
   mariadb_data
@@ -24,6 +22,7 @@ source ./cli/install-system/initialize-persistent-mediawiki-service-volumes.sh
 # <<<
 
 touch $MEDIAWIKI_ROOT/mwmLocalSettings.php
+touch $MEDIAWIKI_ROOT/w/composer.local.json
 envsubst < mediawiki-manager.tpl > mediawiki-manager.yml
 podman play kube mediawiki-manager.yml
 

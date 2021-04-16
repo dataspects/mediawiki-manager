@@ -10,7 +10,7 @@ restic \
         restore $SNAPSHOT_ID \
             --target ./currentresources
 
-cp ./currentresources/var/www/html/currentresources/composer.json /var/www/html/w/composer.json; \
+cp ./currentresources/var/www/html/currentresources/composer.local.json /var/www/html/w/composer.local.json; \
 cp ./currentresources/var/www/html/currentresources/mwmconfigdb.sqlite /var/www/html/mwmconfigdb.sqlite; \
 rm -rf /var/www/html/w/extensions/*;
 cp -r --preserve=links ./currentresources/var/www/html/currentresources/extensions/* /var/www/html/w/extensions/; \

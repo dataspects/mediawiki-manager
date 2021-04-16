@@ -17,7 +17,7 @@ printf "MWM snapshot: mysqldump mediawiki completed.\n"
 # STEP 2: Copy folders and files
 printf "MWM snapshot: Trying to copy folders and files...\n"
 cp -r \
-    /var/www/html/w/composer.json \
+    /var/www/html/w/composer.local.json \
     /var/www/html/w/extensions \
     /var/www/html/w/skins \
     /var/www/html/w/images \
@@ -26,7 +26,7 @@ cp -r \
     /etc/apache2/sites-available \
     $CONTAINER_INTERNAL_PATH_TO_SNAPSHOT
   
-printf "MWM snapshot: mysqldump mediawiki completed.\n"
+printf "MWM snapshot: copy folders and files completed.\n"
 
 if [[ $TAG == "" ]]
 then

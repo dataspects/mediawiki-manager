@@ -24,7 +24,6 @@ declare -a vols=(
   "/var/www/html/w/extensions"
   "/var/www/html/w/skins"
   "/var/www/html/w/vendor"
-  "/var/www/html/w/composer.json"
   "/var/www/html/w/images"
 )
 for vol in "${vols[@]}"
