@@ -17,4 +17,6 @@ podman play kube mediawiki-manager.yml
 
 ./cli/system-snapshots/restore-restic-snapshot.sh latest
 
+source ./cli/lib/waitForMariaDB.sh
+
 runMWUpdatePHP
