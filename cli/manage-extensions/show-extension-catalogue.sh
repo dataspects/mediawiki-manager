@@ -4,7 +4,7 @@ source ./cli/lib/utils.sh
 source ./cli/manage-extensions/utils.sh
 
 getExtensionJSON
-printf "\nMWStake Certified Extensions Catalog"
+printf "\n\033[0;32mMWStake Certified Extensions Catalog\033[0m"
 printf "\n====================================\n"
 printf "$CATALOGUE_URL\n\n"
 printf "\n<EXTNAME>\n---------\n"

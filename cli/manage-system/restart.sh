@@ -9,5 +9,3 @@ source ./envs/my-new-system.env
 
 ./cli/manage-system/stop.sh
 ./cli/manage-system/start.sh
-
-runMWUpdatePHP

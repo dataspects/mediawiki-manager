@@ -33,12 +33,15 @@ then
 fi
 ###
 
+./cli/system-snapshots/take-restic-snapshot.sh
+
 ###
 # Run installation aspects
 if [ $cInstrFound ]
 then
     echo "Running composer..."
     cd /var/www/html/w && COMPOSER_HOME=/var/www/html/w php composer.phar remove $composer
+    cd -
     echo "Ran composer"
 fi
 if [ $rInstrFound ]
@@ -48,6 +51,7 @@ fi
 if [ $lsInstrFound ]
 then
     echo "Running localsettings"
+    echo `pwd`
     echo $localSettings | jq -r '.[]' | while read lsLine
     do
         php ./cli/lib/removeFromMWMSQLite.php "$EXTNAME"
@@ -56,4 +60,4 @@ fi
 ###
 
 php ./cli/lib/updateMWMLocalSettings.php
-# runMWUpdatePHP
+runMWUpdatePHP

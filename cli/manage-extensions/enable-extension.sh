@@ -34,12 +34,15 @@ then
 fi
 ###
 
+./cli/system-snapshots/take-restic-snapshot.sh
+
 ###
 # Run installation aspects
 if [ $cInstrFound ]
 then
     echo "Running composer..."
     cd /var/www/html/w && COMPOSER_HOME=/var/www/html/w php composer.phar require $composer
+    cd -
     echo "Ran composer"
 fi
 if [ $rInstrFound ]
@@ -68,4 +71,4 @@ fi
 ###
 
 php ./cli/lib/updateMWMLocalSettings.php
-# runMWUpdatePHP
+runMWUpdatePHP

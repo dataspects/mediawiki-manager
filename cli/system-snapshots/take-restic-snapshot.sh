@@ -1,25 +1,22 @@
 #!/bin/bash
-
-source ./envs/my-new-system.env
-
-source ./cli/lib/utils.sh
-source ./cli/lib/permissions.sh
+source ./cli/lib/runInContainerOnly.sh
 
 CONTAINER_INTERNAL_PATH_TO_SNAPSHOT=/var/www/html/currentresources
+
+TAG=$1
 
 ######
 # STEP 1: Dump content database
 printf "MWM snapshot: Trying to mysqldump mediawiki...\n"
-podman exec $APACHE_CONTAINER_NAME /bin/bash -c \
-  "mysqldump -h $MYSQL_HOST -u $MYSQL_USER -p$WG_DB_PASSWORD \
-  $DATABASE_NAME > $CONTAINER_INTERNAL_PATH_TO_SNAPSHOT/db.sql"
+
+  mysqldump -h $MYSQL_HOST -u $MYSQL_USER -p$WG_DB_PASSWORD \
+  $DATABASE_NAME > $CONTAINER_INTERNAL_PATH_TO_SNAPSHOT/db.sql
 printf "MWM snapshot: mysqldump mediawiki completed.\n"
 
 ######
 # STEP 2: Copy folders and files
 printf "MWM snapshot: Trying to copy folders and files...\n"
-podman exec $APACHE_CONTAINER_NAME /bin/bash -c \
-  "cp -r \
+cp -r \
     /var/www/html/w/composer.json \
     /var/www/html/w/extensions \
     /var/www/html/w/skins \
@@ -28,15 +25,22 @@ podman exec $APACHE_CONTAINER_NAME /bin/bash -c \
     /var/www/html/mwmconfigdb.sqlite \
     /etc/apache2/sites-available \
     $CONTAINER_INTERNAL_PATH_TO_SNAPSHOT
-  "
+  
 printf "MWM snapshot: mysqldump mediawiki completed.\n"
+
+if [[ $TAG == "" ]]
+then
+    TAGS=""
+else
+    TAGS="--tag $TAG"
+fi
 
 ######
 # STEP 3: Run restic backup
 printf "MWM snapshot: Trying to run restic backup...\n"
-podman exec $APACHE_CONTAINER_NAME /bin/bash -c \
-  "restic \
+restic \
     --password-file /var/www/restic_password \
     --repo /var/www/html/snapshots \
-      backup $CONTAINER_INTERNAL_PATH_TO_SNAPSHOT"
+    $TAGS \
+      backup $CONTAINER_INTERNAL_PATH_TO_SNAPSHOT
 printf "MWM snapshot: Completed running restic backup.\n"

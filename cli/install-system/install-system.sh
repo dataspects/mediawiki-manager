@@ -74,11 +74,3 @@ source ./cli/manage-content/inject-manage-page-from-mediawiki.org.sh
 echo "Initialize restic backup repository"
 podman exec $APACHE_CONTAINER_NAME /bin/bash -c \
   "restic --password-file /var/www/restic_password --verbose init --repo /var/www/html/snapshots"
-
-### >>>
-# MWM Concept: take initial snapshot and view snapshots
-source ./cli/system-snapshots/take-restic-snapshot.sh
-source ./cli/system-snapshots/view-restic-snapshots.sh
-# <<<
-
-# setPermissionsOnSystemInstanceRoot
