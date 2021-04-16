@@ -21,6 +21,8 @@ else
 fi
 
 declare -a vols=(
+  "/var/www/html/w/composer.json"
+  "/var/www/html/w/composer.lock"
   "/var/www/html/w/extensions"
   "/var/www/html/w/skins"
   "/var/www/html/w/vendor"

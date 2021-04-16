@@ -22,7 +22,9 @@ source ./cli/install-system/initialize-persistent-mediawiki-service-volumes.sh
 # <<<
 
 touch $MEDIAWIKI_ROOT/mwmLocalSettings.php
-touch $MEDIAWIKI_ROOT/w/composer.local.json
+echo "{}" > $MEDIAWIKI_ROOT/w/composer.local.json
+echo "{}" > $MEDIAWIKI_ROOT/w/composer.local.lock
+
 envsubst < mediawiki-manager.tpl > mediawiki-manager.yml
 podman play kube mediawiki-manager.yml
 

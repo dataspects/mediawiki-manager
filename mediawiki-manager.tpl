@@ -47,6 +47,9 @@ spec:
         - name: mediawiki_root_w_composerLocalJSON
           hostPath:
             path: ${SYSTEM_INSTANCE_ROOT}/mediawiki_root/w/composer.local.json
+        - name: mediawiki_root_w_composerLocalLock
+          hostPath:
+            path: ${SYSTEM_INSTANCE_ROOT}/mediawiki_root/w/composer.local.lock
         - name: mediawiki_root_w_images
           hostPath:
             path: ${SYSTEM_INSTANCE_ROOT}/mediawiki_root/w/images
@@ -78,6 +81,8 @@ spec:
               name: mediawiki_root_w_vendor
             - mountPath: /var/www/html/w/composer.local.json
               name: mediawiki_root_w_composerLocalJSON
+            - mountPath: /var/www/html/w/composer.local.lock
+              name: mediawiki_root_w_composerLocalLock
             - mountPath: /var/www/html/w/images
               name: mediawiki_root_w_images
             # MWM

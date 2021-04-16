@@ -11,6 +11,7 @@ restic \
             --target ./currentresources
 
 cp ./currentresources/var/www/html/currentresources/composer.local.json /var/www/html/w/composer.local.json; \
+cp ./currentresources/var/www/html/currentresources/composer.local.lock /var/www/html/w/composer.local.lock; \
 cp ./currentresources/var/www/html/currentresources/mwmconfigdb.sqlite /var/www/html/mwmconfigdb.sqlite; \
 rm -rf /var/www/html/w/extensions/*;
 cp -r --preserve=links ./currentresources/var/www/html/currentresources/extensions/* /var/www/html/w/extensions/; \
@@ -27,3 +28,5 @@ mysql -h $MYSQL_HOST -u $MYSQL_USER -p$WG_DB_PASSWORD \
     $DATABASE_NAME < ./currentresources/var/www/html/currentresources/db.sql
 
 php ./cli/lib/updateMWMLocalSettings.php
+cd /var/www/html/w && COMPOSER_HOME=/var/www/html/w php composer.phar update
+cd -

@@ -18,6 +18,7 @@ printf "MWM snapshot: mysqldump mediawiki completed.\n"
 printf "MWM snapshot: Trying to copy folders and files...\n"
 cp -r \
     /var/www/html/w/composer.local.json \
+    /var/www/html/w/composer.local.lock \
     /var/www/html/w/extensions \
     /var/www/html/w/skins \
     /var/www/html/w/images \

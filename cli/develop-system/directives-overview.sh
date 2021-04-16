@@ -9,6 +9,7 @@ strs=(
     "addToMWMSQLite.php"
     "removeFromMWMSQLite.php"
     "updateMWMLocalSettings.php"
+    "composer.phar"
 )
 
 clear;
@@ -24,6 +25,9 @@ FLAGS="--line-number \
     --ignore-case \
     --context=$CONTEXT \
     --exclude-dir=develop-system \
+    --exclude-dir=mediawiki_root \
+    --exclude-dir=mariadb_data \
+    --exclude-dir=currentresources \
     --exclude-dir=.git"
 
 for s in "${strs[@]}"

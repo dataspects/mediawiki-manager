@@ -19,4 +19,7 @@ podman play kube mediawiki-manager.yml
 
 source ./cli/lib/waitForMariaDB.sh
 
+source ./envs/my-new-system.env
+podman exec $APACHE_CONTAINER_NAME /bin/bash -c "cd /var/www/html/w && COMPOSER_HOME=/var/www/html/w php composer.phar update"
+
 runMWUpdatePHP
