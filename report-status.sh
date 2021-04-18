@@ -1,4 +1,6 @@
 #!/bin/bash
+# Public MWMBashCommand
+#
 
 clear;
 ./cli/system-snapshots/view-restic-snapshots.sh

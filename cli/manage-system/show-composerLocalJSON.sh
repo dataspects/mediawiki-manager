@@ -1,4 +1,7 @@
 #!/bin/bash
+# Public MWMBashCommand
+#
+
 source ./envs/my-new-system.env
 
 printf "\n\033[0;32mcomposer.local.json\033[0m"

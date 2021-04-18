@@ -1,4 +1,6 @@
 #!/bin/bash
+# Public MWMBashCommand
+#
 
 source ./envs/my-new-system.env
 source ./cli/lib/utils.sh

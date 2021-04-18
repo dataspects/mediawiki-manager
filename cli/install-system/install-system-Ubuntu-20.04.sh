@@ -1,4 +1,7 @@
 #!/bin/bash
+# Public MWMBashCommand
+#
+
 source ./envs/my-new-system.env
 source ./cli/config-db/lib.sh
 source ./cli/logging/lib.sh

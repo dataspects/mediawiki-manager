@@ -1,6 +1,6 @@
 #!/bin/bash
-
-# MWMBashScript: restart MWM System
+# Public MWMBashCommand
+#
 
 source ./cli/lib/utils.sh
 source ./cli/lib/permissions.sh

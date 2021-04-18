@@ -1,4 +1,6 @@
 #!/bin/bash
+# Public MWMBashCommand
+#
 
 source ./cli/lib/utils.sh
 source ./cli/manage-extensions/utils.sh

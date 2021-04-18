@@ -1,4 +1,7 @@
 #!/bin/bash
+# Public MWMBashCommand
+#
+
 source ./cli/lib/runInContainerOnly.sh
 
 # FIXME: handle multiple system setups

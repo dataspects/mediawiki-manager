@@ -1,4 +1,7 @@
 #!/bin/bash
+# Public MWMBashCommand
+#
+
 source ./cli/lib/runInContainerOnly.sh
 
 CONTAINER_INTERNAL_PATH_TO_SNAPSHOT=/var/www/html/currentresources
