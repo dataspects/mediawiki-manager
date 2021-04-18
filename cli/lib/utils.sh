@@ -2,10 +2,12 @@
 
 # Public MWMBashFunction
 promptToContinue () {
-    printf "\033[0m\n"
+    printf "\n\n\e[2mDim"
     read -p "Continue? (y/n)" -n 1 -r
+    printf "\e[0m"
     if [[ ! $REPLY =~ ^[Yy]$ ]]
     then
+        printf "\n"
         exit 1
     fi
     printf "\n"
