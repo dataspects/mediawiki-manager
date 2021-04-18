@@ -15,5 +15,5 @@ for filename in WikiPageContents/*.wikitext; do
     source ./cli/manage-content/mediawiki-inject.sh
 done
 
-runMWUpdatePHP
+runMWRunJobsPHP
 runSMWRebuildData

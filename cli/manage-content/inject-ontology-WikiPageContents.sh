@@ -32,5 +32,5 @@ for filename in ontologies/$ONTOLOGY_NAME/objects/*; do
     fi    
 done
 
-runMWUpdatePHP
+runMWRunJobsPHP
 runSMWRebuildData

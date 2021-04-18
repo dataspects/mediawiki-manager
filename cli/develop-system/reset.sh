@@ -22,4 +22,4 @@ sudo rm -rf \
     mariadb_data \
     mwmconfigdb.sqlite
 
-./cli/install-system/install-system.sh
+./cli/install-system/install-system-Ubuntu-20.04.sh

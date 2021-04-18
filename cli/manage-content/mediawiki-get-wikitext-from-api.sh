@@ -19,6 +19,8 @@ CR=$(curl -S \
 	--compressed \
 	--request "GET" "${WIKIAPI}?action=query&prop=revisions&titles=$TITLE&rvslots=*&rvprop=content&formatversion=2&format=json&rvsection=$SECTION")
 
+echo "${WIKIAPI}?action=query&prop=revisions&titles=$TITLE&rvslots=*&rvprop=content&formatversion=2&format=json&rvsection=$SECTION"
+
 rm ${folder}/cache.json
 echo "$CR" > ${folder}/cache.json
 WIKITEXT=$(jq --raw-output '.query.pages[0].revisions[0].slots.main.content' ${folder}/cache.json)

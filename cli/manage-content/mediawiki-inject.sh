@@ -1,5 +1,8 @@
 #!/bin/bash
 
+echo $PAGENAME
+echo $WIKITEXT
+
 CR=$(curl -S \
 	$OPTION_INSECURE \
 	--location \

@@ -2,7 +2,7 @@
 
 # Public MWMBashFunction
 promptToContinue () {
-    printf "\n\n\e[2mDim"
+    printf "\n\n\e[2m"
     read -p "Continue? (y/n)" -n 1 -r
     printf "\e[0m"
     if [[ ! $REPLY =~ ^[Yy]$ ]]
@@ -21,6 +21,16 @@ folder="/tmp"
 getPageData () {
     PAGENAME=$(sed -r 's/.*\/(.*).wikitext/\1/g' <<< $1)
     WIKITEXT=`cat "$1"`
+}
+
+# Public MWMBashFunction
+runMWRunJobsPHP () {
+    if [ "`ls /home`" != "" ]
+    then
+        podman exec $APACHE_CONTAINER_NAME /bin/bash -c "cd w; php maintenance/runJobs.php"
+    else
+        cd w; php maintenance/runJobs.php --quick
+    fi
 }
 
 # Public MWMBashFunction

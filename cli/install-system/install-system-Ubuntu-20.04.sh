@@ -63,14 +63,6 @@ podman exec $APACHE_CONTAINER_NAME /bin/bash -c \
 
 runMWUpdatePHP
 
-###############################
-# Done installing core system #
-###############################
-
-echo "Inject contents..."
-source ./cli/manage-content/inject-local-WikiPageContents.sh
-source ./cli/manage-content/inject-manage-page-from-mediawiki.org.sh
-
 ##########
 # RESTIC #
 ##########
