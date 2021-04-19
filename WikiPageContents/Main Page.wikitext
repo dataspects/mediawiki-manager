@@ -1,5 +1,4 @@
 Welcome!
 
 * [[Get started...]]
-* [[Manage this MediaWiki instance]]
-* [{{SERVER}}/ui Manage extensions and apps...]
+* [[Help:Editing pages]]
