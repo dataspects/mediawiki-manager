@@ -27,6 +27,8 @@ if [ "$repository" != "null" ]; then rInstrFound=true; fi
 if [ "$localSettings" != "null" ]; then lsInstrFound=true; fi
 ###
 
+./cli/system-snapshots/take-restic-snapshot.sh BeforeDisabling-$EXTNAME
+
 ###
 # Check installation aspects
 if [ $cInstrFound ] && [ $rInstrFound ]
@@ -34,9 +36,6 @@ then
     echo "Problem: Installation aspects for $EXTNAME contain both composer and repository specifications!"
     exit
 fi
-###
-
-./cli/system-snapshots/take-restic-snapshot.sh
 
 ###
 # Run installation aspects

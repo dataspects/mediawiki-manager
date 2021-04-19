@@ -6,6 +6,15 @@ source ./cli/lib/runInContainerOnly.sh
 
 SNAPSHOT_ID=$1
 
+# If it is "latest", then we're coming from an upgrade, which already had a snapshot
+# right before running
+
+if [[ $SNAPSHOT_ID != "latest" ]]
+then
+    ./cli/system-snapshots/take-restic-snapshot.sh BeforeRestoring-$SNAPSHOT_ID
+fi
+
+
 restic \
     --password-file /var/www/restic_password \
     --repo /var/www/html/snapshots \

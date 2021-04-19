@@ -37,7 +37,7 @@ then
 fi
 ###
 
-./cli/system-snapshots/take-restic-snapshot.sh
+./cli/system-snapshots/take-restic-snapshot.sh BeforeEnabling-$EXTNAME
 
 ###
 # Run installation aspects

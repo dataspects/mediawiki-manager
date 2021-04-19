@@ -6,12 +6,14 @@ source ./cli/lib/utils.sh
 source ./cli/lib/permissions.sh
 source ./envs/my-new-system.env
 
-./cli/system-snapshots/take-restic-snapshot.sh Upgrade
+echo -n "Enter MEDIAWIKI_IMAGE, e.g. 'docker.io/dataspects/mediawiki:1.35.1-2104141705': "
+read MEDIAWIKI_IMAGE
+
+./cli/system-snapshots/take-restic-snapshot.sh BeforeUpgrade
 
 ./cli/manage-system/stop.sh
 podman pod rm mwm-deployment-pod-0
 
-MEDIAWIKI_IMAGE=docker.io/dataspects/mediawiki:1.35.1-2104141705
 envsubst < mediawiki-manager.tpl > mediawiki-manager.yml
 podman play kube mediawiki-manager.yml
 
