@@ -4,7 +4,7 @@
 
 source ./cli/lib/runInContainerOnly.sh
 
-printf "\n\033[0;32mMWM System Snapshots\033[0m"
+printf "\n\033[0;32m\e[1mMWM System Snapshots\033[0m"
 printf "\n====================\n"
 restic \
     --repo /var/www/html/snapshots \

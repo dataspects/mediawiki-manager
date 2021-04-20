@@ -7,3 +7,4 @@ clear;
 ./cli/config-db/view-mwm-config.sh
 ./cli/manage-extensions/show-extension-catalogue.sh
 ./cli/manage-system/show-composerLocalJSON.sh
+./report-podman.sh

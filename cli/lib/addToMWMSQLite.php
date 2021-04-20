@@ -1,4 +1,5 @@
 <?php
+
 $name  = $argv[1];
 $localsettingsdirectives = $argv[2];
 $db = new SQLite3('mwmconfigdb.sqlite');

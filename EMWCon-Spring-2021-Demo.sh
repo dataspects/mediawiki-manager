@@ -41,3 +41,7 @@ printf "\n\n\t\e[4m./cli/manage-content/inject-ontology-WikiPageContents.sh\e[0m
 promptToContinue
 source ./cli/manage-content/inject-ontology-WikiPageContents.sh
 promptToContinue
+
+# ./cli/system-snapshots/restore-restic-snapshot.sh XYZ
+# ./cli/manage-system/upgrade.sh
+# ./cli/manage-extensions/disable-extension.sh SemanticScribunto
