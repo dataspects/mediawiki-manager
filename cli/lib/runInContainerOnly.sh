@@ -1,5 +1,7 @@
 #!/bin/bash
 
+# CreateCampEMWCon2021: https://mwstake.org/mwstake/wiki/MWStake_MediaWiki_Manager/Infrastructure
+
 if [ "`ls /home`" != "" ]
 then
     source ./cli/lib/utils.sh

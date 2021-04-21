@@ -20,7 +20,8 @@
     ],
     "documentation": [
       "https://www.mediawiki.org/wiki/Extension:Semantic_Scribunto"
-    ]
+    ],
+    "CreateCampEMWCon2021": "Which fields should be used for what purpose? https://mwstake.org/mwstake/wiki/MWStake_MediaWiki_Manager/MWStakeServices/ExtensionsCatalog"
   },
   {
     "name": "Mermaid",

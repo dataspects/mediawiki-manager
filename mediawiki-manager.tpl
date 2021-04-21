@@ -1,9 +1,3 @@
-# Generation of Kubernetes YAML is still under development!
-#
-# Save the output of this file and use kubectl create -f to import
-# it into Kubernetes.
-#
-# Created with podman-3.0.1
 apiVersion: v1
 kind: Deployment
 metadata:
@@ -20,6 +14,7 @@ spec:
       labels:
         app: mwm
     spec:
+      # CreateCampEMWCon2021: introduce volume type switch: owner, group, permissions
       volumes:
         # Restic
         - name: snapshots
@@ -69,6 +64,7 @@ spec:
           hostPath:
             path: ${SYSTEM_INSTANCE_ROOT}/mariadb_data
       containers:
+        # CreateCampEMWCon2021: optimize Dockerfile: executing user and permissions: https://github.com/dataspects/dataspectsSystemBuilder/tree/master/docker-images/mediawiki
         - image: ${MEDIAWIKI_IMAGE}
           name: mediawiki
           volumeMounts:
@@ -112,6 +108,7 @@ spec:
             - name: WG_DB_PASSWORD
               value: ${WG_DB_PASSWORD}
           ports:
+            # CreateCampEMWCon2021: optimize Apache Virtual Host config: mwmITLocal, mwmITIntra, mwmITCloud: https://github.com/dataspects/dataspectsSystemBuilder/tree/master/docker-images/mediawiki
             - containerPort: 443
               hostPort: 4443
         - image: docker.io/library/mariadb:10.5.5

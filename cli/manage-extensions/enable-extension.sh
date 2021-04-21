@@ -43,6 +43,7 @@ fi
 # Run installation aspects
 if [ $cInstrFound ]
 then
+    # CreateCampEMWCon2021: run composer correctly
     echo "Running composer..."
     cd /var/www/html/w && COMPOSER=composer.local.json COMPOSER_HOME=/var/www/html/w php composer.phar require $composer
     cd -

@@ -1,8 +1,6 @@
 #!/bin/bash
 
-# TODO:
-#
-#   1. Reconsider entire permissions structure
+# CreateCampEMWCon2021: Check general permissions
 
 setPermissionsOnSystemInstanceRoot () {
 

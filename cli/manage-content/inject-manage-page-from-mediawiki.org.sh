@@ -8,7 +8,7 @@ source ./envs/my-new-system.env
 
 source ./cli/lib/utils.sh
 
-./cli/system-snapshots/take-restic-snapshot.sh BeforeMWOrgContentsInjection
+# ./cli/system-snapshots/take-restic-snapshot.sh BeforeMWOrgContentsInjection
 
 WIKIAPI=https://www.mediawiki.org/w/api.php
 TITLE="Help:Editing_pages"

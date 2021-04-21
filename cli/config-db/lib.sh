@@ -3,6 +3,7 @@
 mwmLocalSettings="mwmLocalSettings.php"
 
 initializeSQLiteDB() {
+    # CreateCampEMWCon2021: SQLite MWM Config database schema
     DB=mwmconfigdb.sqlite
     sqlite3 $DB "CREATE TABLE IF NOT EXISTS extensions (
         id INTEGER PRIMARY KEY AUTOINCREMENT,

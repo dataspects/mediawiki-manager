@@ -1,6 +1,6 @@
 #!/bin/bash
 
-# This script is used in the context of https://mwstake.org/mwstake/wiki/MWStake_MediaWiki_Manager#ALcontainerization:_Docker
+# CreateCampEMWCon2021: https://mwstake.org/mwstake/wiki/MWStake_MediaWiki_Manager/Infrastructure
 
 source ./envs/my-new-system.env
 
@@ -47,7 +47,7 @@ if [[ $? == 0 ]]
       exit
   fi
 
-# FIXME
+# CreateCampEMWCon2021: Check general permissions
 chmod -R 777 $MEDIAWIKI_ROOT/w
 
 echo "SUCCESS: Initialized persistent mediawiki service volumes"
