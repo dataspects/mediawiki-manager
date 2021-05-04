@@ -1,6 +1,5 @@
 #!/bin/bash
-# Public MWMBashCommand
-#
+# Public MWMBashScript: Install system from scratch.
 
 source ./envs/my-new-system.env
 source ./cli/config-db/lib.sh

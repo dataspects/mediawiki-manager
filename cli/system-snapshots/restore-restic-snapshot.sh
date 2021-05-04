@@ -1,6 +1,5 @@
 #!/bin/bash
-# Public MWMBashCommand
-#
+# Public MWMBashScript: Restore system snapshot.
 
 source ./cli/lib/runInContainerOnly.sh
 

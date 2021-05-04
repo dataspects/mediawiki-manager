@@ -1,6 +1,5 @@
 #!/bin/bash
-# Public MWMBashCommand
-#
+# Public MWMBashScript: Inject <PageName>.wikitext files from local ./WikiPageContents directory.
 
 source ./envs/my-new-system.env
 

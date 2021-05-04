@@ -1,6 +1,5 @@
 #!/bin/bash
-# Public MWMBashCommand
-#
+# Public MWMBashScript: Inject <TITLE>s from <WIKIAPI> BY <SECTION>s.
 
 source ./envs/my-new-system.env
 

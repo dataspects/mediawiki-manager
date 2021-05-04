@@ -1,6 +1,5 @@
 #!/bin/bash
-# Public MWMBashCommand
-#
+# Public MWMBashScript: Enable extensions selected from $CATALOGUE_URL.
 
 source ./cli/lib/runInContainerOnly.sh
 

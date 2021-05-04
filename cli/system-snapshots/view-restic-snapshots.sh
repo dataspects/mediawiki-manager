@@ -1,6 +1,5 @@
 #!/bin/bash
-# Public MWMBashCommand
-#
+# Public MWMBashScript: View system snapshots.
 
 source ./cli/lib/runInContainerOnly.sh
 

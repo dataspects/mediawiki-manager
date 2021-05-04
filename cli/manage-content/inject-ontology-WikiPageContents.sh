@@ -1,6 +1,5 @@
 #!/bin/bash
-# Public MWMBashCommand
-#
+# Public MWMBashScript: Inject objects from GitHub <ONTOLOGY_URL>.
 
 source ./envs/my-new-system.env
 source ./cli/lib/utils.sh

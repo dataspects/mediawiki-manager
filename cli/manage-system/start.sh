@@ -1,6 +1,5 @@
 #!/bin/bash
-# Public MWMBashCommand
-#
+# Public MWMBashScript: Start MWM System.
 
 source ./envs/my-new-system.env
 source ./cli/lib/utils.sh

@@ -1,5 +1,5 @@
 #!/bin/bash
-# Public MWMBashCommand
+# Public MWMBashScript: CAUTION: Remove everything except container images and reset entire system.
 #
 
 source ./envs/my-new-system.env

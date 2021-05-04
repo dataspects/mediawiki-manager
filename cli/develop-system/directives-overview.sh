@@ -1,4 +1,5 @@
 #!/bin/bash
+# Public MWMBashScript: Check the usage of distinct MWM CLI-level directives (scripts, functions, PHP).
 
 strs=(
     "runMWUpdatePHP"

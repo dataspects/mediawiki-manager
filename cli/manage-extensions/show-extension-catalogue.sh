@@ -1,6 +1,5 @@
 #!/bin/bash
-# Public MWMBashCommand
-#
+# Public MWMBashScript: Show extensions featured in $CATALOGUE_URL.
 
 source ./cli/lib/utils.sh
 source ./cli/manage-extensions/utils.sh

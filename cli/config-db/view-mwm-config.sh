@@ -1,6 +1,5 @@
 #!/bin/bash
-# Public MWMBashCommand
-#
+# Public MWMBashScript: Check which PHP directives are currently added to LocalSettings.php.
 
 source ./cli/lib/runInContainerOnly.sh
 

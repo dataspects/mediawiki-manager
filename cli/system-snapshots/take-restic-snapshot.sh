@@ -1,6 +1,5 @@
 #!/bin/bash
-# Public MWMBashCommand
-#
+# Public MWMBashScript: Take system snapshot.
 
 source ./cli/lib/runInContainerOnly.sh
 

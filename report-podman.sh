@@ -1,6 +1,5 @@
 #!/bin/bash
-# Public MWMBashCommand
-#
+# Public MWMBashScript: Check out pods, containers and images.
 
 printf "\n\033[0;32m\e[1mPods\033[0m"
 printf "\n====================================\n"

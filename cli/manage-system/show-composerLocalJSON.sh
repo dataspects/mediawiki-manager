@@ -1,6 +1,5 @@
 #!/bin/bash
-# Public MWMBashCommand
-#
+# Public MWMBashScript: Check the current contents of $MEDIAWIKI_ROOT/w/composer.local.json.
 
 source ./envs/my-new-system.env
 

@@ -1,6 +1,5 @@
 #!/bin/bash
-# Public MWMBashCommand
-#
+# Public MWMBashScript: Check out primary system aspects.
 
 clear;
 ./cli/config-db/view-mwm-config.sh
