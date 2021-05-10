@@ -17,8 +17,8 @@ The installer will take care of everything else.
 
 1. `user@server:~$ git clone https://github.com/dataspects/mediawiki-manager.git`
 2. `user@server:~$ cd mediawiki-manager`
-3. Configure `~/mediawiki-manager/envs/my-new-system.env`
-4. `user@server:~/mediawiki-manager$ ./cli/install-system/install-system.sh`
+3. Configure $ENV
+4. `user@server:~/mediawiki-manager$ ENVmwman=my-system.env ENVmwcli=../mediawiki-cli/my-system.env ./install-system/install-system-Ubuntu-20.04.sh`
 
 ## Features
 

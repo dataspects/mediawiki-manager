@@ -19,84 +19,84 @@ spec:
         # Restic
         - name: snapshots
           hostPath:
-            path: ${SYSTEM_INSTANCE_ROOT}/snapshots
+            path: ${SYSTEM_SNAPSHOT_FOLDER_ON_HOSTING_SYSTEM}
         - name: currentresources
           hostPath:
-            path: ${SYSTEM_INSTANCE_ROOT}/currentresources
+            path: ${CURRENT_RESOURCES_ON_HOSTING_SYSTEM}
         - name: restic_password
           hostPath:
-            path: ${SYSTEM_INSTANCE_ROOT}/conf/restic/restic_password
+            path: ${RESTIC_PASSWORD_ON_HOSTING_SYSTEM}
         - name: mwmsqlite
           hostPath:
-            path: ${SYSTEM_INSTANCE_ROOT}/mwmconfigdb.sqlite
+            path: ${MWCLI_CONFIG_DB_ON_HOSTING_SYSTEM}
         # MediaWiki        
-        - name: mediawiki_root_w_extensions
+        - name: system_root_w_extensions
           hostPath:
-            path: ${SYSTEM_INSTANCE_ROOT}/mediawiki_root/w/extensions
-        - name: mediawiki_root_w_skins
+            path: ${SYSTEM_ROOT_FOLDER_ON_HOSTING_SYSTEM}/w/extensions
+        - name: system_root_w_skins
           hostPath:
-            path: ${SYSTEM_INSTANCE_ROOT}/mediawiki_root/w/skins
-        - name: mediawiki_root_w_vendor
+            path: ${SYSTEM_ROOT_FOLDER_ON_HOSTING_SYSTEM}/w/skins
+        - name: system_root_w_vendor
           hostPath:
-            path: ${SYSTEM_INSTANCE_ROOT}/mediawiki_root/w/vendor
-        - name: mediawiki_root_w_composerLocalJSON
+            path: ${SYSTEM_ROOT_FOLDER_ON_HOSTING_SYSTEM}/w/vendor
+        - name: system_root_w_composerLocalJSON
           hostPath:
-            path: ${SYSTEM_INSTANCE_ROOT}/mediawiki_root/w/composer.local.json
-        - name: mediawiki_root_w_composerLocalLock
+            path: ${SYSTEM_ROOT_FOLDER_ON_HOSTING_SYSTEM}/w/composer.local.json
+        - name: system_root_w_composerLocalLock
           hostPath:
-            path: ${SYSTEM_INSTANCE_ROOT}/mediawiki_root/w/composer.local.lock
-        - name: mediawiki_root_w_images
+            path: ${SYSTEM_ROOT_FOLDER_ON_HOSTING_SYSTEM}/w/composer.local.lock
+        - name: system_root_w_images
           hostPath:
-            path: ${SYSTEM_INSTANCE_ROOT}/mediawiki_root/w/images
+            path: ${SYSTEM_ROOT_FOLDER_ON_HOSTING_SYSTEM}/w/images
         # Apache
         - name: apache_sites_available
           hostPath:
-            path: ${SYSTEM_INSTANCE_ROOT}/conf/apache/sites-available
+            path: ${APACHE_CONF_ON_HOSTING_SYSTEM}
         # MWM
         - name: mwmCLI
           hostPath:
-            path: ${SYSTEM_INSTANCE_ROOT}/cli
+            path: ${MEDIAWIKI_CLI_ON_HOSTING_SYSTEM}
         - name: mwmLogs
           hostPath:
-            path: ${SYSTEM_INSTANCE_ROOT}/logs
+            path: ${MWCLI_SYSTEM_LOG_ON_HOSTING_SYSTEM}
         # MariaDB
         - name: mariadb_data
           hostPath:
-            path: ${SYSTEM_INSTANCE_ROOT}/mariadb_data
+            path: ${MARIADB_FOLDER_ON_HOSTING_SYSTEM}
       containers:
         # CreateCampEMWCon2021: optimize Dockerfile: executing user and permissions: https://github.com/dataspects/dataspectsSystemBuilder/tree/master/docker-images/mediawiki
         - image: ${MEDIAWIKI_IMAGE}
           name: mediawiki
           volumeMounts:
             # MediaWiki
-            - mountPath: /var/www/html/w/extensions
-              name: mediawiki_root_w_extensions
-            - mountPath: /var/www/html/w/skins
-              name: mediawiki_root_w_skins
-            - mountPath: /var/www/html/w/vendor
-              name: mediawiki_root_w_vendor
+            # - mountPath: /var/www/html/w/extensions
+            #   name: system_root_w_extensions
+            # - mountPath: /var/www/html/w/skins
+            #   name: system_root_w_skins
+            # - mountPath: /var/www/html/w/vendor
+            #   name: system_root_w_vendor
             - mountPath: /var/www/html/w/composer.local.json
-              name: mediawiki_root_w_composerLocalJSON
+              name: system_root_w_composerLocalJSON
             - mountPath: /var/www/html/w/composer.local.lock
-              name: mediawiki_root_w_composerLocalLock
+              name: system_root_w_composerLocalLock
             - mountPath: /var/www/html/w/images
-              name: mediawiki_root_w_images
+              name: system_root_w_images
             # MWM
-            - mountPath: /var/www/html/logs
+            - mountPath: ${MWCLI_SYSTEM_LOG_IN_CONTAINER}
               name: mwmLogs
-            - mountPath: /var/www/html/mwmconfigdb.sqlite
+            - mountPath: ${MWCLI_CONFIG_DB_IN_CONTAINER}
               name: mwmsqlite
-            - mountPath: /var/www/html/cli
+            - mountPath: ${MEDIAWIKI_CLI_IN_CONTAINER}
               name: mwmCLI
             # Apache
-            - mountPath: /etc/apache2/sites-available
+            - mountPath: ${APACHE_CONF_IN_CONTAINER}
               name: apache_sites_available
             # Restic
-            - mountPath: /var/www/restic_password
+            - mountPath: ${RESTIC_PASSWORD_IN_CONTAINER}
               name: restic_password
-            - mountPath: /var/www/html/snapshots
+            - mountPath: ${SYSTEM_SNAPSHOT_FOLDER_IN_CONTAINER}
               name: snapshots
-            - mountPath: /var/www/html/currentresources
+            - mountPath: ${CURRENT_RESOURCES_IN_CONTAINER}
               name: currentresources
           env:
             - name: MYSQL_HOST

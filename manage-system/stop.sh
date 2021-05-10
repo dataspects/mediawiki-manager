@@ -2,9 +2,9 @@
 # Public MWMBashScript: Stop MWM System.
 
 source ./envs/my-new-system.env
-source ./cli/lib/utils.sh
+source $MEDIAWIKI_CLI/lib/utils.sh
 
-podman pod stop $POD
+$CONTAINER_COMMAND pod stop $POD
 
 if [[ $? == 0 ]]
 then

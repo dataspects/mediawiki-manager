@@ -3,11 +3,11 @@
 #
 
 source ./envs/my-new-system.env
-source ./cli/lib/utils.sh
+source $MEDIAWIKI_CLI/lib/utils.sh
 
-./cli/manage-system/stop.sh
+$MEDIAWIKI_CLI/manage-system/stop.sh
 
-podman pod rm mwm-deployment-pod-0
+$CONTAINER_COMMAND pod rm mwm-deployment-pod-0
 if [[ $? == 0 ]]
 then
     echo "SUCCESS: removed pod mwm"
@@ -17,9 +17,9 @@ fi
 
 #FIXME: Why sudo?
 sudo rm -rf \
-    mediawiki_root \
+    system_root \
     snapshots \
     mariadb_data \
     mwmconfigdb.sqlite
 
-./cli/install-system/install-system-Ubuntu-20.04.sh
+$MEDIAWIKI_CLI/install-system/install-system-Ubuntu-20.04.sh

@@ -3,14 +3,14 @@
 
 printf "\n\033[0;32m\e[1mPods\033[0m"
 printf "\n====================================\n"
-podman pod ls
+$CONTAINER_COMMAND pod ls
 
 printf "\n\033[0;32m\e[1mContainers\033[0m"
 printf "\n====================================\n"
-podman container ls -a --pod
+$CONTAINER_COMMAND container ls -a --pod
 
 printf "\n\033[0;32m\e[1mImages\033[0m"
 printf "\n====================================\n"
-podman image ls -a
+$CONTAINER_COMMAND image ls -a
 
 printf "\n"
