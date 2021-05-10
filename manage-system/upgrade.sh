@@ -21,6 +21,6 @@ $MEDIAWIKI_CLI/system-snapshots/restore-restic-snapshot.sh latest
 source $MEDIAWIKI_CLI/lib/waitForMariaDB.sh
 
 source ./envs/my-new-system.env
-$CONTAINER_COMMAND exec $APACHE_CONTAINER_NAME /bin/bash -c "cd /var/www/html/w && COMPOSER_HOME=/var/www/html/w php composer.phar update"
+$CONTAINER_COMMAND exec $APACHE_CONTAINER_NAME /bin/bash -c "cd $SYSTEM_ROOT_FOLDER_IN_CONTAINER/w && COMPOSER_HOME=$SYSTEM_ROOT_FOLDER_IN_CONTAINER/w php composer.phar update"
 
 runMWUpdatePHP

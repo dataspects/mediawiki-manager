@@ -13,19 +13,19 @@ class MediaWiki {
 
     public function runMaintenanceUpdatePHP() {
         $this->logger->write("Running maintenance/update.php...");
-        exec("cd /var/www/html/w && php maintenance/update.php --quick", $output, $retval);
+        exec("cd $SYSTEM_ROOT_FOLDER_IN_CONTAINER/w && php maintenance/update.php --quick", $output, $retval);
         $this->logger->write("Ran maintenance/update.php");
     }
 
     public function runMaintenanceJobsPHP() {
         $this->logger->write("Running maintenance/runJobs.php...");
-        exec("cd /var/www/html/w && php maintenance/runJobs.php", $output, $retval);
+        exec("cd $SYSTEM_ROOT_FOLDER_IN_CONTAINER/w && php maintenance/runJobs.php", $output, $retval);
         $this->logger->write("Ran maintenance/runJobs.php");
     }
 
     public function runExtensionsSemanticMediaWikiMaintenanceRebuildDataPHP() {
         $this->logger->write("Running extensions/SemanticMediaWiki/maintenance/rebuildData.php...");
-        exec("cd /var/www/html/w/extensions/SemanticMediaWiki && php maintenance/rebuildData.php", $output, $retval);
+        exec("cd $SYSTEM_ROOT_FOLDER_IN_CONTAINER/w/extensions/SemanticMediaWiki && php maintenance/rebuildData.php", $output, $retval);
         $this->logger->write("Ran extensions/SemanticMediaWiki/maintenance/rebuildData.php...");
     }
 

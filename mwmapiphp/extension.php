@@ -11,8 +11,8 @@ class Extension {
         $this->logger = $logger;
         # FIXME: safe now?
         # FIXME: Ok not to escapeshellcmd as of now?
-        $this->configFile = "/var/www/html/w/LocalSettings.php";
-        $this->configFileBAK = "/var/www/html/w/LocalSettings.php.bak";
+        $this->configFile = "$SYSTEM_ROOT_FOLDER_IN_CONTAINER/w/LocalSettings.php";
+        $this->configFileBAK = "$SYSTEM_ROOT_FOLDER_IN_CONTAINER/w/LocalSettings.php.bak";
     }
 
     private function getExtensionProfileByName() {
@@ -33,14 +33,14 @@ class Extension {
         $this->logger->write("Trying to enable ".$this->ep["name"]."...");
         if(array_key_exists("composer", $this->ep["installation-aspects"])) {
             // By composer
-            exec("cd /var/www/html/w && COMPOSER_HOME=/var/www/html/w php composer.phar require ".$this->ep["installation-aspects"]["composer"], $output, $retval);
+            exec("cd $SYSTEM_ROOT_FOLDER_IN_CONTAINER/w && COMPOSER_HOME=$SYSTEM_ROOT_FOLDER_IN_CONTAINER/w php composer.phar require ".$this->ep["installation-aspects"]["composer"], $output, $retval);
             if($retval <> 0) {
                 $this->logger->write("Composer retval ".$retval."...");
             }
         } elseif(array_key_exists("repository", $this->ep["installation-aspects"])) {
             // From repository
             $this->logger->write("Trying to clone ".$this->ep["installation-aspects"]["repository"]."...");
-            exec("git clone ".$this->ep["installation-aspects"]["repository"]." /var/www/html/w/extensions/".$this->name, $output, $retval);
+            exec("git clone ".$this->ep["installation-aspects"]["repository"]." $SYSTEM_ROOT_FOLDER_IN_CONTAINER/w/extensions/".$this->name, $output, $retval);
             if($retval <> 0) {
                 $this->logger->write($this->ep["installation-aspects"]["repository"]." already cloned");
             } else {
@@ -80,7 +80,7 @@ class Extension {
         if(array_key_exists("composer", $this->ep["installation-aspects"])) {
             // By composer
             $this->logger->write("Running composer...");
-            exec("cd /var/www/html/w && COMPOSER_HOME=/var/www/html/w php composer.phar remove ".$this->ep["installation-aspects"]["composer"], $output, $retval);
+            exec("cd $SYSTEM_ROOT_FOLDER_IN_CONTAINER/w && COMPOSER_HOME=$SYSTEM_ROOT_FOLDER_IN_CONTAINER/w php composer.phar remove ".$this->ep["installation-aspects"]["composer"], $output, $retval);
             if($retval <> 0) {
                 $this->logger->write("Composer retval ".$retval."...");
             }

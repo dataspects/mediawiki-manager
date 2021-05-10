@@ -69,17 +69,17 @@ spec:
           name: mediawiki
           volumeMounts:
             # MediaWiki
-            # - mountPath: /var/www/html/w/extensions
+            # - mountPath: $SYSTEM_ROOT_FOLDER_IN_CONTAINER/w/extensions
             #   name: system_root_w_extensions
-            # - mountPath: /var/www/html/w/skins
+            # - mountPath: $SYSTEM_ROOT_FOLDER_IN_CONTAINER/w/skins
             #   name: system_root_w_skins
-            # - mountPath: /var/www/html/w/vendor
+            # - mountPath: $SYSTEM_ROOT_FOLDER_IN_CONTAINER/w/vendor
             #   name: system_root_w_vendor
-            - mountPath: /var/www/html/w/composer.local.json
+            - mountPath: ${SYSTEM_ROOT_FOLDER_IN_CONTAINER}/w/composer.local.json
               name: system_root_w_composerLocalJSON
-            - mountPath: /var/www/html/w/composer.local.lock
+            - mountPath: ${SYSTEM_ROOT_FOLDER_IN_CONTAINER}/w/composer.local.lock
               name: system_root_w_composerLocalLock
-            - mountPath: /var/www/html/w/images
+            - mountPath: ${SYSTEM_ROOT_FOLDER_IN_CONTAINER}/w/images
               name: system_root_w_images
             # MWM
             - mountPath: ${MWCLI_SYSTEM_LOG_IN_CONTAINER}

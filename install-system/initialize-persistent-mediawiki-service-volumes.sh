@@ -17,10 +17,10 @@ else
 fi
 
 declare -a vols=(
-  # "/var/www/html/w/extensions"
-  # "/var/www/html/w/skins"
-  # "/var/www/html/w/vendor" # FIXME
-  "/var/www/html/w/images"
+  # "$SYSTEM_ROOT_FOLDER_IN_CONTAINER/w/extensions"
+  # "$SYSTEM_ROOT_FOLDER_IN_CONTAINER/w/skins"
+  # "$SYSTEM_ROOT_FOLDER_IN_CONTAINER/w/vendor" # FIXME
+  "$SYSTEM_ROOT_FOLDER_IN_CONTAINER/w/images"
 )
 for vol in "${vols[@]}"
 do

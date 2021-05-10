@@ -33,8 +33,10 @@ touch $SYSTEM_ROOT_FOLDER_ON_HOSTING_SYSTEM/mwmLocalSettings.php
 echo "{}" > $SYSTEM_ROOT_FOLDER_ON_HOSTING_SYSTEM/w/composer.local.json
 echo "{}" > $SYSTEM_ROOT_FOLDER_ON_HOSTING_SYSTEM/w/composer.local.lock
 
-envsubst < mediawiki-manager-local.tpl > ../mediawiki-manager.yml
-$CONTAINER_COMMAND play kube ../mediawiki-manager.yml
+echo $SYSTEM_SNAPSHOT_FOLDER_ON_HOSTING_SYSTEM
+
+envsubst < mediawiki-manager-local.tpl > mediawiki-manager.yml
+$CONTAINER_COMMAND play kube mediawiki-manager.yml
 
 setPermissionsOnSystemInstanceRoot
 
@@ -64,7 +66,7 @@ $CONTAINER_COMMAND exec $MEDIAWIKI_CONTAINER_NAME /bin/bash -c \
 echo "Import database..."
 $CONTAINER_COMMAND exec $MEDIAWIKI_CONTAINER_NAME /bin/bash -c \
   "mysql -h $MYSQL_HOST -u $MYSQL_USER -p$WG_DB_PASSWORD \
-  mediawiki < /var/www/html/w/db.sql"
+  mediawiki < $SYSTEM_ROOT_FOLDER_IN_CONTAINER/w/db.sql"
 
 runMWUpdatePHP
 exit
