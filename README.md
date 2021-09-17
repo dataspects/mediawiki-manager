@@ -23,3 +23,10 @@ The installer will take care of everything else.
 ## Features
 
 The current set and state of features can be discovered at `./report-cli-public-commands.sh`.
+
+## Development
+
+1. Run ./initdev.sh on development machine (dm).
+2. cd mediawiki-cli
+3. ./report-status.sh
+4. If dm=dataspectsSystemBuilder, visit https://localhost:4443
