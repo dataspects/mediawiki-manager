@@ -11,43 +11,49 @@ source $MEDIAWIKI_CLI_ON_HOSTING_SYSTEM/logging/lib.sh
 source $MEDIAWIKI_CLI_ON_HOSTING_SYSTEM/lib/utils.sh
 source $MEDIAWIKI_CLI_ON_HOSTING_SYSTEM/lib/permissions.sh
 
-initializeSystemLog
-$MEDIAWIKI_CLI_ON_HOSTING_SYSTEM/initialize-mwcliconfigdb.sh
+# # initializeSystemLog
+# $MEDIAWIKI_CLI_ON_HOSTING_SYSTEM/initialize-mwcliconfigdb.sh
 
-mkdir --parent \
-  $SYSTEM_ROOT_FOLDER_ON_HOSTING_SYSTEM/w/extensions \
-  $SYSTEM_ROOT_FOLDER_ON_HOSTING_SYSTEM/w/skins \
-  $SYSTEM_ROOT_FOLDER_ON_HOSTING_SYSTEM/w/vendor \
-  $SYSTEM_ROOT_FOLDER_ON_HOSTING_SYSTEM/w/images \
-  $SYSTEM_SNAPSHOT_FOLDER_ON_HOSTING_SYSTEM \
-  $CURRENT_RESOURCES_ON_HOSTING_SYSTEM \
-  $MARIADB_FOLDER_ON_HOSTING_SYSTEM
-writeToSystemLog "Initialized hostPath folders"
+# mkdir --parent \
+#   $SYSTEM_ROOT_FOLDER_ON_HOSTING_SYSTEM/w/extensions \
+#   $SYSTEM_ROOT_FOLDER_ON_HOSTING_SYSTEM/w/skins \
+#   $SYSTEM_ROOT_FOLDER_ON_HOSTING_SYSTEM/w/vendor \
+#   $SYSTEM_ROOT_FOLDER_ON_HOSTING_SYSTEM/w/images \
+#   $SYSTEM_SNAPSHOT_FOLDER_ON_HOSTING_SYSTEM \
+#   $CURRENT_RESOURCES_ON_HOSTING_SYSTEM \
+#   $MARIADB_FOLDER_ON_HOSTING_SYSTEM
+# writeToSystemLog "Initialized hostPath folders"
 
-### >>>
-# MWM Concept: initialize persistent mediawiki service volumes
-source ./install-system/initialize-persistent-mediawiki-service-volumes.sh
-# <<<
+# ### >>>
+# # MWM Concept: initialize persistent mediawiki service volumes
+# source ./install-system/initialize-persistent-mediawiki-service-volumes.sh
+# # <<<
 
-touch $SYSTEM_ROOT_FOLDER_ON_HOSTING_SYSTEM/mwmLocalSettings.php
-echo "{}" > $SYSTEM_ROOT_FOLDER_ON_HOSTING_SYSTEM/w/composer.local.json
-echo "{}" > $SYSTEM_ROOT_FOLDER_ON_HOSTING_SYSTEM/w/composer.local.lock
+# touch $SYSTEM_ROOT_FOLDER_ON_HOSTING_SYSTEM/mwmLocalSettings.php
+# echo "{}" > $SYSTEM_ROOT_FOLDER_ON_HOSTING_SYSTEM/w/composer.local.json
+# echo "{}" > $SYSTEM_ROOT_FOLDER_ON_HOSTING_SYSTEM/w/composer.local.lock
 
-echo $SYSTEM_SNAPSHOT_FOLDER_ON_HOSTING_SYSTEM
 
-envsubst < mediawiki-manager-local.tpl > mediawiki-manager.yml
+
+
+
+# # echo $SYSTEM_SNAPSHOT_FOLDER_ON_HOSTING_SYSTEM
+
+# envsubst < mediawiki-manager-local.tpl > mediawiki-manager.yml
+
 $CONTAINER_COMMAND play kube mediawiki-manager.yml
+exit
+# setPermissionsOnSystemInstanceRoot
 
-setPermissionsOnSystemInstanceRoot
-
-initializemwmLocalSettings
-
+# initializemwmLocalSettings
 $CONTAINER_COMMAND exec $MEDIAWIKI_CONTAINER_NAME /bin/bash -c \
 "php $MEDIAWIKI_CLI_IN_CONTAINER/lib/addToMWMSQLite.php \"ls\" \"
 \\\$wgServer = 'https://$SYSTEM_DOMAIN_NAME:4443';
 \\\$wgDBpassword = '$WG_DB_PASSWORD';
 \\\$wgDBserver = '$MYSQL_HOST';
 \""
+
+exit
 
 compilemwmLocalSettings
 
@@ -69,7 +75,7 @@ $CONTAINER_COMMAND exec $MEDIAWIKI_CONTAINER_NAME /bin/bash -c \
   mediawiki < $SYSTEM_ROOT_FOLDER_IN_CONTAINER/w/db.sql"
 
 runMWUpdatePHP
-exit
+
 ##########
 # RESTIC #
 ##########
